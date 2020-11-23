@@ -37,6 +37,7 @@
         <spring-boot.version>2.1.10.RELEASE</spring-boot.version>
         <spring-boot-alibaba.version>2.1.0.RELEASE</spring-boot-alibaba.version>
         <lombok.version>1.18.10</lombok.version>
+        <knife4j.version>2.0.4</knife4j.version>
     </properties>
 
     <dependencyManagement>
@@ -111,7 +112,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--测试框架-->
+        <!-- 测试框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
