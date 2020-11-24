@@ -1,0 +1,5 @@
+logging:
+  path: /data/logs/cloud/${spring.application.name}
+  config: classpath:logback-spring.xml
+  level:
+    com.github.cloud: INFO

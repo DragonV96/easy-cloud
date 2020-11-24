@@ -6,15 +6,15 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author : glw
- * @date : 2020/11/12
- * @time : 0:14
- * @Description : 网关
+ * @date : 2020/11/24
+ * @time : 22:33
+ * @Description : 文件服务
  */
-@SpringBootApplication
 @EnableDiscoveryClient
-public class GateWayApplication {
+@SpringBootApplication
+public class FileSysytemApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GateWayApplication.class, args);
+        SpringApplication.run(FileSysytemApplication.class, args);
     }
 }

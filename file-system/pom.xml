@@ -11,5 +11,19 @@
 
     <artifactId>file-system</artifactId>
 
+    <dependencies>
+        <dependency>
+            <artifactId>common</artifactId>
+            <groupId>com.github.DragonV96</groupId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 高性能分布式文件服务器 -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>${fastdfs.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

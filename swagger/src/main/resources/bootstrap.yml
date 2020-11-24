@@ -1,0 +1,26 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: swagger
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        group: swagger
+        namespace: ceaebcf5-685d-4d5a-93fc-bb67f22e2fb4
+        ext-config[0]:
+          data-id: common-log.yml
+          refresh: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

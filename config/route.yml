@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: file_system
+          uri: lb://file-system
+          predicates:
+            - Path=/file/**
+          filters:
+            - SwaggerHeaderFilter
+            - StripPrefix=1
