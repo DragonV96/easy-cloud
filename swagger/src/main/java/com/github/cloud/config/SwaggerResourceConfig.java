@@ -17,13 +17,13 @@ import java.util.List;
  * @author : glw
  * @date : 2020/11/24
  * @time : 0:13
- * @Description : Swagger API 文档配置类
+ * @Description : 重写 SwaggerResourcesProvider 动态提供 API 文档
  */
 @Slf4j
 @Component
 @Primary
 @AllArgsConstructor
-public class SwaggerConfig implements SwaggerResourcesProvider {
+public class SwaggerResourceConfig implements SwaggerResourcesProvider {
 
     private final RouteLocator routeLocator;
 
@@ -39,7 +39,7 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
                     .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
                     .forEach(predicateDefinition -> resources.add(swaggerResource(route.getId(),
                             predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0")
-                                    .replace("/**", "v2/api-docs"))));
+                                    .replace("**", "v2/api-docs"))));
         });
 
         return resources;
@@ -47,12 +47,13 @@ public class SwaggerConfig implements SwaggerResourcesProvider {
 
     /**
      * swagger 资源配置
+     *
      * @param name
      * @param location
      * @return
      */
     private SwaggerResource swaggerResource(String name, String location) {
-        log.info("name:{},location:{}",name,location);
+        log.info("name:{},location:{}", name, location);
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation(location);
