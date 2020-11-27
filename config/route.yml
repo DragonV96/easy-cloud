@@ -10,6 +10,3 @@ spring:
           uri: lb://file-system
           predicates:
             - Path=/file/**
-          filters:
-#            - SwaggerHeaderFilter
-            - StripPrefix=1

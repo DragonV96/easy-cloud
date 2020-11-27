@@ -38,4 +38,6 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>
+
+    <logger name="com.alibaba.nacos.client.naming" level="ERROR" />
 </configuration>

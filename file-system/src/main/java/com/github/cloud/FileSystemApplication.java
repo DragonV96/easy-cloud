@@ -12,9 +12,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-public class FileSysytemApplication {
+public class FileSystemApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FileSysytemApplication.class, args);
+        SpringApplication.run(FileSystemApplication.class, args);
     }
+
 }
