@@ -34,3 +34,7 @@ build/
 *.log
 mvnw
 mvnw.cmd
+
+### Nacos ###
+*.dat
+db.lck
