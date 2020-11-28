@@ -37,4 +37,5 @@ mvnw.cmd
 
 ### Nacos ###
 *.dat
-db.lck
+*.lck
+*.ctrl
