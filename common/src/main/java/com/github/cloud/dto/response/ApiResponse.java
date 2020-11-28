@@ -24,10 +24,10 @@ public class ApiResponse<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "当前页码", name = "code")
+    @ApiModelProperty(value = "响应码", name = "code")
     private Integer code;
 
-    @ApiModelProperty(value = "当前页码", name = "msg")
+    @ApiModelProperty(value = "响应描述信息", name = "msg")
     private String msg;
 
     @ApiModelProperty(value = "响应数据", name = "data")
@@ -36,7 +36,9 @@ public class ApiResponse<T> implements Serializable {
     private static final int SUCCESS_CODE = 200;
     private static final String SUCCESS_MSG = "执行成功";
 
-    public ApiResponse() {
+    private ApiResponse() {
+        this.code = SUCCESS_CODE;
+        this.msg = SUCCESS_MSG;
     }
 
     private ApiResponse(T data) {
