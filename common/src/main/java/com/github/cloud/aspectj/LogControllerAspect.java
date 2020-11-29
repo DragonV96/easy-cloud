@@ -50,7 +50,7 @@ public class LogControllerAspect implements EnvironmentAware {
         controllerLog.append("[service] ").append(appName).append(" : api = %s, class = %s, method = %s, args = %s");
     }
 
-    @Pointcut("execution(* com.github.cloud..controller..*Controller.*(..))")
+    @Pointcut(value = "execution(* com.github.cloud..controller..*Controller.*(..))")
     public void pointCut() {
     }
 

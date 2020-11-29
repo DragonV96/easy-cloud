@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+
 /**
  * @author : glw
  * @date : 2020/11/29
@@ -19,6 +23,7 @@ import lombok.ToString;
 public class UpdateFileRequest {
 
     @ApiModelProperty(value = "文件 id", name = "fileId", required = true)
+    @NotNull
     private Long fileId;
 
     @ApiModelProperty(value = "文件名", name = "fileName")
@@ -31,6 +36,7 @@ public class UpdateFileRequest {
     private Byte fileStatus;
 
     @ApiModelProperty(value = "fastDFS 文件组", name = "group")
+    @NotBlank(message = "fastDFS 文件组不能为空")
     private String group;
 
     @ApiModelProperty(value = "fastDFS 文件地址", name = "storagePath")

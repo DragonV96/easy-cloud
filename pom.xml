@@ -41,11 +41,14 @@
         <knife4j.version>2.0.8</knife4j.version>
         <guava.version>28.0-jre</guava.version>
         <fastdfs.version>1.26.4</fastdfs.version>
+        <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <druid.version>1.1.14</druid.version>
+        <mysql.version>5.1.41</mysql.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!--支持Spring Boot 2.1.X-->
+            <!-- 支持Spring Boot 2.2.X -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -82,12 +85,31 @@
                 <artifactId>knife4j-micro-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
-
             <!-- swagger model 后端包 -->
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-models</artifactId>
                 <version>${swagger-model.version}</version>
+            </dependency>
+
+            <!--mybatis plus依赖包-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- druid 数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- Mysql驱动包 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+                <scope>runtime</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
