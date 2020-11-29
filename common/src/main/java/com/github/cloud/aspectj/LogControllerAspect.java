@@ -71,8 +71,9 @@ public class LogControllerAspect implements EnvironmentAware {
                     StringBuilder argsInfo = new StringBuilder();
                     String apiValue = ((ApiOperation) annotation).value();
                     // 拼接对象参数
-                    Arrays.asList(joinPoint.getArgs()).stream().forEach(item -> {
-                        if (!(item instanceof BindingResult)) {
+                    Object[] args = joinPoint.getArgs();
+                    Arrays.asList(args).stream().forEach(item -> {
+                        if (null != item && !(item instanceof BindingResult)) {
                             argsInfo.append(item.toString());
                         }
                     });
