@@ -29,4 +29,9 @@ public class GlobalException extends RuntimeException implements Serializable {
         this.errorType = errorType;
     }
 
+    public GlobalException(ErrorType errorType, String message, Throwable throwable) {
+        super(errorType.getMsg(), throwable);
+        this.errorType = errorType;
+    }
+
 }

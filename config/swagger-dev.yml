@@ -1,6 +1,3 @@
-server:
-  port: 8088
-
 knife4j:
   enableAggregation: true
   nacos:
