@@ -1,5 +1,8 @@
 server:
   port: 8001
+  tomcat:
+    max-http-form-post-size: 20MB
+    connection-timeout: 180000 # 连接时间
 
 spring:
   application:
