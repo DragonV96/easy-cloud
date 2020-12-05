@@ -11,5 +11,12 @@
 
     <artifactId>code-generator</artifactId>
 
+    <dependencies>
+        <!-- hutool 工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

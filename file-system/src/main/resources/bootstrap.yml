@@ -1,8 +1,5 @@
 server:
   port: 8001
-  tomcat:
-    max-http-form-post-size: 20MB
-    connection-timeout: 180000 # 连接时间
 
 spring:
   application:
@@ -13,12 +10,12 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-        namespace: ceaebcf5-685d-4d5a-93fc-bb67f22e2fb4
+        namespace: 919014fd-d2a4-415d-ba9e-41f3c7fcc762
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yml
         group: file-system
-        namespace: ceaebcf5-685d-4d5a-93fc-bb67f22e2fb4
+        namespace: 919014fd-d2a4-415d-ba9e-41f3c7fcc762
         ext-config:
           - data-id: common-log.yml
             refresh: true

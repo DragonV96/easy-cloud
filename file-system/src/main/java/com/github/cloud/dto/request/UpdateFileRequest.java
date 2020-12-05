@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 
 /**
@@ -20,7 +21,9 @@ import javax.validation.constraints.NotNull;
 @Data
 @ToString
 @ApiModel(value = "更新文件信息请求对象")
-public class UpdateFileRequest {
+public class UpdateFileRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "文件 id", name = "fileId", required = true)
     @NotNull

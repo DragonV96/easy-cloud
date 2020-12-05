@@ -44,6 +44,7 @@
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <druid.version>1.1.14</druid.version>
         <mysql.version>5.1.41</mysql.version>
+        <hutool.version>5.3.9</hutool.version>
     </properties>
 
     <dependencyManagement>
@@ -110,6 +111,12 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
                 <scope>runtime</scope>
+            </dependency>
+            <!-- hutool 工具包 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
