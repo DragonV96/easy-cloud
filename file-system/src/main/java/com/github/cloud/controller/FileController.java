@@ -1,9 +1,15 @@
 package com.github.cloud.controller;
 
+import com.github.cloud.config.FastDFSClient;
 import com.github.cloud.dto.request.UpdateFileRequest;
 import com.github.cloud.dto.response.ApiResponse;
+import com.github.tobato.fastdfs.domain.StorePath;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,14 +22,22 @@ import java.util.List;
  * @time : 22:36
  * @Description : 文件处理接口
  */
+@Slf4j
 @RestController
 @RequestMapping("/file")
 @Api(value = "文件处理接口", tags = "文件处理接口")
 public class FileController {
 
+    @Autowired
+    private FastDFSClient fastDFSClient;
+
     @ApiOperation(value = "文件上传", tags = "文件上传")
+    @ApiImplicitParams({@ApiImplicitParam(name = "file", value = "文件流对象,接收数组格式", dataType = "multipart/form-data")}
+    )
     @PostMapping("/upload")
-    public ApiResponse upload(@RequestBody MultipartFile file) {
+    public ApiResponse upload(@RequestParam(value = "file") MultipartFile file) {
+        StorePath storePath = fastDFSClient.uploadFile(file);
+        log.info("FileController upload, storePath = {}", storePath);
         return ApiResponse.success();
     }
 
@@ -47,7 +61,7 @@ public class FileController {
 
     @ApiOperation(value = "批量文件上传", tags = "批量文件上传")
     @PostMapping("/upload/batch")
-    public ApiResponse uploadBatch(@RequestBody MultipartFile[] files) {
+    public ApiResponse uploadBatch(MultipartFile[] files) {
         return ApiResponse.success();
     }
 
