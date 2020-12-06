@@ -25,7 +25,7 @@ import java.io.Serializable;
 #if($swaggerSwitch)
 @ApiModel(value = "${comment}响应对象")
 #end
-public class ${entityClassName}${requestSuffix} implements Serializable {
+public class ${entityClassName}${responseSuffix} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
