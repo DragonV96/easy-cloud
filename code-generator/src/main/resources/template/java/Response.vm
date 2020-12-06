@@ -1,0 +1,37 @@
+package ${packageName}.${moduleName}.${dtoPackageName}.${responsePackageName};
+
+#if($swaggerSwitch)
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+#end
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+
+/**
+* @author : ${author}
+* @date : ${date}
+* @time : ${time}
+* @Description : ${comment}响应对象
+*/
+@EqualsAndHashCode
+@Data
+@ToString
+#if($swaggerSwitch)
+@ApiModel(value = "${comment}响应对象")
+#end
+public class ${entityClassName}${requestSuffix} implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+#foreach(${column} in ${columnMap})
+    @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}")
+    private ${column.javaType} ${column.javaField};
+
+#end
+}

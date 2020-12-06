@@ -12,10 +12,17 @@
     <artifactId>code-generator</artifactId>
 
     <dependencies>
-        <!-- hutool 工具包 -->
+        <!-- 公共模块 -->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <artifactId>common</artifactId>
+            <groupId>com.github.DragonV96</groupId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--velocity代码生成使用模板 -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
         </dependency>
     </dependencies>
 

@@ -1,0 +1,33 @@
+package ${packageName}.${moduleName}.${entityPackageName};
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import java.io.Serializable;
+
+
+/**
+* @author : ${author}
+* @date : ${date}
+* @time : ${time}
+* @Description : ${comment}表对象
+*/
+@EqualsAndHashCode
+@Data
+@ToString
+public class ${entityClassName} implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+#foreach(${column} in ${columnMap})
+    /**
+     * ${column.columnComment}
+     */
+    #if(${column.isKey})
+    @TableId(type = IdType.${column.idType})
+    #end
+    private ${column.javaType} ${column.javaField};
+
+#end
+}

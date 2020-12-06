@@ -22,11 +22,23 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Data
 @ToString
+#if($swaggerSwitch)
 @ApiModel(value = "${comment}新增请求对象")
-public class Add${entityName}${requestSuffix} implements Serializable {
+#end
+public class Add${entityClassName}${requestSuffix} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
 #foreach(${column} in ${columnMap})
+    @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}"#if(${column.required}), required = true#end)
+    #if(${column.javaType.equals("String")})
+    #if(${column.columnComment.indexOf("（")} > 0)
+    @NotEmpty("${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+    #elseif(${column.columnComment.indexOf("(")} > 0)
+    @NotEmpty("${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+    #end
+    #end
+    private ${column.javaType} ${column.javaField};
+
 #end
 }
