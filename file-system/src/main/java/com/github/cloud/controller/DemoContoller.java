@@ -11,10 +11,9 @@ import com.github.cloud.service.DemoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -23,7 +22,7 @@ import java.util.List;
  * @time : 15:13
  * @Description : demo控制层
  */
-@Api(value = "demo", tags = {"demo"})
+@Api(value = "demo" , tags = {"demo"})
 @RestController
 @RequestMapping("/demo")
 public class DemoContoller {
@@ -31,59 +30,44 @@ public class DemoContoller {
     @Autowired
     private DemoService demoService;
 
+    @ApiOperation(value = "分页查询xxx" , tags = "分页查询")
     @GetMapping("/page")
-    @ApiOperation(value = "分页查询xxx", tags = "分页查询")
-    public ApiResponse<IPage<Demo>> page(PageDemo request){
+    public ApiResponse<IPage<Demo>> page(PageDemo request) {
         IPage<Demo> response = demoService.page(request);
         return ApiResponse.success(response);
     }
 
-    /**
-     * 根据主键 id 查询xxx详情
-     * @param id
-     * @return
-     */
-    public ApiResponse<DemoResponse> detail(Long id){
+    @ApiOperation(value = "查询xxx详情" , tags = "查询详情")
+    @GetMapping("/{id}")
+    public ApiResponse<DemoResponse> detail(@PathVariable("id") Long id) {
         DemoResponse response = demoService.detail(id);
         return ApiResponse.success(response);
     }
 
-    /**
-     * 新增xxx
-     * @param request
-     * @return
-     */
-    public ApiResponse<Boolean> save(AddDemo request){
+    @ApiOperation(value = "新增xxx" , tags = "新增")
+    @PostMapping
+    public ApiResponse<Boolean> save(@RequestBody @Valid AddDemo request) {
         boolean save = demoService.save(request);
         return ApiResponse.success(save);
     }
 
-    /**
-     * 更新xxx
-     * @param request
-     * @return
-     */
-    public ApiResponse<Boolean> update(UpdateDemo request) {
+    @ApiOperation(value = "更新xxx" , tags = "更新")
+    @PutMapping
+    public ApiResponse<Boolean> update(@RequestBody @Valid UpdateDemo request) {
         boolean update = demoService.update(request);
         return ApiResponse.success(update);
     }
 
-    /**
-     * 根据主键 id 删除xxx
-     * @param id
-     * @return
-     */
-    public ApiResponse<Boolean> delete(Long id){
+    @ApiOperation(value = "删除xxx" , tags = "删除")
+    @DeleteMapping("/{id}")
+    public ApiResponse<Boolean> delete(@PathVariable("id") Long id) {
         boolean delete = demoService.delete(id);
         return ApiResponse.success(delete);
     }
 
-    /**
-     * 根据主键 id 列表批量删除xxx
-     * @param ids
-     * @return
-     */
-    public ApiResponse<Boolean> deleteBatch(List<Long> ids){
+    @ApiOperation(value = "批量删除xxx" , tags = "批量删除")
+    @DeleteMapping("/batch/{ids}")
+    public ApiResponse<Boolean> deleteBatch(@PathVariable("ids") List<Long> ids) {
         boolean delete = demoService.deleteBatch(ids);
         return ApiResponse.success(delete);
     }
