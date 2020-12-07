@@ -1,6 +1,11 @@
 package ${packageName}.${moduleName}.${servicePackageName};
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import ${packageName}.${moduleName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
 import ${packageName}.${moduleName}.${entityPackageName}.${entityClassName};
 
 /**
@@ -10,4 +15,46 @@ import ${packageName}.${moduleName}.${entityPackageName}.${entityClassName};
 * @Description : ${comment}业务层接口
 */
 public interface ${entityClassName}Service extends IService<${entityClassName}> {
+
+    /**
+    * 分页查询${comment}
+    * @param request
+    * @return
+    */
+    IPage<${entityClassName}> page(Page${entityClassName}${requestSuffix} request);
+
+    /**
+    * 根据主键 id 查询${comment}详情
+    * @param id
+    * @return
+    */
+    DemoResponse detail(${column.javaType} id);
+
+    /**
+    * 新增${comment}
+    * @param request
+    * @return
+    */
+    boolean save(Add${entityClassName}${requestSuffix} request);
+
+    /**
+    * 更新${comment}
+    * @param request
+    * @return
+    */
+    boolean update(Update${entityClassName}${requestSuffix} request);
+
+    /**
+    * 根据主键 id 删除${comment}
+    * @param id
+    * @return
+    */
+    boolean delete(${column.javaType} id);
+
+    /**
+    * 根据主键 id 列表批量删除${comment}
+    * @param ids
+    * @return
+    */
+    boolean deleteBatch(List<${column.javaType}> ids);
 }
