@@ -11,6 +11,8 @@ import ${packageName}.${moduleName}.${servicePackageName}.${entityClassName}Serv
 #if($swaggerSwitch)
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+#end#if($shiroSwitch)
+import org.apache.shiro.authz.annotations.RequirePermission;
 #end
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,9 @@ public class ${entityClassName}Contoller {
 #if($swaggerSwitch)
     @ApiOperation(value = "分页查询${comment}" , tags = "分页查询")
 #end
+#if($shiroSwitch)
+    @RequirePermission(value = "${moduleName}:${entityLowerName}:page")
+#end
     @GetMapping("/page")
     public ApiResponse<IPage<${entityClassName}>> page(Page${entityClassName} request) {
     IPage<Demo> response = ${entityLowerName}Service.page(request);
@@ -47,7 +52,10 @@ public class ${entityClassName}Contoller {
 #if($swaggerSwitch)
     @ApiOperation(value = "查询${comment}详情" , tags = "查询详情")
 #end
-    @GetMapping("/{id}")
+#if($shiroSwitch)
+    @RequirePermission(value = "${moduleName}:${entityLowerName}:detail")
+#end
+    @GetMapping("/detail/{id}")
     public ApiResponse<${entityClassName}Response> detail(@PathVariable("id") ${column.javaType} id) {
         ${entityClassName}Response response = ${entityLowerName}Service.detail(id);
         return ApiResponse.success(response);
@@ -57,7 +65,10 @@ public class ${entityClassName}Contoller {
 #if($swaggerSwitch)
     @ApiOperation(value = "新增${comment}" , tags = "新增")
 #end
-    @PostMapping
+#if($shiroSwitch)
+    @RequirePermission(value = "${moduleName}:${entityLowerName}:save")
+#end
+    @PostMapping("/save")
     public ApiResponse<Boolean> save(@RequestBody @Valid Add${entityClassName} request) {
         boolean save = ${entityLowerName}Service.save(request);
         return ApiResponse.success(save);
@@ -67,7 +78,10 @@ public class ${entityClassName}Contoller {
 #if($swaggerSwitch)
     @ApiOperation(value = "更新${comment}" , tags = "更新")
 #end
-    @PutMapping
+#if($shiroSwitch)
+    @RequirePermission(value = "${moduleName}:${entityLowerName}:update")
+#end
+    @PutMapping("/update")
     public ApiResponse<Boolean> update(@RequestBody @Valid Update${entityClassName} request) {
         boolean update = ${entityLowerName}Service.update(request);
         return ApiResponse.success(update);
@@ -77,7 +91,10 @@ public class ${entityClassName}Contoller {
 #if($swaggerSwitch)
     @ApiOperation(value = "删除${comment}" , tags = "删除")
 #end
-    @DeleteMapping("/{id}")
+#if($shiroSwitch)
+    @RequirePermission(value = "${moduleName}:${entityLowerName}:delete")
+#end
+    @DeleteMapping("/delete/{id}")
     public ApiResponse<Boolean> delete(@PathVariable("id") ${column.javaType} id) {
         boolean delete = ${entityLowerName}Service.delete(id);
         return ApiResponse.success(delete);
@@ -87,7 +104,10 @@ public class ${entityClassName}Contoller {
 #if($swaggerSwitch)
     @ApiOperation(value = "批量删除${comment}" , tags = "批量删除")
 #end
-    @DeleteMapping("/batch/{ids}")
+#if($shiroSwitch)
+    @RequirePermission(value = "${moduleName}:${entityLowerName}:delete")
+#end
+    @DeleteMapping("/delete/batch/{ids}")
     public ApiResponse<Boolean> deleteBatch(@PathVariable("ids") List<${column.javaType}> ids) {
         boolean delete = ${entityLowerName}Service.deleteBatch(ids);
         return ApiResponse.success(delete);
