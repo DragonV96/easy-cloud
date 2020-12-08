@@ -1,10 +1,20 @@
 package ${packageName}.${moduleName}.${servicePackageName}.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import ${packageName}.${moduleName}.${entityPackageName}.${entityClassName};
+import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import ${packageName}.${moduleName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
+import ${packageName}.${moduleName}.${dtoPackageName}.${responsePackageName}.${entityClassName};
 import ${packageName}.${moduleName}.${mapperPackageName}.${entityClassName}Mapper;
-import ${packageName}.${moduleName}.${servicePackageName}.${entityClassName}Mapper;
+import ${packageName}.${moduleName}.${servicePackageName}.${entityClassName}Service;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author : ${author}
@@ -14,4 +24,44 @@ import org.springframework.stereotype.Service;
 */
 @Service
 public class ${entityClassName}ServiceImpl extends ServiceImpl<${entityClassName}Mapper, ${entityClassName}> implements ${entityClassName}Service {
+
+    @Override
+    public IPage<${entityClassName}> page(Page${entityClassName}${requestSuffix} request) {
+        IPage<${entityClassName}> page = new Page<>(request.getCurrent(), request.getSize());
+        ${entityClassName} entity = new ${entityClassName}();
+        BeanUtils.copyProperties(request, entity);
+        return super.page(page, new QueryWrapper<>(entity));
+    }
+
+    @Override
+    public ${entityClassName}${responseSuffix} detail(${column.javaType} id) {
+        Demo entity = super.getById(id);
+        ${entityClassName}${responseSuffix} response = new ${entityClassName}${responseSuffix}();
+        BeanUtils.copyProperties(response, entity);
+        return response;
+    }
+
+    @Override
+    public boolean save(Add${entityClassName}${requestSuffix} request) {
+        ${entityClassName} entity = new ${entityClassName}();
+        BeanUtils.copyProperties(request, entity);
+        return super.save(entity);
+    }
+
+    @Override
+    public boolean update(Update${entityClassName}${requestSuffix} request) {
+        ${entityClassName} entity = new ${entityClassName}();
+        BeanUtils.copyProperties(request, entity);
+        return super.updateById(entity);
+    }
+
+    @Override
+    public boolean delete(${column.javaType} id) {
+        return super.removeById(id);
+    }
+
+    @Override
+    public boolean deleteBatch(List<${column.javaType}> ids) {
+        return super.removeByIds(ids);
+    }
 }
