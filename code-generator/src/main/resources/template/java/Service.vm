@@ -1,6 +1,7 @@
 package ${packageName}.${moduleName}.${servicePackageName};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
 import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
