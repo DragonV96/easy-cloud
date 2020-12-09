@@ -20,7 +20,7 @@ public class ${entityClassName} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-#foreach(${column} in ${columnMap})
+#foreach(${column} in ${columns})
     /**
      * ${column.columnComment}
      */

@@ -1,4 +1,4 @@
-package ${packageName}.${moduleName}.${servicePackageName}.controller;
+package ${packageName}.${moduleName}.${controllerPackageName}.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
