@@ -1,24 +1,17 @@
-package com.github.cloud.entity;
+package com.github.cloud.config;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
-import java.io.Serializable;
-import java.util.List;
+import lombok.Getter;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author : glw
- * @date : 2020/12/9
- * @time : 23:37
- * @Description : 业务字段生成对象
+ * @date : 2020/12/11
+ * @time : 1:07
+ * @Description : 项目包结构及名称配置
  */
-@EqualsAndHashCode
-@ToString
-@Data
-public class BusinessEntity implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Getter
+@Configuration
+public class ProjectConfig {
 
     /**
      * 项目包路径

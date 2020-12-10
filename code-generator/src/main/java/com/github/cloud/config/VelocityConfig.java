@@ -4,7 +4,7 @@ package com.github.cloud.config;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.velocity.app.Velocity;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
@@ -15,6 +15,7 @@ import java.util.Properties;
  * @Description : Velocity 引擎初始化配置
  */
 @Slf4j
+@Component
 public class VelocityConfig implements CommandLineRunner {
 
     private static final String UTF8 = "UTF-8";
