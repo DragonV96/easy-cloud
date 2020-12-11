@@ -15,7 +15,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @ToString
 @Data
-public class TableColumnEntity implements Serializable {
+public class TableColumn implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

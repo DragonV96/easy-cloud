@@ -1,8 +1,9 @@
 package com.github.cloud.config;
 
-import com.github.cloud.entity.TableColumnEntity;
+import com.github.cloud.entity.TableColumn;
 import lombok.Getter;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ import java.util.List;
  * @Description : 表属性配置
  */
 @Getter
-@Configuration
+@Component
+@ConfigurationProperties(prefix = "generator.table")
 public class TableConfig {
 
     /**
@@ -31,7 +33,9 @@ public class TableConfig {
      */
     private String entityPackageName;
 
-    /** 表列信息 */
-    private List<TableColumnEntity> columns;
+    /**
+     * 表列信息
+     */
+    private List<TableColumn> columns;
 
 }
