@@ -1,6 +1,6 @@
 package ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName};
 
-#if($swaggerSwitch)
+#if($enableSwagger)
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 #end
@@ -22,7 +22,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Data
 @ToString
-#if($swaggerSwitch)
+#if($enableSwagger)
 @ApiModel(value = "${comment}新增请求对象")
 #end
 public class Update${entityClassName}${requestSuffix} implements Serializable {

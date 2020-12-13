@@ -1,6 +1,6 @@
 package com.github.cloud.util;
 
-import com.github.cloud.config.BaseConfig;
+import com.github.cloud.config.PackageConfig;
 import org.apache.velocity.VelocityContext;
 
 /**
@@ -16,7 +16,7 @@ public class VelocityUtil {
      * @param config
      * @return
      */
-    public static VelocityContext setTemplate(BaseConfig config) {
+    public static VelocityContext setTemplate(PackageConfig config) {
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("packageName", config.getPackageName());
         velocityContext.put("moduleName", config.getModuleName());

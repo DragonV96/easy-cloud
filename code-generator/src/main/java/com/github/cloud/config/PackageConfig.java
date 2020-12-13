@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
  */
 @Getter
 @Component
-@ConfigurationProperties(prefix = "generator.base")
-public class BaseConfig {
+@ConfigurationProperties(prefix = "generator.package")
+public class PackageConfig {
 
     /**
-     * 项目包路径
+     * 项目根路径
      */
     private String packageName;
 

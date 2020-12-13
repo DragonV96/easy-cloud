@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author : glw
  * @date : 2020/12/11
  * @time : 23:47
- * @Description : 项目包结构及名称配置
+ * @Description : 项目信息配置
  */
 @Getter
 @Component
@@ -19,4 +19,9 @@ public class ProjectConfig {
      * 作者
      */
     private String author;
+
+    /**
+     * 生成路径
+     */
+    private String path;
 }

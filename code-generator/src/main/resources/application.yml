@@ -14,3 +14,39 @@ spring:
     url: jdbc:mysql://${host.private}:3306/file_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
+
+generator:
+  # 项目信息配置
+  project:
+    # 作者
+    author: glw
+    # 生成路径
+    path: D:\tmp
+  # 项目开关配置
+  switch:
+    # 是否开启 swagger
+    enable-swagger: true
+    # 是否开启 shiro
+    enable-shiro: false
+  # 项目包结构及名称配置
+  package:
+    # 项目根路径
+    package-name: com.github.cloud
+    # 项目子模块路径
+    module-name: file
+    # controller 包路径
+    controller-package-name: controller
+    # service 接口包路径
+    service-package-name: service
+    # service 接口实现类包路径
+    service-impl-package-name: impl
+    # dto 包路径
+    dto-package-name: dto
+    # request 包路径
+    request-package-name: request
+    # response 包路径
+    response-package-name: response
+    # request 后缀
+    request-suffix: Request
+    # response 后缀
+    response-suffix: Response
