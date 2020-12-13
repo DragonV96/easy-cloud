@@ -1,6 +1,6 @@
 package com.github.cloud.config;
 
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @time : 1:07
  * @Description : 项目包结构及名称配置
  */
-@Getter
+@Data
 @Component
 @ConfigurationProperties(prefix = "generator.package")
 public class PackageConfig {
@@ -18,12 +18,12 @@ public class PackageConfig {
     /**
      * 项目根路径
      */
-    private String packageName;
+    private String rootPackageName;
 
     /**
      * 项目子模块路径
      */
-    private String moduleName;
+    private String modulePackageName;
 
     /**
      * controller 包路径
@@ -54,14 +54,4 @@ public class PackageConfig {
      * response 包路径
      */
     private String responsePackageName;
-
-    /**
-     * request 后缀
-     */
-    private String requestSuffix;
-
-    /**
-     * response 后缀
-     */
-    private String responseSuffix;
 }

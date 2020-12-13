@@ -1,7 +1,6 @@
 package com.github.cloud.config;
 
-import com.github.cloud.entity.TableColumn;
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -13,29 +12,50 @@ import java.util.List;
  * @time : 23:34
  * @Description : 表属性配置
  */
-@Getter
+@Data
 @Component
 @ConfigurationProperties(prefix = "generator.table")
 public class TableConfig {
 
     /**
-     * 表对应实体类名（首字母大写驼峰）
+     * 表名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
      */
-    private String entityClassName;
+    private String tableNameStyle;
 
     /**
-     * 表对应实体类注释
+     * 字段名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
      */
-    private String comment;
+    private String columnNameStyle;
 
     /**
-     * 实体类对应包路径
+     * 表信息生成配置列表
      */
-    private String entityPackageName;
+    private List<TableConfig.AllowTable> allowTables;
 
     /**
-     * 表列信息
+     * 表信息生成配置
      */
-    private List<TableColumn> columns;
+    @Data
+    public static class AllowTable {
 
+        /**
+         * 表名
+         */
+        private String tableName;
+
+        /**
+         * 表前缀移除
+         */
+        private String removePrefix;
+
+        /**
+         * 主键名
+         */
+        private String primaryKeyName;
+
+        /**
+         * 主键类型，对应 mybatis 5种类型
+         */
+        private String primaryKeyType;
+    }
 }

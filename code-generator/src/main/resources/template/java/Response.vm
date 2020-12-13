@@ -1,4 +1,4 @@
-package ${packageName}.${moduleName}.${dtoPackageName}.${responsePackageName};
+package ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName};
 
 #if($enableSwagger)
 import io.swagger.annotations.ApiModel;
@@ -15,6 +15,9 @@ import java.io.Serializable;
 
 /**
 * @author : ${author}
+#if(${enableEmail})
+* @email : ${email}
+#end
 * @date : ${date}
 * @time : ${time}
 * @Description : ${comment}响应对象

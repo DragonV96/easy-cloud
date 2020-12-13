@@ -1,10 +1,13 @@
-package ${packageName}.${moduleName}.${mapperPackageName};
+package ${rootPackageName}.${modulePackageName}.${mapperPackageName};
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ${packageName}.${moduleName}.${entityPackageName}.${entityClassName};
+import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName};
 
 /**
 * @author : ${author}
+#if(${enableEmail})
+* @email : ${email}
+#end
 * @date : ${date}
 * @time : ${time}
 * @Description : ${comment}数据访问层

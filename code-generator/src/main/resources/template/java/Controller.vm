@@ -1,13 +1,13 @@
-package ${packageName}.${moduleName}.${controllerPackageName}.controller;
+package ${rootPackageName}.${modulePackageName}.${controllerPackageName}.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
-import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
-import ${packageName}.${moduleName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
 import com.github.cloud.dto.response.ApiResponse;
-import ${packageName}.${moduleName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
-import ${packageName}.${moduleName}.${entityPackageName}.${entityClassName};
-import ${packageName}.${moduleName}.${servicePackageName}.${entityClassName}Service;
+import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
+import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName};
+import ${rootPackageName}.${modulePackageName}.${servicePackageName}.${entityClassName}Service;
 #if($enableSwagger)
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,6 +22,9 @@ import java.util.List;
 
 /**
 * @author : ${author}
+#if(${enableEmail})
+* @email : ${email}
+#end
 * @date : ${date}
 * @time : ${time}
 * @Description : ${comment}业务层实现
@@ -40,7 +43,7 @@ public class ${entityClassName}Contoller {
     @ApiOperation(value = "分页查询${comment}" , tags = "分页查询")
 #end
 #if($enableShiro)
-    @RequirePermission(value = "${moduleName}:${entityLowerName}:page")
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:page")
 #end
     @GetMapping("/page")
     public ApiResponse<IPage<${entityClassName}>> page(Page${entityClassName} request) {
@@ -53,7 +56,7 @@ public class ${entityClassName}Contoller {
     @ApiOperation(value = "查询${comment}详情" , tags = "查询详情")
 #end
 #if($enableShiro)
-    @RequirePermission(value = "${moduleName}:${entityLowerName}:detail")
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:detail")
 #end
     @GetMapping("/detail/{id}")
     public ApiResponse<${entityClassName}Response> detail(@PathVariable("id") ${column.javaType} id) {
@@ -66,7 +69,7 @@ public class ${entityClassName}Contoller {
     @ApiOperation(value = "新增${comment}" , tags = "新增")
 #end
 #if($enableShiro)
-    @RequirePermission(value = "${moduleName}:${entityLowerName}:save")
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:save")
 #end
     @PostMapping("/save")
     public ApiResponse<Boolean> save(@RequestBody @Valid Add${entityClassName} request) {
@@ -79,7 +82,7 @@ public class ${entityClassName}Contoller {
     @ApiOperation(value = "更新${comment}" , tags = "更新")
 #end
 #if($enableShiro)
-    @RequirePermission(value = "${moduleName}:${entityLowerName}:update")
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:update")
 #end
     @PutMapping("/update")
     public ApiResponse<Boolean> update(@RequestBody @Valid Update${entityClassName} request) {
@@ -92,7 +95,7 @@ public class ${entityClassName}Contoller {
     @ApiOperation(value = "删除${comment}" , tags = "删除")
 #end
 #if($enableShiro)
-    @RequirePermission(value = "${moduleName}:${entityLowerName}:delete")
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")
 #end
     @DeleteMapping("/delete/{id}")
     public ApiResponse<Boolean> delete(@PathVariable("id") ${column.javaType} id) {
@@ -105,7 +108,7 @@ public class ${entityClassName}Contoller {
     @ApiOperation(value = "批量删除${comment}" , tags = "批量删除")
 #end
 #if($enableShiro)
-    @RequirePermission(value = "${moduleName}:${entityLowerName}:delete")
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")
 #end
     @DeleteMapping("/delete/batch/{ids}")
     public ApiResponse<Boolean> deleteBatch(@PathVariable("ids") List<${column.javaType}> ids) {
