@@ -18,25 +18,25 @@ public class SwitchConfig {
     /**
      * 是否开启类注释的邮箱
      */
-    private boolean enableEmail;
+    private Boolean enableEmail;
 
     /**
      * 是否开启 swagger
      */
-    private boolean enableSwagger;
+    private Boolean enableSwagger;
 
     /**
      * 是否开启 shiro
      */
-    private boolean enableShiro;
+    private Boolean enableShiro;
 
     /**
      * 是否开启 log TODO 未完
      */
-    private boolean enableLog;
+    private Boolean enableLog;
 
     /**
      * 是否开启生成枚举 TODO 未完
      */
-    private boolean enableEnum;
+    private Boolean enableEnum;
 }

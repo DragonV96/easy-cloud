@@ -58,9 +58,4 @@ public class TableColumn implements Serializable {
      * 是否非空（1-是；2-否）
      */
     private String isRequired;
-
-    /**
-     * 实体类对应包路径
-     */
-    private String entityPackageName;
 }

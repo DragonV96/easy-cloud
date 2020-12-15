@@ -8,9 +8,8 @@ import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClas
 #if(${enableEmail})
 * @email : ${email}
 #end
-* @date : ${date}
-* @time : ${time}
-* @Description : ${comment}数据访问层
+* @datetime : ${datetime}
+* @description : ${comment}数据访问层
 */
 public interface ${entityClassName}Mapper extends BaseMapper<${entityClassName}> {
 }

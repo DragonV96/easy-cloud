@@ -21,9 +21,8 @@ import java.util.List;
 #if(${enableEmail})
 * @email : ${email}
 #end
-* @date : ${date}
-* @time : ${time}
-* @Description : ${comment}业务层实现
+* @datetime : ${datetime}
+* @description : ${comment}业务层实现
 */
 @Service
 public class ${entityClassName}ServiceImpl extends ServiceImpl<${entityClassName}Mapper, ${entityClassName}> implements ${entityClassName}Service {

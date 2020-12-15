@@ -14,9 +14,8 @@ import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClas
 #if(${enableEmail})
 * @email : ${email}
 #end
-* @date : ${date}
-* @time : ${time}
-* @Description : ${comment}业务层接口
+* @datetime : ${datetime}
+* @description : ${comment}业务层接口
 */
 public interface ${entityClassName}Service extends IService<${entityClassName}> {
 

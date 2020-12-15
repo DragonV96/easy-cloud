@@ -12,9 +12,8 @@ import java.io.Serializable;
 #if(${enableEmail})
 * @email : ${email}
 #end
-* @date : ${date}
-* @time : ${time}
-* @Description : ${comment}表对象
+* @datetime : ${datetime}
+* @description : ${comment}表对象
 */
 @EqualsAndHashCode
 @Data
