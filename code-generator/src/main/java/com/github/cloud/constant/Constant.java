@@ -9,6 +9,11 @@ package com.github.cloud.constant;
 public interface Constant {
 
     /**
+     * UTF-8 字符集
+     */
+    String UTF8 = "UTF-8";
+
+    /**
      * 项目根路径
      */
     String PROJECT_PATH = "main/java";
