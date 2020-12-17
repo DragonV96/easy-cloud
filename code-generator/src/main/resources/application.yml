@@ -53,6 +53,8 @@ generator:
     service-package-name: service
     # service 接口实现类包路径
     service-impl-package-name: impl
+    # mapper 包路径
+    mapper-package-name: mapper
     # dto 包路径
     dto-package-name: dto
     # request 包路径

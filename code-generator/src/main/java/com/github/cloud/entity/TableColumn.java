@@ -35,7 +35,12 @@ public class TableColumn implements Serializable {
     private String columnType;
 
     /**
-     * 列对应的 java 类型
+     * id 列对应的 java 类型
+     */
+    private String idType;
+
+    /**
+     * 普通列对应的 java 类型
      */
     private String javaType;
 

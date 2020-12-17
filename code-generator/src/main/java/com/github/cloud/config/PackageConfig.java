@@ -41,6 +41,11 @@ public class PackageConfig {
     private String serviceImplPackageName;
 
     /**
+     * mapper 包路径
+     */
+    private String mapperPackageName;
+
+    /**
      * dto 包路径
      */
     private String dtoPackageName;

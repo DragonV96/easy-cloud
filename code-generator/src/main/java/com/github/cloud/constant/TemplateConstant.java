@@ -11,15 +11,15 @@ public interface TemplateConstant {
      * 新增请求对象模板
      */
     String[] TEMPLATES = {
-            "template/java/AddReq.vm",
+            "template/java/Add.vm" ,
             "template/java/Controller.vm",
             "template/java/Entity.vm",
             "template/java/Mapper.vm",
             "template/java/Mapper.xml.vm",
-            "template/java/PageReq.vm",
+            "template/java/Page.vm" ,
             "template/java/Response.vm",
             "template/java/Service.vm",
             "template/java/ServiceImpl.vm",
-            "template/java/UpdateReq.vm",
+            "template/java/Update.vm" ,
     };
 }

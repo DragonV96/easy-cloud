@@ -3,11 +3,10 @@ package com.github.cloud.util;
 import com.github.cloud.config.*;
 import com.github.cloud.constant.Constant;
 import com.github.cloud.constant.TemplateConstant;
-import org.apache.velocity.Template;
+import com.github.cloud.enums.TemplateEnum;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,18 +75,92 @@ public class VelocityUtil {
         return templateList;
     }
 
-    public static void generatorCode(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig tableConfig) {
-        initVelocity();
-        VelocityContext velocityContext = buildContext(projectConfig, packageConfig, switchConfig, suffixConfig, tableConfig);
-        List<String> templateList = getTemplateList();
+    /**
+     * 获取生成文件名
+     * @param projectConfig
+     * @param packageConfig
+     * @param suffixConfig
+     * @param tableConfig
+     * @param template
+     * @return
+     */
+    public static String getFileName(ProjectConfig projectConfig, PackageConfig packageConfig, SuffixConfig suffixConfig, TableConfig tableConfig, String template) {
+        StringBuilder filePath = new StringBuilder();
 
-        for (String template : templateList) {
-            // 生成模板
-            StringWriter sw = new StringWriter();
-            Template resultTemplate = Velocity.getTemplate(template, Constant.UTF8);
-            resultTemplate.merge(velocityContext, sw);
-            // TODO
+        // 公共包路径
+        filePath.append(projectConfig.getPath())
+                .append(projectConfig.getProjectName())
+                .append(Constant.SPLIT)
+                .append(Constant.PROJECT_PATH)
+                .append(Constant.SPLIT)
+                .append(packageConfig.getRootPackageName().replace(Constant.DOT, Constant.SPLIT))
+                .append(Constant.SPLIT)
+                .append(packageConfig.getModulePackageName())
+                .append(Constant.SPLIT);
+
+        if (TemplateEnum.ADD.getName().equals(template) ||
+                TemplateEnum.UPDATE.getName().equals(template) ||
+                TemplateEnum.PAGE.getName().equals(template)) {
+            // 请求对象
+            filePath.append(packageConfig.getDtoPackageName())
+                    .append(packageConfig.getRequestPackageName())
+                    .append(template.replace(Constant.VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getRequestSuffix())
+                    .append(Constant.JAVA_SUFFIX);
+        } else if (TemplateEnum.RESPONSE.getName().equals(template)) {
+            // 响应对象
+            filePath.append(packageConfig.getDtoPackageName())
+                    .append(packageConfig.getResponsePackageName())
+                    .append(template.replace(Constant.VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getResponseSuffix())
+                    .append(Constant.JAVA_SUFFIX);
+        } else if (TemplateEnum.ENTITY.getName().equals(template)) {
+            // 数据库实体类
+            filePath.append(packageConfig.getDtoPackageName())
+                    .append(packageConfig.getResponsePackageName())
+                    .append(template.replace(Constant.VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getResponseSuffix())
+                    .append(Constant.JAVA_SUFFIX);
+        } else if (TemplateEnum.CONTROLLER.getName().equals(template)) {
+            // controller
+            filePath.append(packageConfig.getControllerPackageName())
+                    .append(template.replace(Constant.VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getControllerSuffix())
+                    .append(Constant.JAVA_SUFFIX);
+        } else if (TemplateEnum.SERVICE.getName().equals(template)) {
+            // service
+            filePath.append(packageConfig.getServicePackageName())
+                    .append(template.replace(Constant.VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getServiceSuffix())
+                    .append(Constant.JAVA_SUFFIX);
+        } else if (TemplateEnum.SERVICE_IMPL.getName().equals(template)) {
+            // serviceImpl
+            filePath.append(packageConfig.getServiceImplPackageName())
+                    .append(template.replace(Constant.VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getServiceImplSuffix())
+                    .append(Constant.JAVA_SUFFIX);
+        } else if (TemplateEnum.MAPPER.getName().equals(template)) {
+            // mapper
+            filePath.append(packageConfig.getMapperPackageName())
+                    .append(template.replace(Constant.VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getMapperSuffix())
+                    .append(Constant.JAVA_SUFFIX);
+        } else if (TemplateEnum.MAPPER_XML.getName().equals(template)) {
+            // mapper xml
+            filePath.append(packageConfig.getMapperPackageName())
+                    .append(template.replace(Constant.XML_VM, ""))
+                    // TODO append 表名
+                    .append(suffixConfig.getMapperSuffix())
+                    .append(Constant.XML_SUFFIX);
         }
 
+        return filePath.toString();
     }
 }

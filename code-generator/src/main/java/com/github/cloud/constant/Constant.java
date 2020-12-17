@@ -14,13 +14,42 @@ public interface Constant {
     String UTF8 = "UTF-8";
 
     /**
+     * 路径分隔符
+     */
+    String SPLIT = "\\";
+
+    /**
+     * 点
+     */
+    String DOT = ".";
+
+    /**
+     * java 文件后缀
+     */
+    String JAVA_SUFFIX = ".java";
+
+    /**
+     * vm 文件后缀
+     */
+    String VM = ".vm";
+
+    /**
+     * .xml.vm 文件后缀
+     */
+    String XML_VM = ".xml.vm";
+
+    /**
+     * xml 文件后缀
+     */
+    String XML_SUFFIX = ".xml";
+
+    /**
      * 项目根路径
      */
-    String PROJECT_PATH = "main/java";
-
+    String PROJECT_PATH = "main\\java";
 
     /**
      * mybatis 包路径
      */
-    String MYBATIS_PATH = "main/resources/mapper";
+    String MYBATIS_PATH = "main\\resources\\mapper";
 }
