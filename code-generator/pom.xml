@@ -12,11 +12,22 @@
     <artifactId>code-generator</artifactId>
 
     <dependencies>
-        <!-- 公共模块 -->
+        <!-- lombok -->
         <dependency>
-            <artifactId>common</artifactId>
-            <groupId>com.github.DragonV96</groupId>
-            <version>${project.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- springboot web 包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Mysql驱动包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
         <!--velocity代码生成使用模板 -->

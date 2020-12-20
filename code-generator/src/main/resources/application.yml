@@ -3,20 +3,17 @@ server:
 
 host:
   public: 0.0.0.0
-  private: 192.168.1.14
+  private: 192.168.153.128
   local: 127.0.0.1
-
-# 配置相关数据源 使用 druid 数据源
-spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${host.private}:3306/file_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false
-    username: root
-    password: root
 
 # 生成器配置
 generator:
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${host.private}:3306/information_schema?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
   # 项目信息配置
   project:
     # 项目名称
@@ -91,7 +88,7 @@ generator:
         remove-prefix:
         # 主键名
         primary-key-name: file_log_id
-        # 主键类型，对应 mybatis 5种类型
+        # 主键类型，对应 mybatis 5种主键类型
         primary-key-type: INPUT
         # 表名（示例2）
       - table-name: file_info
@@ -99,7 +96,7 @@ generator:
         remove-prefix:
         # 主键名
         primary-key-name: file_info_id
-        # 主键类型，对应 mybatis 5种类型
+        # 主键类型，对应 mybatis 5种主键类型
         primary-key-type: INPUT
 
 

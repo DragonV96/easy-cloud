@@ -19,7 +19,7 @@ public class Table {
     /**
      * 表名
      */
-    private String entityName;
+    private String tableName;
 
     /**
      * 表对应的 首字母大写 类名
