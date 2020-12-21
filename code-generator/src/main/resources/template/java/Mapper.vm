@@ -9,7 +9,7 @@ import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClas
 * @email : ${email}
 #end
 * @datetime : ${datetime}
-* @description : ${comment}数据访问层
+* @description : ${tableComment}数据访问层
 */
 public interface ${entityClassName}Mapper extends BaseMapper<${entityClassName}> {
 }

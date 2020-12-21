@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,12 +15,24 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Data
-public class Table {
+public class Table implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 库名
+     */
+    private String tableSchema;
 
     /**
      * 表名
      */
     private String tableName;
+
+    /**
+     * 表注释
+     */
+    private String tableComment;
 
     /**
      * 表对应的 首字母大写 类名
@@ -30,11 +43,6 @@ public class Table {
      * 表对应的 首字母小写写 类名
      */
     private String classLowerName;
-
-    /**
-     * 表注释
-     */
-    private String comment;
 
     /**
      * 表字段列表

@@ -20,14 +20,52 @@ public class TableColumn implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 库名
+     */
+    private String tableSchema;
+
+    /**
+     * 表名
+     */
+    private String tableName;
+
+    /**
      * 列名
      */
-    private String columnField;
+    private String columnName;
+
+    /**
+     * 列的默认值
+     */
+    private String columnDefault;
+
+    /**
+     * 列能否为空
+     */
+    private String isNullable;
+
+    /**
+     * 列的类型
+     */
+    private String dataType;
+
+    /**
+     * 列的最大长度
+     */
+    private String characterMaximum;
 
     /**
      * 列注释
      */
     private String columnComment;
+
+
+
+
+    /**
+     * 列名
+     */
+    private String columnField;
 
     /**
      * 列类型

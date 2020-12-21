@@ -26,10 +26,10 @@ import java.util.List;
 * @email : ${email}
 #end
 * @datetime : ${datetime}
-* @description : ${comment}控制层
+* @description : ${tableComment}控制层
 */
 #if($enableSwagger)
-@Api(value = "${comment}" , tags = {"${comment}"})
+@Api(value = "${tableComment}" , tags = {"${tableComment}"})
 #end
 @RestController
 @RequestMapping("/${entityLowerName}")
@@ -39,7 +39,7 @@ public class ${entityClassName}Contoller {
     private ${entityClassName}Service ${entityLowerName}Service;
 
 #if($enableSwagger)
-    @ApiOperation(value = "分页查询${comment}" , tags = "分页查询")
+    @ApiOperation(value = "分页查询${tableComment}" , tags = "分页查询")
 #end
 #if($enableShiro)
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:page")
@@ -52,7 +52,7 @@ public class ${entityClassName}Contoller {
 
 
 #if($enableSwagger)
-    @ApiOperation(value = "查询${comment}详情" , tags = "查询详情")
+    @ApiOperation(value = "查询${tableComment}详情" , tags = "查询详情")
 #end
 #if($enableShiro)
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:detail")
@@ -65,7 +65,7 @@ public class ${entityClassName}Contoller {
 
 
 #if($enableSwagger)
-    @ApiOperation(value = "新增${comment}" , tags = "新增")
+    @ApiOperation(value = "新增${tableComment}" , tags = "新增")
 #end
 #if($enableShiro)
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:save")
@@ -78,7 +78,7 @@ public class ${entityClassName}Contoller {
 
 
 #if($enableSwagger)
-    @ApiOperation(value = "更新${comment}" , tags = "更新")
+    @ApiOperation(value = "更新${tableComment}" , tags = "更新")
 #end
 #if($enableShiro)
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:update")
@@ -91,7 +91,7 @@ public class ${entityClassName}Contoller {
 
 
 #if($enableSwagger)
-    @ApiOperation(value = "删除${comment}" , tags = "删除")
+    @ApiOperation(value = "删除${tableComment}" , tags = "删除")
 #end
 #if($enableShiro)
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")
@@ -104,7 +104,7 @@ public class ${entityClassName}Contoller {
 
 
 #if($enableSwagger)
-    @ApiOperation(value = "批量删除${comment}" , tags = "批量删除")
+    @ApiOperation(value = "批量删除${tableComment}" , tags = "批量删除")
 #end
 #if($enableShiro)
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")

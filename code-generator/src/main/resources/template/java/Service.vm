@@ -15,47 +15,47 @@ import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClas
 * @email : ${email}
 #end
 * @datetime : ${datetime}
-* @description : ${comment}业务层接口
+* @description : ${tableComment}业务层接口
 */
 public interface ${entityClassName}Service extends IService<${entityClassName}> {
 
     /**
-    * 分页查询${comment}
+    * 分页查询${tableComment}
     * @param request
     * @return
     */
     IPage<${entityClassName}> page(Page${entityClassName}${requestSuffix} request);
 
     /**
-    * 根据主键 id 查询${comment}详情
+    * 根据主键 id 查询${tableComment}详情
     * @param id
     * @return
     */
     DemoResponse detail(${column.javaType} id);
 
     /**
-    * 新增${comment}
+    * 新增${tableComment}
     * @param request
     * @return
     */
     boolean save(Add${entityClassName}${requestSuffix} request);
 
     /**
-    * 更新${comment}
+    * 更新${tableComment}
     * @param request
     * @return
     */
     boolean update(Update${entityClassName}${requestSuffix} request);
 
     /**
-    * 根据主键 id 删除${comment}
+    * 根据主键 id 删除${tableComment}
     * @param id
     * @return
     */
     boolean delete(${column.javaType} id);
 
     /**
-    * 根据主键 id 列表批量删除${comment}
+    * 根据主键 id 列表批量删除${tableComment}
     * @param ids
     * @return
     */

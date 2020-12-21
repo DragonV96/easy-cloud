@@ -19,13 +19,13 @@ import java.io.Serializable;
 * @email : ${email}
 #end
 * @datetime : ${datetime}
-* @description : ${comment}响应对象
+* @description : ${tableComment}响应对象
 */
 @EqualsAndHashCode
 @Data
 @ToString
 #if($enableSwagger)
-@ApiModel(value = "${comment}响应对象")
+@ApiModel(value = "${tableComment}响应对象")
 #end
 public class ${entityClassName}${responseSuffix} implements Serializable {
 

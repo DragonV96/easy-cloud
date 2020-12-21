@@ -22,7 +22,7 @@ import java.util.List;
 * @email : ${email}
 #end
 * @datetime : ${datetime}
-* @description : ${comment}业务层实现
+* @description : ${tableComment}业务层实现
 */
 @Service
 public class ${entityClassName}ServiceImpl extends ServiceImpl<${entityClassName}Mapper, ${entityClassName}> implements ${entityClassName}Service {

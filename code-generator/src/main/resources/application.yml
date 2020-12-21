@@ -6,14 +6,17 @@ host:
   private: 192.168.153.128
   local: 127.0.0.1
 
-# 生成器配置
-generator:
-  # 数据源配置
+# 配置相关数据源 使用 druid 数据源
+spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://${host.private}:3306/information_schema?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
+
+# 生成器配置
+generator:
   # 项目信息配置
   project:
     # 项目名称
@@ -76,6 +79,8 @@ generator:
     mapper-suffix: Mapper
   # 数据库表配置
   table:
+    # 数据库名
+    database-name: file_system
     # 表名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
     table-name-style: 1
     # 字段名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）

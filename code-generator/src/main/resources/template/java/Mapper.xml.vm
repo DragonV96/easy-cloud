@@ -3,7 +3,7 @@
 <mapper namespace="${rootPackageName}.${modulePackageName}.${mapperPackageName}.${entityClassName}Mapper">
     <resultMap id="${entityLowerName}Map" type="${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}">
         #foreach(${column} in ${columns})
-        <result property="${column.columnField}" column="${column.javaField}"></result>
+        <result property="${column.columnName}" column="${column.javaField}"></result>
         #end
     </resultMap>
 
