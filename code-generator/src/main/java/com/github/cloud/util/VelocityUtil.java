@@ -1,11 +1,13 @@
 package com.github.cloud.util;
 
+import cn.hutool.core.util.StrUtil;
 import com.github.cloud.config.*;
 import com.github.cloud.constant.Constant;
 import com.github.cloud.constant.TemplateConstant;
 import com.github.cloud.enums.TemplateEnum;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -162,5 +164,14 @@ public class VelocityUtil {
         }
 
         return filePath.toString();
+    }
+
+    /**
+     * 根据下划线名字获取首字母大写驼峰名
+     * @param name
+     * @return
+     */
+    public static String getClassName(String name) {
+        return StringUtils.capitalizeFirstLetter(StrUtil.toCamelCase(name));
     }
 }

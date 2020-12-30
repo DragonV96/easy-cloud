@@ -1,10 +1,12 @@
 package com.github.cloud.service.impl;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
 import com.github.cloud.config.*;
 import com.github.cloud.constant.Constant;
 import com.github.cloud.entity.Table;
 import com.github.cloud.entity.TableColumn;
+import com.github.cloud.enums.DataTypeEnum;
 import com.github.cloud.mapper.GeneratorMapper;
 import com.github.cloud.service.GeneratorService;
 import com.github.cloud.util.VelocityUtil;
@@ -35,6 +37,7 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     public void outputCode(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig tableConfig){
         VelocityContext velocityContext = VelocityUtil.buildContext(projectConfig, packageConfig, switchConfig, suffixConfig, tableConfig);
+
         List<String> templateList = VelocityUtil.getTemplateList();
 
         for (String template : templateList) {
@@ -64,8 +67,25 @@ public class GeneratorServiceImpl implements GeneratorService {
     private void fillContext(VelocityContext velocityContext, String databaseName, String tableName) {
         Table table = generatorService.queryTable(databaseName, tableName);
         List<TableColumn> tableColumns = generatorService.queryTableColumn(databaseName, tableName);
-        velocityContext.put("table", table);
-        velocityContext.put("table", table);
+
+        // 表属性
+        velocityContext.put("entityClassName", VelocityUtil.getClassName(table.getTableName()));
+        velocityContext.put("entityLowerName", StrUtil.toCamelCase(table.getTableName()));
+        velocityContext.put("tableComment", table.getTableComment());
+
+        // 字段属性
+        this.fillTableColumn(tableColumns);
         velocityContext.put("columns", tableColumns);
+    }
+
+    private void fillTableColumn(List<TableColumn> tableColumns, TableConfig tableConfig) {
+        for (TableColumn column : tableColumns) {
+            column.setJavaField(StrUtil.toCamelCase(column.getColumnName()));
+            column.setJavaType(DataTypeEnum.valueOf(column.getDataType()).getJavaType());
+
+            if (Constant.PRIMARY.equals(column.getColumnKey())) {
+                column.setIsKey(true);
+            }
+        }
     }
 }

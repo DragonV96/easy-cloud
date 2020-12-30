@@ -52,4 +52,9 @@ public interface Constant {
      * mybatis 包路径
      */
     String MYBATIS_PATH = "main\\resources\\mapper";
+
+    /**
+     * 主键标识
+     */
+    String PRIMARY = "PRI";
 }

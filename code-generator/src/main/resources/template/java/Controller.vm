@@ -46,7 +46,7 @@ public class ${entityClassName}Contoller {
 #end
     @GetMapping("/page")
     public ApiResponse<IPage<${entityClassName}>> page(Page${entityClassName} request) {
-    IPage<Demo> response = ${entityLowerName}Service.page(request);
+    IPage<${entityClassName}> response = ${entityLowerName}Service.page(request);
         return ApiResponse.success(response);
     }
 
