@@ -19,9 +19,9 @@ public interface GeneratorService {
      * @param packageConfig
      * @param switchConfig
      * @param suffixConfig
-     * @param tableConfig
+     * @param allowTable
      */
-    void outputCode(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig tableConfig);
+    void outputCode(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig.AllowTable allowTable);
 
     /**
      * 查询表信息

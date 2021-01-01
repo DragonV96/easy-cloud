@@ -36,7 +36,7 @@ public class ${entityClassName}ServiceImpl extends ServiceImpl<${entityClassName
     }
 
     @Override
-    public ${entityClassName}${responseSuffix} detail(${column.javaType} id) {
+    public ${entityClassName}${responseSuffix} detail(${idDataType} id) {
         Demo entity = super.getById(id);
         ${entityClassName}${responseSuffix} response = new ${entityClassName}${responseSuffix}();
         BeanUtils.copyProperties(response, entity);
@@ -58,12 +58,12 @@ public class ${entityClassName}ServiceImpl extends ServiceImpl<${entityClassName
     }
 
     @Override
-    public boolean delete(${column.javaType} id) {
+    public boolean delete(${idDataType} id) {
         return super.removeById(id);
     }
 
     @Override
-    public boolean deleteBatch(List<${column.javaType}> ids) {
+    public boolean deleteBatch(List<${idDataType}> ids) {
         return super.removeByIds(ids);
     }
 }

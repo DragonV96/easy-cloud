@@ -24,10 +24,10 @@
         t.column_default AS columnDefault,
         t.is_nullable AS isNullable,
         t.data_type AS dataType,
-        t.character_maximum AS characterMaximum,
+        t.character_maximum_length AS characterMaximum,
         t.column_key AS columnKey,
         t.column_comment AS columnComment
-        FROM tables t
+        FROM columns t
         <where>
             <if test="databaseName != null and databaseName != ''">
                 AND t.table_schema = #{databaseName}

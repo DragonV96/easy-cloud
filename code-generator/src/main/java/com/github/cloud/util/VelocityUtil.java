@@ -1,5 +1,6 @@
 package com.github.cloud.util;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.cloud.config.*;
 import com.github.cloud.constant.Constant;
@@ -35,10 +36,13 @@ public class VelocityUtil {
 
     /**
      * 项目包结构及名称配置
+     * @param projectConfig
      * @param packageConfig
+     * @param switchConfig
+     * @param suffixConfig
      * @return
      */
-    public static VelocityContext buildContext(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig tableConfig) {
+    public static VelocityContext buildContext(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig) {
         VelocityContext velocityContext = new VelocityContext();
 
         // 项目开关配置
@@ -49,6 +53,7 @@ public class VelocityUtil {
         // 项目信息配置
         velocityContext.put("author", projectConfig.getAuthor());
         velocityContext.put("email", projectConfig.getEmail());
+        velocityContext.put("datetime", DateUtil.now());
 
         // 项目类后缀配置
         velocityContext.put("requestSuffix", suffixConfig.getRequestSuffix());
@@ -60,6 +65,7 @@ public class VelocityUtil {
         velocityContext.put("controllerPackageName", packageConfig.getControllerPackageName());
         velocityContext.put("servicePackageName", packageConfig.getServicePackageName());
         velocityContext.put("serviceImplPackageName", packageConfig.getServiceImplPackageName());
+        velocityContext.put("entityPackageName", packageConfig.getEntityPackageName());
         velocityContext.put("dtoPackageName", packageConfig.getDtoPackageName());
         velocityContext.put("requestPackageName", packageConfig.getRequestPackageName());
         velocityContext.put("responsePackageName", packageConfig.getResponsePackageName());
@@ -82,88 +88,125 @@ public class VelocityUtil {
      * @param projectConfig
      * @param packageConfig
      * @param suffixConfig
-     * @param tableConfig
+     * @param allowTable
      * @param template
      * @return
      */
-    public static String getFileName(ProjectConfig projectConfig, PackageConfig packageConfig, SuffixConfig suffixConfig, TableConfig tableConfig, String template) {
+    public static String getFileName(ProjectConfig projectConfig, PackageConfig packageConfig, SuffixConfig suffixConfig, TableConfig.AllowTable allowTable, String template) {
         StringBuilder filePath = new StringBuilder();
 
         // 公共包路径
         filePath.append(projectConfig.getPath())
+                .append(Constant.SPLIT)
                 .append(projectConfig.getProjectName())
-                .append(Constant.SPLIT)
-                .append(Constant.PROJECT_PATH)
-                .append(Constant.SPLIT)
-                .append(packageConfig.getRootPackageName().replace(Constant.DOT, Constant.SPLIT))
-                .append(Constant.SPLIT)
-                .append(packageConfig.getModulePackageName())
                 .append(Constant.SPLIT);
 
-        if (TemplateEnum.ADD.getName().equals(template) ||
-                TemplateEnum.UPDATE.getName().equals(template) ||
-                TemplateEnum.PAGE.getName().equals(template)) {
+        if (template.endsWith(TemplateEnum.MAPPER_XML.getName())) {
+            // xml 文件前缀
+            fillResourcesPath(filePath);
+        } else {
+            // java 文件前缀
+            fillJavaPath(filePath, packageConfig);
+        }
+
+        if (template.endsWith(TemplateEnum.ADD.getName()) ||
+                template.endsWith(TemplateEnum.UPDATE.getName()) ||
+                template.endsWith(TemplateEnum.PAGE.getName())) {
             // 请求对象
             filePath.append(packageConfig.getDtoPackageName())
+                    .append(Constant.SPLIT)
                     .append(packageConfig.getRequestPackageName())
-                    .append(template.replace(Constant.VM, ""))
-                    // TODO append 表名
+                    .append(Constant.SPLIT)
+                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
                     .append(suffixConfig.getRequestSuffix())
                     .append(Constant.JAVA_SUFFIX);
-        } else if (TemplateEnum.RESPONSE.getName().equals(template)) {
+        } else if (template.endsWith(TemplateEnum.RESPONSE.getName())) {
             // 响应对象
             filePath.append(packageConfig.getDtoPackageName())
+                    .append(Constant.SPLIT)
                     .append(packageConfig.getResponsePackageName())
-                    .append(template.replace(Constant.VM, ""))
-                    // TODO append 表名
-                    .append(suffixConfig.getResponseSuffix())
+                    .append(Constant.SPLIT)
+                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
+                    .append(suffixConfig.getEntitySuffix())
                     .append(Constant.JAVA_SUFFIX);
-        } else if (TemplateEnum.ENTITY.getName().equals(template)) {
+        } else if (template.endsWith(TemplateEnum.ENTITY.getName())) {
             // 数据库实体类
-            filePath.append(packageConfig.getDtoPackageName())
-                    .append(packageConfig.getResponsePackageName())
-                    .append(template.replace(Constant.VM, ""))
-                    // TODO append 表名
+            filePath.append(packageConfig.getEntityPackageName())
+                    .append(Constant.SPLIT)
+                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
                     .append(suffixConfig.getResponseSuffix())
                     .append(Constant.JAVA_SUFFIX);
-        } else if (TemplateEnum.CONTROLLER.getName().equals(template)) {
+        } else if (template.endsWith(TemplateEnum.CONTROLLER.getName())) {
             // controller
             filePath.append(packageConfig.getControllerPackageName())
-                    .append(template.replace(Constant.VM, ""))
-                    // TODO append 表名
+                    .append(Constant.SPLIT)
+                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
                     .append(suffixConfig.getControllerSuffix())
                     .append(Constant.JAVA_SUFFIX);
-        } else if (TemplateEnum.SERVICE.getName().equals(template)) {
+        } else if (template.endsWith(TemplateEnum.SERVICE.getName())) {
             // service
             filePath.append(packageConfig.getServicePackageName())
-                    .append(template.replace(Constant.VM, ""))
-                    // TODO append 表名
+                    .append(Constant.SPLIT)
+                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
                     .append(suffixConfig.getServiceSuffix())
                     .append(Constant.JAVA_SUFFIX);
-        } else if (TemplateEnum.SERVICE_IMPL.getName().equals(template)) {
+        } else if (template.endsWith(TemplateEnum.SERVICE_IMPL.getName())) {
             // serviceImpl
-            filePath.append(packageConfig.getServiceImplPackageName())
-                    .append(template.replace(Constant.VM, ""))
-                    // TODO append 表名
+            filePath.append(packageConfig.getServicePackageName())
+                    .append(Constant.SPLIT)
+                    .append(packageConfig.getServiceImplPackageName())
+                    .append(Constant.SPLIT)
+                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
                     .append(suffixConfig.getServiceImplSuffix())
                     .append(Constant.JAVA_SUFFIX);
-        } else if (TemplateEnum.MAPPER.getName().equals(template)) {
+        } else if (template.endsWith(TemplateEnum.MAPPER.getName())) {
             // mapper
             filePath.append(packageConfig.getMapperPackageName())
-                    .append(template.replace(Constant.VM, ""))
-                    // TODO append 表名
+                    .append(Constant.SPLIT)
+                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
                     .append(suffixConfig.getMapperSuffix())
                     .append(Constant.JAVA_SUFFIX);
-        } else if (TemplateEnum.MAPPER_XML.getName().equals(template)) {
+        } else if (template.endsWith(TemplateEnum.MAPPER_XML.getName())) {
             // mapper xml
-            filePath.append(packageConfig.getMapperPackageName())
-                    .append(template.replace(Constant.XML_VM, ""))
-                    // TODO append 表名
+            filePath.append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.XML_VM, ""))
+                    .append(getClassName(allowTable.getTableName()))
                     .append(suffixConfig.getMapperSuffix())
                     .append(Constant.XML_SUFFIX);
         }
 
         return filePath.toString();
+    }
+
+    /**
+     * 填充 java 文件路径
+     * @param filePath
+     * @param packageConfig
+     */
+    private static void fillJavaPath(StringBuilder filePath, PackageConfig packageConfig) {
+        // java 公共包路径
+        filePath.append(Constant.PROJECT_PATH)
+                .append(Constant.SPLIT)
+                .append(packageConfig.getRootPackageName().replace(Constant.DOT, Constant.SPLIT))
+                .append(Constant.SPLIT)
+                .append(packageConfig.getModulePackageName())
+                .append(Constant.SPLIT);
+    }
+
+    /**
+     * 填充 resources 文件路径
+     * @param filePath
+     */
+    private static void fillResourcesPath(StringBuilder filePath) {
+        // resources 公共包路径
+        filePath.append(Constant.MYBATIS_PATH)
+                .append(Constant.SPLIT);
     }
 
     /**

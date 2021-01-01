@@ -7,6 +7,7 @@ import com.github.cloud.constant.Constant;
 import com.github.cloud.entity.Table;
 import com.github.cloud.entity.TableColumn;
 import com.github.cloud.enums.DataTypeEnum;
+import com.github.cloud.exception.GlobalException;
 import com.github.cloud.mapper.GeneratorMapper;
 import com.github.cloud.service.GeneratorService;
 import com.github.cloud.util.VelocityUtil;
@@ -35,8 +36,9 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Autowired
     private GeneratorService generatorService;
 
-    public void outputCode(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig tableConfig){
-        VelocityContext velocityContext = VelocityUtil.buildContext(projectConfig, packageConfig, switchConfig, suffixConfig, tableConfig);
+    public void outputCode(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig.AllowTable allowTable){
+        VelocityContext velocityContext = VelocityUtil.buildContext(projectConfig, packageConfig, switchConfig, suffixConfig);
+        this.fillContext(velocityContext, projectConfig.getDatabaseName(), allowTable);
 
         List<String> templateList = VelocityUtil.getTemplateList();
 
@@ -45,8 +47,9 @@ public class GeneratorServiceImpl implements GeneratorService {
             StringWriter sw = new StringWriter();
             Template resultTemplate = Velocity.getTemplate(template, Constant.UTF8);
             resultTemplate.merge(velocityContext, sw);
-
-            FileUtil.writeUtf8String(sw.toString(), VelocityUtil.getFileName(projectConfig, packageConfig, suffixConfig, tableConfig, template));
+            String fileName = VelocityUtil.getFileName(projectConfig, packageConfig, suffixConfig, allowTable, template);
+            FileUtil.writeUtf8String(sw.toString(), fileName);
+            log.info("generate file = {}", fileName);
         }
     }
 
@@ -63,10 +66,14 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 填充表及表字段配置
      * @param velocityContext
+     * @param databaseName
+     * @param allowTable
      */
-    private void fillContext(VelocityContext velocityContext, String databaseName, String tableName) {
-        Table table = generatorService.queryTable(databaseName, tableName);
-        List<TableColumn> tableColumns = generatorService.queryTableColumn(databaseName, tableName);
+    private void fillContext(VelocityContext velocityContext, String databaseName, TableConfig.AllowTable allowTable) {
+        Table table = generatorService.queryTable(databaseName, allowTable.getTableName());
+        log.info("table = {}", table);
+        List<TableColumn> tableColumns = generatorService.queryTableColumn(databaseName, allowTable.getTableName());
+        log.info("tableColumns = {}", tableColumns);
 
         // 表属性
         velocityContext.put("entityClassName", VelocityUtil.getClassName(table.getTableName()));
@@ -74,18 +81,53 @@ public class GeneratorServiceImpl implements GeneratorService {
         velocityContext.put("tableComment", table.getTableComment());
 
         // 字段属性
-        this.fillTableColumn(tableColumns);
+        this.fillTableColumn(velocityContext, tableColumns, allowTable);
         velocityContext.put("columns", tableColumns);
     }
 
-    private void fillTableColumn(List<TableColumn> tableColumns, TableConfig tableConfig) {
+    /**
+     * 填充表字段
+     * @param velocityContext
+     * @param tableColumns
+     * @param allowTable
+     */
+    private void fillTableColumn(VelocityContext velocityContext, List<TableColumn> tableColumns, TableConfig.AllowTable allowTable) {
         for (TableColumn column : tableColumns) {
             column.setJavaField(StrUtil.toCamelCase(column.getColumnName()));
-            column.setJavaType(DataTypeEnum.valueOf(column.getDataType()).getJavaType());
+            this.fillJavaType(column);
 
             if (Constant.PRIMARY.equals(column.getColumnKey())) {
                 column.setIsKey(true);
+                column.setIdType(allowTable.getPrimaryKeyType());
+                velocityContext.put("idDataType", column.getJavaType());
             }
         }
+    }
+
+    /**
+     * 根据数据库类型填充 java 对应类型
+     * @param column
+     */
+    private void fillJavaType(TableColumn column) {
+        if (DataTypeEnum.VARCHAR.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.VARCHAR.getJavaType());
+        } else if (DataTypeEnum.INT.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.INT.getJavaType());
+        } else if (DataTypeEnum.BIGINT.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.BIGINT.getJavaType());
+        } else if (DataTypeEnum.TIMESTAMP.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.TIMESTAMP.getJavaType());
+        } else if (DataTypeEnum.DATETIME.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.DATETIME.getJavaType());
+        } else if (DataTypeEnum.CHAR.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.CHAR.getJavaType());
+        } else if (DataTypeEnum.BIT.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.BIT.getJavaType());
+        } else if (DataTypeEnum.TINYINT.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.TINYINT.getJavaType());
+        } else {
+            throw new GlobalException("没有此数据库表字段类型！");
+        }
+        log.info("column.getJavaType() = {}", column.getJavaType());
     }
 }

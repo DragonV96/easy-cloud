@@ -3,7 +3,7 @@ server:
 
 host:
   public: 0.0.0.0
-  private: 192.168.153.128
+  private: 192.168.1.14
   local: 127.0.0.1
 
 # 配置相关数据源 使用 druid 数据源
@@ -29,6 +29,8 @@ generator:
     path: D:\tmp
     # 版本号
     version: 0.0.1-SNAPSHOT
+    # 数据库名
+    database-name: file_system
   # 项目开关配置
   switch:
     # 是否开启类注释的邮箱
@@ -55,6 +57,8 @@ generator:
     service-impl-package-name: impl
     # mapper 包路径
     mapper-package-name: mapper
+    # 数据库实体类包路径
+    entity-package-name: entity
     # dto 包路径
     dto-package-name: dto
     # request 包路径
@@ -79,8 +83,6 @@ generator:
     mapper-suffix: Mapper
   # 数据库表配置
   table:
-    # 数据库名
-    database-name: file_system
     # 表名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
     table-name-style: 1
     # 字段名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
@@ -88,19 +90,19 @@ generator:
     # 表信息生成配置列表
     allow-tables:
         # 表名（示例1）
-      - table-name: file_log
-        # 表前缀移除
-        remove-prefix:
-        # 主键名
-        primary-key-name: file_log_id
-        # 主键类型，对应 mybatis 5种主键类型
-        primary-key-type: INPUT
-        # 表名（示例2）
       - table-name: file_info
         # 表前缀移除
         remove-prefix:
         # 主键名
-        primary-key-name: file_info_id
+        primary-key-name: file_id
+        # 主键类型，对应 mybatis 5种主键类型
+        primary-key-type: INPUT
+        # 表名（示例2）
+      - table-name: sys_user
+        # 表前缀移除
+        remove-prefix:
+        # 主键名
+        primary-key-name: user_id
         # 主键类型，对应 mybatis 5种主键类型
         primary-key-type: INPUT
 

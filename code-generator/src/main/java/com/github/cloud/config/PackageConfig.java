@@ -46,6 +46,11 @@ public class PackageConfig {
     private String mapperPackageName;
 
     /**
+     * 数据库实体类包路径
+     */
+    private String entityPackageName;
+
+    /**
      * dto 包路径
      */
     private String dtoPackageName;

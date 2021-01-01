@@ -9,14 +9,14 @@ import lombok.Getter;
  */
 @Getter
 public enum DataTypeEnum {
-    CHAR("char", "String"),
     VARCHAR("varchar", "String"),
-    BIT("bit", "Boolean"),
-    TINYINT("tinyint", "Byte"),
     INT("int", "Integer"),
     BIGINT("bigint", "Long"),
     TIMESTAMP("timestamp", "Date"),
     DATETIME("datetime", "Date"),
+    CHAR("char", "String"),
+    BIT("bit", "Boolean"),
+    TINYINT("tinyint", "Byte"),
     ;
 
     /**

@@ -33,13 +33,11 @@ public class Page${entityClassName}${requestSuffix} implements Serializable {
 
 #foreach(${column} in ${columns})
     @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}"#if(${column.required}), required = true#end)
-    #if(${column.javaType.equals("String")})
-    #if(${column.columnComment.indexOf("（")} > 0)
+#if(${column.javaType.equals("String")})
+#if(${column.columnComment.indexOf("（")} > 0)
     @NotEmpty("${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
-    #elseif(${column.columnComment.indexOf("(")} > 0)
-    @NotEmpty("${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
-    #end
-    #end
+#end
+#end
     private ${column.javaType} ${column.javaField};
 
 #end

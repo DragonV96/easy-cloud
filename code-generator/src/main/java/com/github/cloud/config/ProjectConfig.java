@@ -39,4 +39,9 @@ public class ProjectConfig {
      * 版本号 TODO 未完
      */
     private String version;
+
+    /**
+     * 数据库名
+     */
+    private String databaseName;
 }

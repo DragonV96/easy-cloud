@@ -58,7 +58,7 @@ public class ${entityClassName}Contoller {
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:detail")
 #end
     @GetMapping("/detail/{id}")
-    public ApiResponse<${entityClassName}Response> detail(@PathVariable("id") ${column.javaType} id) {
+    public ApiResponse<${entityClassName}Response> detail(@PathVariable("id") ${idDataType} id) {
         ${entityClassName}Response response = ${entityLowerName}Service.detail(id);
         return ApiResponse.success(response);
     }
@@ -97,7 +97,7 @@ public class ${entityClassName}Contoller {
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")
 #end
     @DeleteMapping("/delete/{id}")
-    public ApiResponse<Boolean> delete(@PathVariable("id") ${column.javaType} id) {
+    public ApiResponse<Boolean> delete(@PathVariable("id") ${idDataType} id) {
         boolean delete = ${entityLowerName}Service.delete(id);
         return ApiResponse.success(delete);
     }
@@ -110,7 +110,7 @@ public class ${entityClassName}Contoller {
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")
 #end
     @DeleteMapping("/delete/batch/{ids}")
-    public ApiResponse<Boolean> deleteBatch(@PathVariable("ids") List<${column.javaType}> ids) {
+    public ApiResponse<Boolean> deleteBatch(@PathVariable("ids") List<${idDataType}> ids) {
         boolean delete = ${entityLowerName}Service.deleteBatch(ids);
         return ApiResponse.success(delete);
     }

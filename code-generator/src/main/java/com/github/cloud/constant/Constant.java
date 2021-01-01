@@ -54,6 +54,11 @@ public interface Constant {
     String MYBATIS_PATH = "main\\resources\\mapper";
 
     /**
+     * 模板公共路径
+     */
+    String TEMPLATE_PATH = "template/java/";
+
+    /**
      * 主键标识
      */
     String PRIMARY = "PRI";

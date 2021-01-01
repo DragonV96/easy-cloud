@@ -18,11 +18,6 @@ import java.util.List;
 public class TableConfig {
 
     /**
-     * 数据库名
-     */
-    private String databaseName;
-
-    /**
      * 表名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
      */
     private String tableNameStyle;

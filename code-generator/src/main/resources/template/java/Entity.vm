@@ -26,9 +26,9 @@ public class ${entityClassName} implements Serializable {
     /**
      * ${column.columnComment}
      */
-    #if(${column.isKey})
+#if(${column.isKey})
     @TableId(type = IdType.${column.idType})
-    #end
+#end
     private ${column.javaType} ${column.javaField};
 
 #end

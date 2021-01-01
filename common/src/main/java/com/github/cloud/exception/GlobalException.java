@@ -1,6 +1,7 @@
 package com.github.cloud.exception;
 
 
+import com.github.cloud.enums.ErrorCode;
 import com.github.cloud.enums.ErrorType;
 import lombok.Getter;
 
@@ -18,6 +19,11 @@ public class GlobalException extends RuntimeException implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final ErrorType errorType;
+
+    public GlobalException(String message) {
+        super(message);
+        this.errorType = ErrorCode.ERROR_SYSTEM;
+    }
 
     public GlobalException(ErrorType errorType) {
         super(errorType.getMsg());
