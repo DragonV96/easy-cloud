@@ -62,4 +62,14 @@ public interface Constant {
      * 主键标识
      */
     String PRIMARY = "PRI";
+
+    /**
+     * 列不能为空标识
+     */
+    String NOT_NULL = "NO";
+
+    /**
+     * 列可以为空标识
+     */
+    String NULL = "YES";
 }

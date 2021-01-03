@@ -36,6 +36,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Autowired
     private GeneratorService generatorService;
 
+    @Override
     public void outputCode(ProjectConfig projectConfig, PackageConfig packageConfig, SwitchConfig switchConfig, SuffixConfig suffixConfig, TableConfig.AllowTable allowTable){
         VelocityContext velocityContext = VelocityUtil.buildContext(projectConfig, packageConfig, switchConfig, suffixConfig);
         this.fillContext(velocityContext, projectConfig.getDatabaseName(), allowTable);
@@ -81,8 +82,11 @@ public class GeneratorServiceImpl implements GeneratorService {
         velocityContext.put("tableComment", table.getTableComment());
 
         // 字段属性
-        this.fillTableColumn(velocityContext, tableColumns, allowTable);
+        this.fillTableColumn(velocityContext, tableColumns, allowTable, table);
         velocityContext.put("columns", tableColumns);
+        velocityContext.put("hasDate", table.getHasDate());
+        velocityContext.put("hasNotNull", table.getHasNotNull());
+        velocityContext.put("hasNotBlank", table.getHasNotBlank());
     }
 
     /**
@@ -90,12 +94,17 @@ public class GeneratorServiceImpl implements GeneratorService {
      * @param velocityContext
      * @param tableColumns
      * @param allowTable
+     * @param table
      */
-    private void fillTableColumn(VelocityContext velocityContext, List<TableColumn> tableColumns, TableConfig.AllowTable allowTable) {
+    private void fillTableColumn(VelocityContext velocityContext, List<TableColumn> tableColumns, TableConfig.AllowTable allowTable, Table table) {
         for (TableColumn column : tableColumns) {
             column.setJavaField(StrUtil.toCamelCase(column.getColumnName()));
-            this.fillJavaType(column);
+            this.fillJavaType(column, table);
 
+            // 校验填充
+            this.fillValidate(column, table);
+
+            // 主键填充
             if (Constant.PRIMARY.equals(column.getColumnKey())) {
                 column.setIsKey(true);
                 column.setIdType(allowTable.getPrimaryKeyType());
@@ -107,8 +116,9 @@ public class GeneratorServiceImpl implements GeneratorService {
     /**
      * 根据数据库类型填充 java 对应类型
      * @param column
+     * @param table
      */
-    private void fillJavaType(TableColumn column) {
+    private void fillJavaType(TableColumn column, Table table) {
         if (DataTypeEnum.VARCHAR.getDataType().equals(column.getDataType())) {
             column.setJavaType(DataTypeEnum.VARCHAR.getJavaType());
         } else if (DataTypeEnum.INT.getDataType().equals(column.getDataType())) {
@@ -129,5 +139,31 @@ public class GeneratorServiceImpl implements GeneratorService {
             throw new GlobalException("没有此数据库表字段类型！");
         }
         log.info("column.getJavaType() = {}", column.getJavaType());
+    }
+
+    /**
+     * 根据数据库类型填充数据校验注解
+     * @param column
+     * @param table
+     */
+    private void fillValidate(TableColumn column, Table table) {
+        if (Constant.NULL.equals(column.getIsNullable())) {
+            return;
+        }
+
+        if (DataTypeEnum.VARCHAR.getDataType().equals(column.getDataType())
+                || DataTypeEnum.CHAR.getDataType().equals(column.getDataType())) {
+            table.setHasNotBlank(true);
+        } else if (DataTypeEnum.INT.getDataType().equals(column.getDataType())
+                || DataTypeEnum.BIGINT.getDataType().equals(column.getDataType())
+                || DataTypeEnum.BIT.getDataType().equals(column.getDataType())
+                || DataTypeEnum.TINYINT.getDataType().equals(column.getDataType())) {
+            table.setHasNotNull(true);
+        } else if (DataTypeEnum.TIMESTAMP.getDataType().equals(column.getDataType())
+                || DataTypeEnum.DATETIME.getDataType().equals(column.getDataType())) {
+            table.setHasDate(true);
+        } else {
+            throw new GlobalException("没有此数据库表字段类型！");
+        }
     }
 }

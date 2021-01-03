@@ -7,10 +7,20 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+#if(${hasDate})
+import org.springframework.format.annotation.DateTimeFormat;
+#end
 
+#if(${hasNotBlank})
 import javax.validation.constraints.NotBlank;
+#end
+#if(${hasNotNull})
 import javax.validation.constraints.NotNull;
+#end
 import java.io.Serializable;
+#if(${hasDate})
+import java.util.Date;
+#end
 
 
 /**
@@ -33,9 +43,22 @@ public class Update${entityClassName}${requestSuffix} implements Serializable {
 
 #foreach(${column} in ${columns})
     @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}"#if(${column.required}), required = true#end)
+#if(${column.isNullable.equals("NO")})
 #if(${column.javaType.equals("String")})
 #if(${column.columnComment.indexOf("（")} > 0)
-    @NotEmpty("${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+    @NotBlank(message = "${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+#else
+    @NotBlank(message = "${column.columnComment}不能为空")
+#end
+#elseif(${column.javaType.equals("Long")} || ${column.javaType.equals("Integer")} || ${column.javaType.equals("Byte")})
+#if(${column.columnComment.indexOf("（")} > 0)
+    @NotNull(message = "${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+#else
+    @NotNull(message = "${column.columnComment}不能为空")
+#end
+#elseif(${column.javaType.equals("Date")})
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @NotNull(message = "${column.columnComment}不能为空")
 #end
 #end
     private ${column.javaType} ${column.javaField};

@@ -27,4 +27,19 @@ public class Table implements Serializable {
      * 表注释
      */
     private String tableComment;
+
+    /**
+     * 是否含有日期
+     */
+    private Boolean hasDate = false;
+
+    /**
+     * 是否含有非空基本数据类型
+     */
+    private Boolean hasNotNull = false;
+
+    /**
+     * 是否含有非空字符串
+     */
+    private Boolean hasNotBlank = false;
 }

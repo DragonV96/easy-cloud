@@ -8,13 +8,14 @@ import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackag
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName};
+import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName};
 import ${rootPackageName}.${modulePackageName}.${mapperPackageName}.${entityClassName}Mapper;
 import ${rootPackageName}.${modulePackageName}.${servicePackageName}.${entityClassName}Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 /**
 * @author : ${author}
@@ -37,7 +38,7 @@ public class ${entityClassName}ServiceImpl extends ServiceImpl<${entityClassName
 
     @Override
     public ${entityClassName}${responseSuffix} detail(${idDataType} id) {
-        Demo entity = super.getById(id);
+        ${entityClassName} entity = super.getById(id);
         ${entityClassName}${responseSuffix} response = new ${entityClassName}${responseSuffix}();
         BeanUtils.copyProperties(response, entity);
         return response;

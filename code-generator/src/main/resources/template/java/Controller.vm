@@ -1,4 +1,4 @@
-package ${rootPackageName}.${modulePackageName}.${controllerPackageName}.controller;
+package ${rootPackageName}.${modulePackageName}.${controllerPackageName};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
@@ -33,7 +33,7 @@ import java.util.List;
 #end
 @RestController
 @RequestMapping("/${entityLowerName}")
-public class ${entityClassName}Contoller {
+public class ${entityClassName}Controller {
 
     @Autowired
     private ${entityClassName}Service ${entityLowerName}Service;
@@ -45,7 +45,7 @@ public class ${entityClassName}Contoller {
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:page")
 #end
     @GetMapping("/page")
-    public ApiResponse<IPage<${entityClassName}>> page(Page${entityClassName} request) {
+    public ApiResponse<IPage<${entityClassName}>> page(Page${entityClassName}${requestSuffix} request) {
     IPage<${entityClassName}> response = ${entityLowerName}Service.page(request);
         return ApiResponse.success(response);
     }
@@ -71,7 +71,7 @@ public class ${entityClassName}Contoller {
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:save")
 #end
     @PostMapping("/save")
-    public ApiResponse<Boolean> save(@RequestBody @Valid Add${entityClassName} request) {
+    public ApiResponse<Boolean> save(@RequestBody @Valid Add${entityClassName}${requestSuffix} request) {
         boolean save = ${entityLowerName}Service.save(request);
         return ApiResponse.success(save);
     }
@@ -84,7 +84,7 @@ public class ${entityClassName}Contoller {
     @RequirePermission(value = "${modulePackageName}:${entityLowerName}:update")
 #end
     @PutMapping("/update")
-    public ApiResponse<Boolean> update(@RequestBody @Valid Update${entityClassName} request) {
+    public ApiResponse<Boolean> update(@RequestBody @Valid Update${entityClassName}${requestSuffix} request) {
         boolean update = ${entityLowerName}Service.update(request);
         return ApiResponse.success(update);
     }

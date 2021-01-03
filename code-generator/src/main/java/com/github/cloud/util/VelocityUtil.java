@@ -23,6 +23,9 @@ import java.util.Properties;
  */
 public class VelocityUtil {
 
+    /**
+     * 初始化 velocity 引擎
+     */
     public static void initVelocity() {
         Properties p = new Properties();
         // 加载classpath目录下的vm文件
@@ -65,6 +68,7 @@ public class VelocityUtil {
         velocityContext.put("controllerPackageName", packageConfig.getControllerPackageName());
         velocityContext.put("servicePackageName", packageConfig.getServicePackageName());
         velocityContext.put("serviceImplPackageName", packageConfig.getServiceImplPackageName());
+        velocityContext.put("mapperPackageName", packageConfig.getMapperPackageName());
         velocityContext.put("entityPackageName", packageConfig.getEntityPackageName());
         velocityContext.put("dtoPackageName", packageConfig.getDtoPackageName());
         velocityContext.put("requestPackageName", packageConfig.getRequestPackageName());
@@ -94,6 +98,7 @@ public class VelocityUtil {
      */
     public static String getFileName(ProjectConfig projectConfig, PackageConfig packageConfig, SuffixConfig suffixConfig, TableConfig.AllowTable allowTable, String template) {
         StringBuilder filePath = new StringBuilder();
+        String className = getClassName(allowTable.getTableName());
 
         // 公共包路径
         filePath.append(projectConfig.getPath())
@@ -118,7 +123,7 @@ public class VelocityUtil {
                     .append(packageConfig.getRequestPackageName())
                     .append(Constant.SPLIT)
                     .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
+                    .append(className)
                     .append(suffixConfig.getRequestSuffix())
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.RESPONSE.getName())) {
@@ -127,32 +132,28 @@ public class VelocityUtil {
                     .append(Constant.SPLIT)
                     .append(packageConfig.getResponsePackageName())
                     .append(Constant.SPLIT)
-                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
-                    .append(suffixConfig.getEntitySuffix())
+                    .append(className)
+                    .append(suffixConfig.getResponseSuffix())
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.ENTITY.getName())) {
             // 数据库实体类
             filePath.append(packageConfig.getEntityPackageName())
                     .append(Constant.SPLIT)
-                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
-                    .append(suffixConfig.getResponseSuffix())
+                    .append(className)
+                    .append(suffixConfig.getEntitySuffix())
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.CONTROLLER.getName())) {
             // controller
             filePath.append(packageConfig.getControllerPackageName())
                     .append(Constant.SPLIT)
-                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
+                    .append(className)
                     .append(suffixConfig.getControllerSuffix())
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.SERVICE.getName())) {
             // service
             filePath.append(packageConfig.getServicePackageName())
                     .append(Constant.SPLIT)
-                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
+                    .append(className)
                     .append(suffixConfig.getServiceSuffix())
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.SERVICE_IMPL.getName())) {
@@ -161,22 +162,20 @@ public class VelocityUtil {
                     .append(Constant.SPLIT)
                     .append(packageConfig.getServiceImplPackageName())
                     .append(Constant.SPLIT)
-                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
+                    .append(className)
                     .append(suffixConfig.getServiceImplSuffix())
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.MAPPER.getName())) {
             // mapper
             filePath.append(packageConfig.getMapperPackageName())
                     .append(Constant.SPLIT)
-                    .append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
+                    .append(className)
                     .append(suffixConfig.getMapperSuffix())
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.MAPPER_XML.getName())) {
             // mapper xml
             filePath.append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.XML_VM, ""))
-                    .append(getClassName(allowTable.getTableName()))
+                    .append(className)
                     .append(suffixConfig.getMapperSuffix())
                     .append(Constant.XML_SUFFIX);
         }

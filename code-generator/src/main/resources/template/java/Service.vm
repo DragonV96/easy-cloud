@@ -1,13 +1,15 @@
 package ${rootPackageName}.${modulePackageName}.${servicePackageName};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
 import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName};
+
+import java.util.List;
+
 
 /**
 * @author : ${author}
@@ -31,7 +33,7 @@ public interface ${entityClassName}Service extends IService<${entityClassName}> 
     * @param id
     * @return
     */
-    DemoResponse detail(${idDataType} id);
+    ${entityClassName}${responseSuffix} detail(${idDataType} id);
 
     /**
     * 新增${tableComment}

@@ -39,6 +39,7 @@ public class GeneratorHandler implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // 生成代码
         VelocityUtil.initVelocity();
         for (TableConfig.AllowTable item : tableConfig.getAllowTables()) {
             generatorService.outputCode(projectConfig, packageConfig, switchConfig, suffixConfig, item);
