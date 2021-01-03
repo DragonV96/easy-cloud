@@ -21,11 +21,6 @@ public class PackageConfig {
     private String rootPackageName;
 
     /**
-     * 项目子模块路径
-     */
-    private String modulePackageName;
-
-    /**
      * controller 包路径
      */
     private String controllerPackageName;

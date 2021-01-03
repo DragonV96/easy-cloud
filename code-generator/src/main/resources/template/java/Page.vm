@@ -1,4 +1,4 @@
-package ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName};
+package ${rootPackageName}.${dtoPackageName}.${requestPackageName};
 
 import com.github.cloud.dto.request.PageRequest;
 #if($enableSwagger)

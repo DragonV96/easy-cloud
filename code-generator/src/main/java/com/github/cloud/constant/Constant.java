@@ -72,4 +72,9 @@ public interface Constant {
      * 列可以为空标识
      */
     String NULL = "YES";
+
+    /**
+     * 去掉表注释后缀 表
+     */
+    String EXCLUDE = "表";
 }

@@ -1,13 +1,13 @@
-package ${rootPackageName}.${modulePackageName}.${controllerPackageName};
+package ${rootPackageName}.${controllerPackageName};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
 import com.github.cloud.dto.response.ApiResponse;
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
-import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
-import ${rootPackageName}.${modulePackageName}.${servicePackageName}.${entityClassName}${serviceSuffix};
+import ${rootPackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
+import ${rootPackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
+import ${rootPackageName}.${servicePackageName}.${entityClassName}${serviceSuffix};
 #if($enableSwagger)
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

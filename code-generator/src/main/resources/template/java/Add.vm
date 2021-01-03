@@ -1,4 +1,4 @@
-package ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName};
+package ${rootPackageName}.${dtoPackageName}.${requestPackageName};
 
 #if($enableSwagger)
 import io.swagger.annotations.ApiModel;

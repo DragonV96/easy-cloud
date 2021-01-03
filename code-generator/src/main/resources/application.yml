@@ -47,8 +47,6 @@ generator:
   package:
     # 项目根路径
     root-package-name: com.github.cloud
-    # 项目子模块路径
-    module-package-name: file
     # controller 包路径
     controller-package-name: controller
     # service 接口包路径
@@ -94,17 +92,17 @@ generator:
         # 表前缀移除
         remove-prefix:
         # 主键名
-        primary-key-name: file_id
+        primary-key-name: file_info_id
         # 主键类型，对应 mybatis 5种主键类型
         primary-key-type: INPUT
         # 表名（示例2）
-      - table-name: sys_user
+      - table-name: file_status
         # 表前缀移除
         remove-prefix:
         # 主键名
-        primary-key-name: user_id
+        primary-key-name: file_status_id
         # 主键类型，对应 mybatis 5种主键类型
-        primary-key-type: INPUT
+        primary-key-type: AUTO
 
 
 

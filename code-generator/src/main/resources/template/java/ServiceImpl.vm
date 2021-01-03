@@ -1,16 +1,16 @@
-package ${rootPackageName}.${modulePackageName}.${servicePackageName}.${serviceImplPackageName};
+package ${rootPackageName}.${servicePackageName}.${serviceImplPackageName};
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
-import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
-import ${rootPackageName}.${modulePackageName}.${mapperPackageName}.${entityClassName}${mapperSuffix};
-import ${rootPackageName}.${modulePackageName}.${servicePackageName}.${entityClassName}${serviceSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
+import ${rootPackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
+import ${rootPackageName}.${mapperPackageName}.${entityClassName}${mapperSuffix};
+import ${rootPackageName}.${servicePackageName}.${entityClassName}${serviceSuffix};
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,12 @@
-package ${rootPackageName}.${modulePackageName}.${servicePackageName};
+package ${rootPackageName}.${servicePackageName};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
-import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
-import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
+import ${rootPackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
 
 import java.util.List;
 

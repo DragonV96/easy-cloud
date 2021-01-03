@@ -69,7 +69,6 @@ public class VelocityUtil {
 
         // 项目包结构及名称配置
         velocityContext.put("rootPackageName", packageConfig.getRootPackageName());
-        velocityContext.put("modulePackageName", packageConfig.getModulePackageName());
         velocityContext.put("controllerPackageName", packageConfig.getControllerPackageName());
         velocityContext.put("servicePackageName", packageConfig.getServicePackageName());
         velocityContext.put("serviceImplPackageName", packageConfig.getServiceImplPackageName());
@@ -179,8 +178,7 @@ public class VelocityUtil {
                     .append(Constant.JAVA_SUFFIX);
         } else if (template.endsWith(TemplateEnum.MAPPER_XML.getName())) {
             // mapper xml
-            filePath.append(template.replace(Constant.TEMPLATE_PATH, "").replace(Constant.XML_VM, ""))
-                    .append(className)
+            filePath.append(className)
                     .append(suffixConfig.getMapperSuffix())
                     .append(Constant.XML_SUFFIX);
         }
@@ -198,8 +196,6 @@ public class VelocityUtil {
         filePath.append(Constant.PROJECT_PATH)
                 .append(Constant.SPLIT)
                 .append(packageConfig.getRootPackageName().replace(Constant.DOT, Constant.SPLIT))
-                .append(Constant.SPLIT)
-                .append(packageConfig.getModulePackageName())
                 .append(Constant.SPLIT);
     }
 
