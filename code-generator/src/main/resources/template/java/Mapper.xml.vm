@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${rootPackageName}.${modulePackageName}.${mapperPackageName}.${entityClassName}Mapper">
-    <resultMap id="${entityLowerName}Map" type="${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}">
-        #foreach(${column} in ${columns})
-        <result property="${column.columnName}" column="${column.javaField}"></result>
-        #end
+<mapper namespace="${rootPackageName}.${modulePackageName}.${mapperPackageName}.${entityClassName}${mapperSuffix}">
+    <resultMap id="${entityLowerName}Map" type="${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}${entitySuffix}">
+#foreach(${column} in ${columns})
+        <result property="${column.javaField}" column="${column.columnName}"></result>
+#end
     </resultMap>
 
     <sql id="sqlList">

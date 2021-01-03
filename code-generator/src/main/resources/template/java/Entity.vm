@@ -23,7 +23,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @Data
 @ToString
-public class ${entityClassName} implements Serializable {
+public class ${entityClassName}${entitySuffix} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

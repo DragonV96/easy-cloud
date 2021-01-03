@@ -31,22 +31,22 @@ public class SuffixConfig {
     private String responseSuffix;
 
     /**
-     * controller 后缀 TODO 未完
+     * controller 后缀
      */
     private String controllerSuffix;
 
     /**
-     * service 接口后缀 TODO 未完
+     * service 接口后缀
      */
     private String serviceSuffix;
 
     /**
-     * service 实现类后缀 TODO 未完
+     * service 实现类后缀
      */
     private String serviceImplSuffix;
 
     /**
-     * mapper 接口后缀 TODO 未完
+     * mapper 接口后缀
      */
     private String mapperSuffix;
 }

@@ -1,7 +1,7 @@
 package ${rootPackageName}.${modulePackageName}.${mapperPackageName};
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName};
+import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
 
 /**
 * @author : ${author}
@@ -11,5 +11,5 @@ import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClas
 * @datetime : ${datetime}
 * @description : ${tableComment}数据访问层
 */
-public interface ${entityClassName}Mapper extends BaseMapper<${entityClassName}> {
+public interface ${entityClassName}${mapperSuffix} extends BaseMapper<${entityClassName}${entitySuffix}> {
 }

@@ -6,7 +6,7 @@ import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackag
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
 import ${rootPackageName}.${modulePackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
-import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName};
+import ${rootPackageName}.${modulePackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
 
 import java.util.List;
 
@@ -19,14 +19,14 @@ import java.util.List;
 * @datetime : ${datetime}
 * @description : ${tableComment}业务层接口
 */
-public interface ${entityClassName}Service extends IService<${entityClassName}> {
+public interface ${entityClassName}${serviceSuffix} extends IService<${entityClassName}${entitySuffix}> {
 
     /**
     * 分页查询${tableComment}
     * @param request
     * @return
     */
-    IPage<${entityClassName}> page(Page${entityClassName}${requestSuffix} request);
+    IPage<${entityClassName}${entitySuffix}> page(Page${entityClassName}${requestSuffix} request);
 
     /**
     * 根据主键 id 查询${tableComment}详情

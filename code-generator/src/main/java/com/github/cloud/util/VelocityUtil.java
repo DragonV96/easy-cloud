@@ -59,8 +59,13 @@ public class VelocityUtil {
         velocityContext.put("datetime", DateUtil.now());
 
         // 项目类后缀配置
+        velocityContext.put("entitySuffix", suffixConfig.getEntitySuffix());
         velocityContext.put("requestSuffix", suffixConfig.getRequestSuffix());
         velocityContext.put("responseSuffix", suffixConfig.getResponseSuffix());
+        velocityContext.put("controllerSuffix", suffixConfig.getControllerSuffix());
+        velocityContext.put("serviceSuffix", suffixConfig.getServiceSuffix());
+        velocityContext.put("serviceImplSuffix", suffixConfig.getServiceImplSuffix());
+        velocityContext.put("mapperSuffix", suffixConfig.getMapperSuffix());
 
         // 项目包结构及名称配置
         velocityContext.put("rootPackageName", packageConfig.getRootPackageName());
