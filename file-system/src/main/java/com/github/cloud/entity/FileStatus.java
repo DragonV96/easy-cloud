@@ -47,4 +47,9 @@ public class FileStatus implements Serializable {
      */
     private Integer currentChunk;
 
+    /**
+     * 下载次数
+     */
+    private Integer downloadCount;
+
 }

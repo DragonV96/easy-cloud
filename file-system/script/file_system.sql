@@ -36,5 +36,6 @@ CREATE TABLE `file_status` (
   `file_status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '文件状态（1初始化 2上传中 3上传完成 4上传异常）',
   `chunks` int(11) DEFAULT 1 COMMENT '分片数量',
   `current_chunk` int(11) DEFAULT NULL COMMENT '当前分片数',
+  `download_count` int(11) DEFAULT NULL COMMENT '下载次数',
   PRIMARY KEY (`file_status_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='文件状态表';

@@ -43,7 +43,7 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private FileStatusService fileStatusService;
 
-    @Transactional(rollbackFor = RuntimeException.class)
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean upload(MultipartFile file, AddFileRequest request) {
         if (null == file || file.isEmpty()) {
@@ -111,13 +111,31 @@ public class FileServiceImpl implements FileService {
         return false;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean delete(Long id) {
-        return false;
+        // TODO 删除文件
+
+        boolean delete = fileInfoService.delete(id);
+        delete = delete && fileStatusService.deleteByFileInfoId(id);
+
+        if (!delete) {
+            throw new GlobalException(FileErrorCode.DELETE_FILE__RECORD_FAILED);
+        }
+        return delete;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean deleteBatch(List<Long> ids) {
-        return false;
+        // TODO 删除文件
+
+        boolean delete = fileInfoService.deleteBatch(ids);
+        delete = delete && fileStatusService.deleteBatchByFileInfoId(ids);
+
+        if (!delete) {
+            throw new GlobalException(FileErrorCode.DELETE_FILE__RECORD_FAILED);
+        }
+        return delete;
     }
 }

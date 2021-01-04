@@ -7,8 +7,18 @@
         <result property="fileStatus" column="file_status"></result>
         <result property="chunks" column="chunks"></result>
         <result property="currentChunk" column="current_chunk"></result>
+        <result property="downloadCount" column="download_count"></result>
     </resultMap>
 
     <sql id="sqlList">
-        fileStatusId, fileInfoId, fileStatus, chunks, currentChunk    </sql>
+        fileStatusId, fileInfoId, fileStatus, chunks, currentChunk, download_count    </sql>
+
+    <delete id="deleteBatchByFileInfoId" parameterType="java.util.List">
+        DELETE FROM
+        file_status t
+        WHERE t.file_info_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

@@ -13,6 +13,7 @@ import com.github.cloud.mapper.FileStatusMapper;
 import com.github.cloud.service.FileStatusService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -56,12 +57,15 @@ public class FileStatusServiceImpl extends ServiceImpl<FileStatusMapper, FileSta
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return super.removeById(id);
+    public boolean deleteByFileInfoId(Long id) {
+        QueryWrapper<FileStatus> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("file_info_id", id);
+        return super.remove(queryWrapper);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteBatch(List<Integer> ids) {
-        return super.removeByIds(ids);
+    public boolean deleteBatchByFileInfoId(List<Long> ids) {
+        return this.getBaseMapper().deleteBatchByFileInfoId(ids);
     }
 }

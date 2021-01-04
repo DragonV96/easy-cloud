@@ -41,4 +41,7 @@ public class UpdateFileStatusRequest implements Serializable {
     @ApiModelProperty(value = "当前分片数", name = "currentChunk")
     private Integer currentChunk;
 
+    @ApiModelProperty(value = "下载次数", name = "downloadCount")
+    private Integer downloadCount;
+
 }

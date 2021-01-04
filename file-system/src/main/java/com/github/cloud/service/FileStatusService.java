@@ -47,16 +47,16 @@ public interface FileStatusService extends IService<FileStatus> {
     boolean update(UpdateFileStatusRequest request);
 
     /**
-    * 根据主键 id 删除文件状态
+    * 根据文件 id 删除文件状态
     * @param id
     * @return
     */
-    boolean delete(Integer id);
+    boolean deleteByFileInfoId(Long id);
 
     /**
-    * 根据主键 id 列表批量删除文件状态
+    * 根据文件 id 列表批量删除文件状态
     * @param ids
     * @return
     */
-    boolean deleteBatch(List<Integer> ids);
+    boolean deleteBatchByFileInfoId(List<Long> ids);
 }
