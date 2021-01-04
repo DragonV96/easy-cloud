@@ -50,7 +50,6 @@ public class ${entityClassName}${controllerSuffix} {
         return ApiResponse.success(response);
     }
 
-
 #if($enableSwagger)
     @ApiOperation(value = "查询${tableComment}详情" , tags = "查询详情")
 #end
@@ -62,7 +61,6 @@ public class ${entityClassName}${controllerSuffix} {
         ${entityClassName}${responseSuffix} response = ${entityLowerName}Service.detail(id);
         return ApiResponse.success(response);
     }
-
 
 #if($enableSwagger)
     @ApiOperation(value = "新增${tableComment}" , tags = "新增")
@@ -76,7 +74,6 @@ public class ${entityClassName}${controllerSuffix} {
         return ApiResponse.success(save);
     }
 
-
 #if($enableSwagger)
     @ApiOperation(value = "更新${tableComment}" , tags = "更新")
 #end
@@ -89,7 +86,6 @@ public class ${entityClassName}${controllerSuffix} {
         return ApiResponse.success(update);
     }
 
-
 #if($enableSwagger)
     @ApiOperation(value = "删除${tableComment}" , tags = "删除")
 #end
@@ -101,7 +97,6 @@ public class ${entityClassName}${controllerSuffix} {
         boolean delete = ${entityLowerName}Service.delete(id);
         return ApiResponse.success(delete);
     }
-
 
 #if($enableSwagger)
     @ApiOperation(value = "批量删除${tableComment}" , tags = "批量删除")

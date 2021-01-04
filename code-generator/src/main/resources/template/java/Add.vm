@@ -42,7 +42,7 @@ public class Add${entityClassName}${requestSuffix} implements Serializable {
     private static final long serialVersionUID = 1L;
 
 #foreach(${column} in ${columns})
-    @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}"#if(${column.required}), required = true#end)
+    @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}"#if(${column.isNullable.equals("NO")}), required = true#end)
 #if(${column.isNullable.equals("NO")})
 #if(${column.javaType.equals("String")})
 #if(${column.columnComment.indexOf("（")} > 0)
