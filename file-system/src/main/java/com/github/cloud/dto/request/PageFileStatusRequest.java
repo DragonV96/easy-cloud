@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 /**
 * @author : glw
-* @datetime : 2021-01-03 18:17:23
+* @datetime : 2021-01-04 14:18:22
 * @description : 文件状态分页查询请求对象
 */
 @EqualsAndHashCode
@@ -23,15 +23,15 @@ public class PageFileStatusRequest extends PageRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "文件状态id", name = "fileStatusId")
+    @ApiModelProperty(value = "文件状态id", name = "fileStatusId", required = true)
     @NotNull(message = "文件状态id不能为空")
     private Integer fileStatusId;
 
-    @ApiModelProperty(value = "文件id", name = "fileInfoId")
+    @ApiModelProperty(value = "文件id", name = "fileInfoId", required = true)
     @NotNull(message = "文件id不能为空")
     private Long fileInfoId;
 
-    @ApiModelProperty(value = "文件状态（1初始化 2上传中 3上传完成 4上传异常）", name = "fileStatus")
+    @ApiModelProperty(value = "文件状态（1初始化 2上传中 3上传完成 4上传异常）", name = "fileStatus", required = true)
     @NotNull(message = "文件状态不能为空")
     private Byte fileStatus;
 
