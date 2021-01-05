@@ -47,8 +47,10 @@ public class Update${entityClassName}${requestSuffix} implements Serializable {
 #if(${column.javaType.equals("String")})
 #if(${column.columnComment.indexOf("（")} > 0)
     @NotBlank(message = "${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+    @Max(value = ${column.characterMaximum}, message = "${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}超过长度限制，最大长度为${column.characterMaximum}个字节")
 #else
     @NotBlank(message = "${column.columnComment}不能为空")
+    @Max(value = ${column.characterMaximum}, message = "${column.columnComment}超过长度限制，最大长度为${column.characterMaximum}个字节")
 #end
 #elseif(${column.javaType.equals("Long")} || ${column.javaType.equals("Integer")} || ${column.javaType.equals("Byte")})
 #if(${column.columnComment.indexOf("（")} > 0)
