@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -27,10 +28,17 @@ public class AddFileInfoRequest implements Serializable {
 
     @ApiModelProperty(value = "文件名", name = "fileName", required = true)
     @NotBlank(message = "文件名不能为空")
+    @Max(value = 100, message = "文件名超过长度限制，最大长度为100个字节")
     private String fileName;
 
-    @ApiModelProperty(value = "文件大小（字节）", name = "fileSize")
+    @ApiModelProperty(value = "文件大小（字节）", name = "fileSize", required = true)
+    @NotNull(message = "文件大小不能为空")
     private Long fileSize;
+
+    @ApiModelProperty(value = "文件MD5", name = "fileHash", required = true)
+    @NotBlank(message = "文件MD5不能为空")
+    @Max(value = 32, message = "文件MD5超过长度限制，最大长度为32个字节")
+    private String fileHash;
 
     @ApiModelProperty(value = "上传文件的用户名id", name = "uploaderId", required = true)
     @NotNull(message = "上传文件的用户名id不能为空")
@@ -41,9 +49,6 @@ public class AddFileInfoRequest implements Serializable {
 
     @ApiModelProperty(value = "文件类型（1图片 2视频 3音频 4文档 5压缩文件 6可执行文件 7其他）", name = "fileType", hidden = true)
     private Byte fileType;
-
-    @ApiModelProperty(value = "文件MD5", name = "fileHash", hidden = true)
-    private String fileHash;
 
     @ApiModelProperty(value = "fastDFS文件组", name = "dfsGroup", hidden = true)
     private String dfsGroup;

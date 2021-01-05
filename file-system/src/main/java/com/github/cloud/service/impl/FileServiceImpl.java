@@ -1,7 +1,6 @@
 package com.github.cloud.service.impl;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.github.cloud.config.FastDFSClient;
@@ -16,6 +15,7 @@ import com.github.cloud.service.FileService;
 import com.github.cloud.service.FileStatusService;
 import com.github.cloud.util.MimeUtil;
 import com.github.tobato.fastdfs.domain.StorePath;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +31,7 @@ import java.util.List;
  * @datetime : 2021/1/4 16:05
  * @description : 文件业务层实现
  */
+@Slf4j
 @Service
 public class FileServiceImpl implements FileService {
 
@@ -49,9 +50,11 @@ public class FileServiceImpl implements FileService {
         if (null == file || file.isEmpty()) {
             throw new GlobalException(FileErrorCode.UPLOAD_FILE_EMPTY);
         }
+
         long start = System.currentTimeMillis();
         StorePath storePath = fastDFSClient.uploadFile(file);
         long end = System.currentTimeMillis();
+        log.info("File had been upload successfully！File path = {}", storePath.getFullPath());
 
         AddFileInfoRequest fileInfo = request.getFileInfo();
         AddFileStatusRequest fileStatus = request.getFileStatus();
@@ -61,7 +64,6 @@ public class FileServiceImpl implements FileService {
             tempFile = new File(file.getName());
             file.transferTo(tempFile);
             fileInfo.setFileType(MimeUtil.getFileType(tempFile));
-            fileInfo.setFileHash(SecureUtil.md5(tempFile));
         } catch (IOException e) {
             throw new GlobalException(FileErrorCode.UPLOAD_FAIL, e.getMessage());
         } finally {

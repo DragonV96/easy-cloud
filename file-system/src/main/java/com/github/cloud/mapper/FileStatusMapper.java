@@ -18,5 +18,5 @@ public interface FileStatusMapper extends BaseMapper<FileStatus> {
      * @param ids
      * @return
      */
-    boolean deleteBatchByFileInfoId(@Param("dis") List<Long> ids);
+    boolean deleteBatchByFileInfoId(@Param("ids") List<Long> ids);
 }
