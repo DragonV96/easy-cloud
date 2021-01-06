@@ -30,13 +30,13 @@ import java.util.Date;
 * @email : ${email}
 #end
 * @datetime : ${datetime}
-* @description : ${tableComment}新增请求对象
+* @description : ${tableComment}更新请求对象
 */
 @EqualsAndHashCode
 @Data
 @ToString
 #if($enableSwagger)
-@ApiModel(value = "${tableComment}新增请求对象")
+@ApiModel(value = "${tableComment}更新请求对象")
 #end
 public class Update${entityClassName}${requestSuffix} implements Serializable {
 
