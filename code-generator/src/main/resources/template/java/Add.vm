@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 #end
 
 #if(${hasNotBlank})
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 #end
 #if(${hasNotNull})
