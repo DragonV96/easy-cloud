@@ -3,12 +3,13 @@ package com.github.cloud.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.cloud.dto.request.AddFileRequest;
 import com.github.cloud.dto.request.PageFileInfoRequest;
-import com.github.cloud.dto.request.UpdateFileInfoRequest;
+import com.github.cloud.dto.request.UpdateFileRequest;
 import com.github.cloud.dto.response.ApiResponse;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
 import com.github.cloud.service.FileInfoService;
 import com.github.cloud.service.FileService;
+import com.github.cloud.service.FileUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class FileController {
 
     @Autowired
     private FileInfoService fileInfoService;
+
+    @Autowired
+    private FileUserService fileUserService;
 
     @ApiOperation(value = "分页查询文件信息" , tags = "分页查询")
     @GetMapping("/page")
@@ -64,8 +68,8 @@ public class FileController {
 
     @ApiOperation(value = "更新文件信息" , tags = "更新")
     @PutMapping("/update")
-    public ApiResponse<Boolean> update(@RequestBody @Valid UpdateFileInfoRequest request) {
-        boolean update = fileService.update(request);
+    public ApiResponse<Boolean> update(@RequestBody @Valid UpdateFileRequest request) {
+        boolean update = fileUserService.update(request);
         return ApiResponse.success(update);
     }
 

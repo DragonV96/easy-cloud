@@ -3,7 +3,6 @@ package com.github.cloud.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.cloud.dto.request.AddFileRequest;
 import com.github.cloud.dto.request.PageFileInfoRequest;
-import com.github.cloud.dto.request.UpdateFileInfoRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,13 +46,6 @@ public interface FileService {
     FileInfoResponse detail(Long id);
 
     /**
-     * 更新文件
-     * @param request
-     * @return
-     */
-    boolean update(UpdateFileInfoRequest request);
-
-    /**
      * 根据主键 id 删除文件
      * @param id
      * @return
@@ -66,4 +58,24 @@ public interface FileService {
      * @return
      */
     boolean deleteBatch(List<Long> ids);
+
+    /**
+     * 一次性上传
+     * @param file
+     * @param request
+     */
+    void uploadOnce(MultipartFile file, AddFileRequest request);
+
+    /**
+     * 分片上传
+     * @param file
+     * @param request
+     */
+    void uploadSlice(MultipartFile file, AddFileRequest request);
+
+    /**
+     * 秒传（之前已存在相同 MD5 的文件）
+     * @param request
+     */
+    void uploadExist(AddFileRequest request);
 }

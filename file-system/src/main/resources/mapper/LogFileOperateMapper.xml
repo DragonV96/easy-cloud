@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.cloud.mapper.LogFileOperateMapper">
+    <resultMap id="logFileOperateMap" type="com.github.cloud.entity.LogFileOperate">
+        <result property="logFileOperateId" column="log_file_operate_id"></result>
+        <result property="fileInfoId" column="file_info_id"></result>
+        <result property="operateType" column="operate_type"></result>
+        <result property="createBy" column="create_by"></result>
+        <result property="createTime" column="create_time"></result>
+    </resultMap>
+
+    <sql id="sqlList">
+        logFileOperateId, fileInfoId, operateType, createBy, createTime    </sql>
+</mapper>

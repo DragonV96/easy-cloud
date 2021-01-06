@@ -4,13 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.cloud.dto.request.AddFileStatusRequest;
-import com.github.cloud.dto.request.PageFileStatusRequest;
-import com.github.cloud.dto.request.UpdateFileStatusRequest;
-import com.github.cloud.dto.response.FileStatusResponse;
-import com.github.cloud.entity.FileStatus;
+import com.github.cloud.dto.request.AddFileRequest;
+import com.github.cloud.dto.request.PageFileUserRequest;
+import com.github.cloud.dto.request.UpdateFileRequest;
+import com.github.cloud.dto.response.FileUserResponse;
+import com.github.cloud.entity.FileUser;
 import com.github.cloud.mapper.FileStatusMapper;
-import com.github.cloud.service.FileStatusService;
+import com.github.cloud.service.FileUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,41 +24,41 @@ import java.util.List;
 * @description : 文件状态业务层实现
 */
 @Service
-public class FileStatusServiceImpl extends ServiceImpl<FileStatusMapper, FileStatus> implements FileStatusService {
+public class FileUserServiceImpl extends ServiceImpl<FileStatusMapper, FileUser> implements FileUserService {
 
     @Override
-    public IPage<FileStatus> page(PageFileStatusRequest request) {
-        IPage<FileStatus> page = new Page<>(request.getCurrent(), request.getSize());
-        FileStatus entity = new FileStatus();
+    public IPage<FileUser> page(PageFileUserRequest request) {
+        IPage<FileUser> page = new Page<>(request.getCurrent(), request.getSize());
+        FileUser entity = new FileUser();
         BeanUtils.copyProperties(request, entity);
         return super.page(page, new QueryWrapper<>(entity));
     }
 
     @Override
-    public FileStatusResponse detail(Integer id) {
-        FileStatus entity = super.getById(id);
-        FileStatusResponse response = new FileStatusResponse();
+    public FileUserResponse detail(Long id) {
+        FileUser entity = super.getById(id);
+        FileUserResponse response = new FileUserResponse();
         BeanUtils.copyProperties(response, entity);
         return response;
     }
 
     @Override
-    public boolean save(AddFileStatusRequest request) {
-        FileStatus entity = new FileStatus();
+    public boolean save(AddFileRequest request) {
+        FileUser entity = new FileUser();
         BeanUtils.copyProperties(request, entity);
         return super.save(entity);
     }
 
     @Override
-    public boolean update(UpdateFileStatusRequest request) {
-        FileStatus entity = new FileStatus();
+    public boolean update(UpdateFileRequest request) {
+        FileUser entity = new FileUser();
         BeanUtils.copyProperties(request, entity);
         return super.updateById(entity);
     }
 
     @Override
     public boolean deleteByFileInfoId(Long id) {
-        QueryWrapper<FileStatus> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<FileUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("file_info_id", id);
         return super.remove(queryWrapper);
     }

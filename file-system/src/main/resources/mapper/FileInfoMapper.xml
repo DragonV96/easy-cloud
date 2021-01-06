@@ -3,19 +3,31 @@
 <mapper namespace="com.github.cloud.mapper.FileInfoMapper">
     <resultMap id="fileInfoMap" type="com.github.cloud.entity.FileInfo">
         <result property="fileInfoId" column="file_info_id"></result>
-        <result property="fileName" column="file_name"></result>
         <result property="fileType" column="file_type"></result>
         <result property="dfsGroup" column="dfs_group"></result>
         <result property="dfsPath" column="dfs_path"></result>
         <result property="fileHash" column="file_hash"></result>
         <result property="uploadedFileSize" column="uploaded_file_size"></result>
         <result property="fileSize" column="file_size"></result>
-        <result property="uploaderId" column="uploader_id"></result>
         <result property="duration" column="duration"></result>
+        <result property="fileStatus" column="file_status"></result>
+        <result property="chunks" column="chunks"></result>
+        <result property="currentChunk" column="current_chunk"></result>
         <result property="uploadStartTime" column="upload_start_time"></result>
         <result property="uploadEndTime" column="upload_end_time"></result>
     </resultMap>
 
     <sql id="sqlList">
-        fileInfoId, fileName, fileType, dfsGroup, dfsPath, fileHash, uploadedFileSize, fileSize, uploaderId, duration, uploadStartTime, uploadEndTime    </sql>
+        fileInfoId, fileType, dfsGroup, dfsPath, fileHash, uploadedFileSize, fileSize, duration, fileStatus, chunks, currentChunk, uploadStartTime, uploadEndTime
+    </sql>
+
+    <select id="queryIdByHash" resultType="java.lang.Long">
+        SELECT t.file_info_id
+        FROM file_info t
+        <where>
+            <if test="fileHash != null and fileHash != ''">
+                AND t.file_hash = #{fileHash}
+            </if>
+        </where>
+    </select>
 </mapper>

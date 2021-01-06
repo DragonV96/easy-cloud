@@ -7,25 +7,26 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
 * @author : glw
-* @datetime : 2021-01-03 18:17:23
-* @description : 文件状态表对象
+* @datetime : 2021-01-05 21:09:18
+* @description : 文件操作日志表对象
 */
 @EqualsAndHashCode
 @Data
 @ToString
-public class FileStatus implements Serializable {
+public class LogFileOperate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 文件状态id
+     * 文件操作日志id
      */
     @TableId(type = IdType.AUTO)
-    private Integer fileStatusId;
+    private Long logFileOperateId;
 
     /**
      * 文件id
@@ -33,23 +34,18 @@ public class FileStatus implements Serializable {
     private Long fileInfoId;
 
     /**
-     * 文件状态（1初始化 2上传中 3上传完成 4上传异常）
+     * 文件操作类型（1上传；2下载；3更新；4删除）
      */
-    private Byte fileStatus;
+    private Byte operateType;
 
     /**
-     * 分片数量
+     * 操作人id
      */
-    private Integer chunks;
+    private Long createBy;
 
     /**
-     * 当前分片数
+     * 操作时间
      */
-    private Integer currentChunk;
-
-    /**
-     * 下载次数
-     */
-    private Integer downloadCount;
+    private Date createTime;
 
 }

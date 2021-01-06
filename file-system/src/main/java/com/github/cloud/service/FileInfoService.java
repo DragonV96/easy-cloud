@@ -2,9 +2,8 @@ package com.github.cloud.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.cloud.dto.request.AddFileInfoRequest;
+import com.github.cloud.dto.request.AddFileRequest;
 import com.github.cloud.dto.request.PageFileInfoRequest;
-import com.github.cloud.dto.request.UpdateFileInfoRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
 
@@ -33,18 +32,18 @@ public interface FileInfoService extends IService<FileInfo> {
     FileInfoResponse detail(Long id);
 
     /**
+    * 根据文件 hash 查询文件信息 id
+    * @param fileHash
+    * @return
+    */
+    Long queryIdByHash(String fileHash);
+
+    /**
     * 新增文件信息
     * @param request
     * @return
     */
-    boolean save(AddFileInfoRequest request);
-
-    /**
-    * 更新文件信息
-    * @param request
-    * @return
-    */
-    boolean update(UpdateFileInfoRequest request);
+    boolean save(AddFileRequest request);
 
     /**
     * 根据主键 id 删除文件信息

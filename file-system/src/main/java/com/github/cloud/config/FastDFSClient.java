@@ -1,5 +1,7 @@
 package com.github.cloud.config;
 
+import com.github.cloud.constatnt.FileConstant;
+import com.github.cloud.entity.Storage;
 import com.github.cloud.enums.FileErrorCode;
 import com.github.cloud.exception.GlobalException;
 import com.github.cloud.utils.FileUtils;
@@ -37,15 +39,69 @@ public class FastDFSClient {
      * @param file
      * @return
      */
-    public StorePath uploadFile(MultipartFile file) {
-        if (null == file || file.isEmpty()) {
-            return null;
-        }
+    public Storage uploadFile(MultipartFile file) {
         try {
-            return storageClient.uploadFile(file.getInputStream(), file.getSize(), FileUtils.getExtension(file.getOriginalFilename()), null);
+            long start = System.currentTimeMillis();
+            StorePath storePath = storageClient.uploadFile(file.getInputStream(), file.getSize(), FileUtils.getExtension(file.getOriginalFilename()), null);
+            long end = System.currentTimeMillis();
+            log.info("File had been upload successfully！File path = {}", storePath.getFullPath());
+            return this.buildStorage(storePath, start, end);
         } catch (IOException e) {
             log.error("FastDFSClient uploadFile file upload fail, exception = {}, cause = {}", e.getMessage(), e.getCause());
-            throw new GlobalException(FileErrorCode.UPLOAD_FAIL);
+            throw new GlobalException(FileErrorCode.UPLOAD_ONCE_FAILED);
+        }
+    }
+
+    /**
+     * 首次上传分片文件
+     * @param file
+     * @return
+     */
+    public Storage uploadAppenderFile(MultipartFile file) {
+        try {
+            long start = System.currentTimeMillis();
+            StorePath storePath = appendStorageClient.uploadAppenderFile(FileConstant.DEFAULT_GROUP, file.getInputStream(), file.getSize(), FileUtils.getExtension(file.getOriginalFilename()));
+            long end = System.currentTimeMillis();
+            log.info("The first slice of file had been upload successfully！File path = {}", storePath.getFullPath());
+            return this.buildStorage(storePath, start, end);
+        } catch (IOException e) {
+            log.error("FastDFSClient uploadAppenderFile file upload fail, exception = {}, cause = {}", e.getMessage(), e.getCause());
+            throw new GlobalException(FileErrorCode.UPLOAD_SLICE_FIRST_FAILED);
+        }
+    }
+
+    /**
+     * 断点续传，拼接分片文件
+     * @param file
+     * @param storePath
+     * @return
+     */
+    public Storage appendFile(MultipartFile file, StorePath storePath) {
+        try {
+            long start = System.currentTimeMillis();
+            appendStorageClient.appendFile(storePath.getGroup(), storePath.getPath(), file.getInputStream(), file.getSize());
+            long end = System.currentTimeMillis();
+            log.info("The next slice of file had been upload successfully！File path = {}", storePath.getFullPath());
+            return this.buildStorage(storePath, start, end);
+        } catch (IOException e) {
+            log.error("FastDFSClient appendFile file upload fail, exception = {}, cause = {}", e.getMessage(), e.getCause());
+            throw new GlobalException(FileErrorCode.UPLOAD_SLICE_APPEND_FAILED);
+        }
+    }
+
+    /**
+     * 断点续传，拼接分片文件
+     * @param file
+     * @param storePath
+     * @param currentChunk
+     */
+    public void appendFile(MultipartFile file, StorePath storePath, Integer currentChunk) {
+        try {
+            appendStorageClient.appendFile(storePath.getGroup(), storePath.getPath(), file.getInputStream(), file.getSize());
+            log.info("The next slice of file had been upload successfully！Current chunk = {}, file path = {}", currentChunk, storePath.getFullPath());
+        } catch (IOException e) {
+            log.error("FastDFSClient appendFile file upload fail, exception = {}, cause = {}", e.getMessage(), e.getCause());
+            throw new GlobalException(FileErrorCode.UPLOAD_SLICE_APPEND_FAILED);
         }
     }
 
@@ -54,8 +110,8 @@ public class FastDFSClient {
      * @param files
      * @return
      */
-    public List<StorePath> uploadFileBatch(List<MultipartFile> files) {
-        List<StorePath> filePathList = new ArrayList<>();
+    public List<Storage> uploadFileBatch(List<MultipartFile> files) {
+        List<Storage> filePathList = new ArrayList<>();
         for (MultipartFile file : files) {
             filePathList.add(this.uploadFile(file));
         }
@@ -105,5 +161,20 @@ public class FastDFSClient {
         for (StorePath storePath : storePaths) {
             this.deleteFile(storePath);
         }
+    }
+
+    /**
+     * 构建 Storage 对象
+     * @param storePath
+     * @param start
+     * @param end
+     * @return
+     */
+    private Storage buildStorage(StorePath storePath, long start, long end) {
+        Storage storage = new Storage();
+        storage.setStorePath(storePath);
+        storage.setStart(start);
+        storage.setEnd(end);
+        return storage;
     }
 }

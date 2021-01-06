@@ -7,5 +7,10 @@ package com.github.cloud.constatnt;
  */
 public interface FileConstant {
 
+    /**
+     * 文件初始化分片数量
+     */
     Integer INIT_CHUNK = 1;
+
+    String DEFAULT_GROUP = "group1";
 }

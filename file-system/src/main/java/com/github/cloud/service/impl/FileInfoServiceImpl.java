@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.cloud.dto.request.AddFileInfoRequest;
+import com.github.cloud.dto.request.AddFileRequest;
 import com.github.cloud.dto.request.PageFileInfoRequest;
-import com.github.cloud.dto.request.UpdateFileInfoRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
 import com.github.cloud.mapper.FileInfoMapper;
@@ -42,17 +41,15 @@ public class FileInfoServiceImpl extends ServiceImpl<FileInfoMapper, FileInfo> i
     }
 
     @Override
-    public boolean save(AddFileInfoRequest request) {
-        FileInfo entity = new FileInfo();
-        BeanUtils.copyProperties(request, entity);
-        return super.save(entity);
+    public Long queryIdByHash(String fileHash) {
+        return this.getBaseMapper().queryIdByHash(fileHash);
     }
 
     @Override
-    public boolean update(UpdateFileInfoRequest request) {
+    public boolean save(AddFileRequest request) {
         FileInfo entity = new FileInfo();
         BeanUtils.copyProperties(request, entity);
-        return super.updateById(entity);
+        return super.save(entity);
     }
 
     @Override

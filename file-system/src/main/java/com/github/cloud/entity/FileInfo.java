@@ -11,10 +11,10 @@ import java.util.Date;
 
 
 /**
-* @author : glw
-* @datetime : 2021-01-03 18:17:22
-* @description : 文件信息表对象
-*/
+ * @author : glw
+ * @datetime : 2021-01-05 21:09:18
+ * @description : 文件信息表对象
+ */
 @EqualsAndHashCode
 @Data
 @ToString
@@ -29,12 +29,7 @@ public class FileInfo implements Serializable {
     private Long fileInfoId;
 
     /**
-     * 文件名
-     */
-    private String fileName;
-
-    /**
-     * 文件类型（1图片 2视频 3音频 4文档 5压缩文件 6可执行文件 7其他）
+     * 文件类型（1图片；2视频；3音频；4文档；5压缩文件；6可执行文件；7其他）
      */
     private Byte fileType;
 
@@ -64,14 +59,24 @@ public class FileInfo implements Serializable {
     private Long fileSize;
 
     /**
-     * 上传文件的用户名id
-     */
-    private Long uploaderId;
-
-    /**
      * 上传耗时净值（毫秒）
      */
     private Long duration;
+
+    /**
+     * 文件状态（1上传中；2上传完成；3上传异常）
+     */
+    private Byte fileStatus;
+
+    /**
+     * 分片数量
+     */
+    private Integer chunks;
+
+    /**
+     * 当前分片数
+     */
+    private Integer currentChunk;
 
     /**
      * 上传开始时间

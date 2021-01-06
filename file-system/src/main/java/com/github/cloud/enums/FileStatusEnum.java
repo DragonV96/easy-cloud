@@ -10,10 +10,9 @@ import lombok.Getter;
 @Getter
 public enum FileStatusEnum {
 
-    INIT((byte)1, "初始化"),
-    UPLOADING((byte)2, "上传中"),
-    FINISH((byte)3, "上传完成"),
-    EXCEPTION((byte)4, "上传异常");
+    UPLOADING((byte)1, "上传中"),
+    FINISH((byte)2, "上传完成"),
+    EXCEPTION((byte)3, "上传异常");
 
     /** 文件状态 */
     private Byte status;

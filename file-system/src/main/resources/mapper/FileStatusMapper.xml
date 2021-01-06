@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.cloud.mapper.FileStatusMapper">
-    <resultMap id="fileStatusMap" type="com.github.cloud.entity.FileStatus">
-        <result property="fileStatusId" column="file_status_id"></result>
+    <resultMap id="fileUserMap" type="com.github.cloud.entity.FileUser">
+        <result property="fileUserId" column="file_user_id"></result>
         <result property="fileInfoId" column="file_info_id"></result>
-        <result property="fileStatus" column="file_status"></result>
-        <result property="chunks" column="chunks"></result>
-        <result property="currentChunk" column="current_chunk"></result>
+        <result property="fileName" column="file_name"></result>
+        <result property="uploaderId" column="uploader_id"></result>
         <result property="downloadCount" column="download_count"></result>
+        <result property="createBy" column="create_by"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateBy" column="update_by"></result>
+        <result property="updateTime" column="update_time"></result>
     </resultMap>
 
     <sql id="sqlList">
-        fileStatusId, fileInfoId, fileStatus, chunks, currentChunk, download_count    </sql>
+        fileUserId, fileInfoId, fileName, uploaderId, downloadCount, createBy, createTime, updateBy, updateTime
+    </sql>
 
     <delete id="deleteBatchByFileInfoId" parameterType="java.util.List">
         DELETE FROM
