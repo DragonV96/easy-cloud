@@ -49,6 +49,7 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private FileUserService fileUserService;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean upload(MultipartFile file, AddFileRequest request) {
         if (UploadTypeEnum.UPLOAD_ONCE.getType().equals(request.getUploadType())) {
@@ -56,7 +57,7 @@ public class FileServiceImpl implements FileService {
         } else if (UploadTypeEnum.UPLOAD_SLICE.getType().equals(request.getUploadType())) {
             this.uploadSlice(file, request);
         } else if (UploadTypeEnum.UPLOAD_EXIST.getType().equals(request.getUploadType())) {
-
+            this.uploadExist(request);
         } else {
             throw new GlobalException(FileErrorCode.UPLOAD_TYPE_ERROR);
         }
@@ -186,7 +187,7 @@ public class FileServiceImpl implements FileService {
 
         boolean save = fileInfoService.save(request) && fileUserService.save(request);
         if (!save) {
-            throw new GlobalException(FileErrorCode.UPLOAD_FILE__RECORD_SAVE_FAILED);
+            throw new GlobalException(FileErrorCode.UPLOAD_FILE_RECORD_SAVE_FAILED);
         }
     }
 

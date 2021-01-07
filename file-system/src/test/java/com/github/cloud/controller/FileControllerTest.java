@@ -48,16 +48,14 @@ public class FileControllerTest {
                 .file(uploadFile)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
-                        "  \"fileInfo\": {\n" +
-                        "    \"fileName\": \"1.txt\",\n" +
-                        "    \"fileHash\": \"698d51a19d8a121ce581499d7b701668\",\n" +
-                        "    \"fileSize\": 24,\n" +
-                        "    \"uploaderId\": 666\n" +
-                        "  },\n" +
-                        "  \"fileStatus\": {\n" +
-                        "    \"chunks\": 1,\n" +
-                        "    \"currentChunk\": 1\n" +
-                        "  }\n" +
+                        "  \"chunkFileSize\": 24,\n" +
+                        "  \"chunks\": 1,\n" +
+                        "  \"currentChunk\": 1,\n" +
+                        "  \"fileHash\": \"698d51a19d8a121ce581499d7b701668\",\n" +
+                        "  \"fileName\": \"1.txt\",\n" +
+                        "  \"fileSize\": 24,\n" +
+                        "  \"uploadType\": 1,\n" +
+                        "  \"uploaderId\": 666\n" +
                         "}")
         );
     }
