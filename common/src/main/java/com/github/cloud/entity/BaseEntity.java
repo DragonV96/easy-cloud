@@ -1,5 +1,7 @@
 package com.github.cloud.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -23,20 +25,24 @@ public class BaseEntity implements Serializable {
     /**
      * 创建者
      */
-    private Long creatorId;
+    @TableField(fill = FieldFill.INSERT)
+    private Long createBy;
 
     /**
      * 修改者
      */
-    private Long updaterId;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateBy;
 
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 最后一次更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 }

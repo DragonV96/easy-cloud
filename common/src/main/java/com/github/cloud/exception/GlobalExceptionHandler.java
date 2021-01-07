@@ -56,7 +56,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = {Exception.class, Throwable.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiResponse<ErrorType> exception() {
+    public ApiResponse<ErrorType> exception(Exception ex) {
+        log.error("Service error, exception: {}", ex.getMessage());
         return ApiResponse.error();
     }
 }

@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
 /**
@@ -18,7 +17,7 @@ import java.util.Date;
 @EqualsAndHashCode
 @Data
 @ToString
-public class FileUser implements Serializable {
+public class FileUser extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,25 +46,5 @@ public class FileUser implements Serializable {
      * 下载次数
      */
     private Integer downloadCount;
-
-    /**
-     * 创建人id
-     */
-    private Long createBy;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新人id
-     */
-    private Long updateBy;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
 
 }
