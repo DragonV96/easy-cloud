@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -37,7 +38,8 @@ public class LogControllerAspect implements EnvironmentAware {
     /**
      * 拼接 Controller 日志字符串
      */
-    private StringBuilder controllerLog = new StringBuilder();
+    private StringBuilder controllerRequestLog = new StringBuilder();
+    private StringBuilder controllerResponseLog = new StringBuilder();
 
     @Override
     public void setEnvironment(Environment environment) {
@@ -47,7 +49,8 @@ public class LogControllerAspect implements EnvironmentAware {
     @PostConstruct
     public void init() {
         String appName = environment.getProperty(APP_NAME);
-        controllerLog.append("[service] ").append(appName).append(" : api = %s, class = %s, method = %s, args = %s");
+        controllerRequestLog.append("[service] ").append(appName).append(" : api = %s, class = %s, method = %s, args = %s");
+        controllerResponseLog.append("[service] ").append(appName).append(" : response = %s");
     }
 
     @Pointcut(value = "execution(* com.github.cloud..controller..*Controller.*(..))")
@@ -55,10 +58,10 @@ public class LogControllerAspect implements EnvironmentAware {
     }
 
     /**
-     * 根据 swagger 注解打印日志
+     * 根据 swagger 注解打印请求日志
      * @param joinPoint
      */
-    @Before("pointCut()")
+    @Before(value = "pointCut()")
     public void before(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
@@ -77,9 +80,18 @@ public class LogControllerAspect implements EnvironmentAware {
                             argsInfo.append(item.toString());
                         }
                     });
-                    log.info(String.format(controllerLog.toString(), apiValue, className, signature.getName(), argsInfo.toString()));
+                    log.info(String.format(controllerRequestLog.toString(), apiValue, className, signature.getName(), argsInfo.toString()));
                 }
             }
         }
+    }
+
+    /**
+     * 根据 swagger 注解打印响应日志
+     * @param joinPoint
+     */
+    @AfterReturning(returning = "response", pointcut = "pointCut()")
+    public void after(JoinPoint joinPoint, Object response) {
+        log.info(String.format(controllerResponseLog.toString(), response.toString()));
     }
 }
