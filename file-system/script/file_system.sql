@@ -22,7 +22,7 @@ CREATE TABLE `file_info` (
   `chunks` int(11) NOT NULL DEFAULT 1 COMMENT '分片数量',
   `current_chunk` int(11) NOT NULL COMMENT '当前分片数',
   `upload_start_time` timestamp(0) NOT NULL COMMENT '上传开始时间',
-  `upload_end_time` timestamp(0)  NOT NULL COMMENT '上传结束时间',
+  `upload_end_time` timestamp(0) NOT NULL COMMENT '上传结束时间',
   PRIMARY KEY (`file_info_id`) USING BTREE,
   UNIQUE KEY `hash_index` (`file_hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='文件信息表';

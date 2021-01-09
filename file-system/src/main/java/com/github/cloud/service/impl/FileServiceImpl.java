@@ -8,6 +8,7 @@ import com.github.cloud.config.FastDFSClient;
 import com.github.cloud.constatnt.FileConstant;
 import com.github.cloud.dto.request.AddFileRequest;
 import com.github.cloud.dto.request.PageFileInfoRequest;
+import com.github.cloud.dto.request.QueryFileRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
 import com.github.cloud.entity.Storage;
@@ -135,6 +136,12 @@ public class FileServiceImpl implements FileService {
         Long id = fileInfoService.queryIdByHash(request.getFileHash());
         request.setFileInfoId(id);
         fileUserService.save(request);
+    }
+
+    @Override
+    public boolean uploadCheck(QueryFileRequest request) {
+        Long id = fileInfoService.queryIdByHash(request.getFileHash());
+        return id != null && id > 0;
     }
 
     /**

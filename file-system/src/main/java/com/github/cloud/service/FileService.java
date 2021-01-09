@@ -3,6 +3,7 @@ package com.github.cloud.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.cloud.dto.request.AddFileRequest;
 import com.github.cloud.dto.request.PageFileInfoRequest;
+import com.github.cloud.dto.request.QueryFileRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
 import org.springframework.web.multipart.MultipartFile;
@@ -78,4 +79,11 @@ public interface FileService {
      * @param request
      */
     void uploadExist(AddFileRequest request);
+
+    /**
+     * 根据文件 MD5 查询文件是否存在
+     * @param request
+     * @return
+     */
+    boolean uploadCheck(QueryFileRequest request);
 }

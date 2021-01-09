@@ -41,7 +41,24 @@ public class FileControllerTest {
     }
 
     /**
-     * 一次性上传
+     * 上传文件查重
+     * @throws Exception
+     */
+    @Test
+    public void uploadCheck() throws Exception {
+        // 存在相同文件
+        mockMvc.perform(MockMvcRequestBuilders.get("/file/upload/check")
+                .param("fileHash", "698d51a19d8a121ce581499d7b701668")
+        );
+        // 不存在相同文件
+        mockMvc.perform(MockMvcRequestBuilders.get("/file/upload/check")
+                .param("fileHash", "698d51a19d8a121ce581499d7b701670")
+        );
+    }
+
+    /**
+     * 上传文件
+     * ①一次性上传
      * @throws Exception
      */
     @Test
@@ -65,7 +82,8 @@ public class FileControllerTest {
     }
 
     /**
-     * 秒传，已存在文件
+     * 上传文件
+     * ③秒传，已存在文件
      * @throws Exception
      */
     @Test

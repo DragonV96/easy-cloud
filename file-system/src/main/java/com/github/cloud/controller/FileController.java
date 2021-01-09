@@ -3,6 +3,7 @@ package com.github.cloud.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.cloud.dto.request.AddFileRequest;
 import com.github.cloud.dto.request.PageFileInfoRequest;
+import com.github.cloud.dto.request.QueryFileRequest;
 import com.github.cloud.dto.request.UpdateFileRequest;
 import com.github.cloud.dto.response.ApiResponse;
 import com.github.cloud.dto.response.FileInfoResponse;
@@ -50,6 +51,13 @@ public class FileController {
     public ApiResponse<FileInfoResponse> detail(@PathVariable("id") Long id) {
         FileInfoResponse response = fileInfoService.detail(id);
         return ApiResponse.success(response);
+    }
+
+    @ApiOperation(value = "上传文件查重" , tags = "查询")
+    @GetMapping("/upload/check")
+    public ApiResponse<Boolean> uploadCheck(QueryFileRequest request) {
+        boolean upload = fileService.uploadCheck(request);
+        return ApiResponse.success(upload);
     }
 
     @ApiOperation(value = "上传文件" , tags = "新增")
