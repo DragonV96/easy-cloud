@@ -40,8 +40,12 @@ public class FileControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
+    /**
+     * 一次性上传
+     * @throws Exception
+     */
     @Test
-    public void upload() throws Exception {
+    public void uploadOnce() throws Exception {
         File file = new File("D:\\tmp\\1.txt");
         MockMultipartFile uploadFile = new MockMultipartFile("file", "1.txt", MediaType.TEXT_PLAIN_VALUE, new FileInputStream(file));
         mockMvc.perform(MockMvcRequestBuilders.multipart("/file/upload")
@@ -55,6 +59,27 @@ public class FileControllerTest {
                         "  \"fileName\": \"1.txt\",\n" +
                         "  \"fileSize\": 24,\n" +
                         "  \"uploadType\": 1,\n" +
+                        "  \"uploaderId\": 666\n" +
+                        "}")
+        );
+    }
+
+    /**
+     * 秒传，已存在文件
+     * @throws Exception
+     */
+    @Test
+    public void uploadExist() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/file/upload")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\n" +
+                        "  \"chunkFileSize\": 24,\n" +
+                        "  \"chunks\": 1,\n" +
+                        "  \"currentChunk\": 1,\n" +
+                        "  \"fileHash\": \"698d51a19d8a121ce581499d7b701668\",\n" +
+                        "  \"fileName\": \"1.txt\",\n" +
+                        "  \"fileSize\": 24,\n" +
+                        "  \"uploadType\": 3,\n" +
                         "  \"uploaderId\": 666\n" +
                         "}")
         );

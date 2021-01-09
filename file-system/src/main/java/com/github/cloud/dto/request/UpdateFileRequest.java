@@ -6,9 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 
@@ -31,7 +31,7 @@ public class UpdateFileRequest implements Serializable {
 
     @ApiModelProperty(value = "文件名", name = "fileName", required = true)
     @NotBlank(message = "文件名不能为空")
-    @Max(value = 100, message = "文件名超过长度限制，最大长度为100个字节")
+    @Size(max = 100, message = "文件名超过长度限制，最大长度为100个字节")
     private String fileName;
 
 }

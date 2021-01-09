@@ -6,9 +6,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -27,7 +27,7 @@ public class AddFileRequest implements Serializable {
 
     @ApiModelProperty(value = "文件名", name = "fileName", required = true)
     @NotBlank(message = "文件名不能为空")
-    @Max(value = 100, message = "文件名超过长度限制，最大长度为100个字节")
+    @Size(max = 100, message = "文件名超过长度限制，最大长度为100个字节")
     private String fileName;
 
     @ApiModelProperty(value = "上传文件的用户名id", name = "uploaderId", required = true)
@@ -36,7 +36,7 @@ public class AddFileRequest implements Serializable {
 
     @ApiModelProperty(value = "文件MD5", name = "fileHash", required = true)
     @NotBlank(message = "文件MD5不能为空")
-    @Max(value = 32, message = "文件MD5超过长度限制，最大长度为32个字节")
+    @Size(max = 32, message = "文件MD5超过长度限制，最大长度为32个字节")
     private String fileHash;
 
     @ApiModelProperty(value = "分片文件大小（字节）", name = "chunkFileSize", required = true)
