@@ -84,14 +84,14 @@ public class FileController {
     @ApiOperation(value = "删除文件信息" , tags = "删除")
     @DeleteMapping("/delete/{id}")
     public ApiResponse<Boolean> delete(@PathVariable("id") Long id) {
-        boolean delete = fileService.delete(id);
-        return ApiResponse.success(delete);
+        fileService.delete(id);
+        return ApiResponse.success();
     }
 
     @ApiOperation(value = "批量删除文件信息" , tags = "批量删除")
     @DeleteMapping("/delete/batch/{ids}")
     public ApiResponse<Boolean> deleteBatch(@PathVariable("ids") List<Long> ids) {
-        boolean delete = fileService.deleteBatch(ids);
-        return ApiResponse.success(delete);
+        fileService.deleteBatch(ids);
+        return ApiResponse.success();
     }
 }

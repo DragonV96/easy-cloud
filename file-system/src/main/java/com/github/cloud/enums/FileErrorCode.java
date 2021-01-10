@@ -23,7 +23,9 @@ public enum FileErrorCode implements ErrorType{
     DOWNLOAD_FAIL(1001101, "文件下载失败，请稍后重试！"),
 
     DELETE_FAIL(1001201, "文件删除失败，请稍后重试！"),
-    DELETE_FILE__RECORD_FAILED(1001202, "文件记录删除失败，请稍后重试！"),
+    DELETE_FILE_RECORD_FAILED(1001202, "文件记录删除失败，请稍后重试！"),
+    DELETE_FILE_INFO_RECORD_FAILED(1001203, "文件信息记录删除失败，请稍后重试！"),
+    DELETE_FILE_NOT_EXIST(1001204, "文件不存在，删除文件失败，请确认后重试！"),
     ;
 
     /**

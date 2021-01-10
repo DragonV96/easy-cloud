@@ -19,4 +19,18 @@ public interface FileStatusMapper extends BaseMapper<FileUser> {
      * @return
      */
     boolean deleteBatchByFileInfoId(@Param("ids") List<Long> ids);
+
+    /**
+     * 根据主键 id 查询文件 id
+     * @param id
+     * @return
+     */
+    Long queryFileInfoIdsById(@Param("id") Long id);
+
+    /**
+     * 根据文件 id 查询主键 id 列表
+     * @param fileInfoId
+     * @return
+     */
+    List<Long> queryIdsByFileInfoId(Long fileInfoId);
 }

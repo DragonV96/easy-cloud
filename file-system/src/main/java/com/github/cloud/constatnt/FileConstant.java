@@ -12,5 +12,13 @@ public interface FileConstant {
      */
     Integer INIT_CHUNK = 1;
 
+    /**
+     * FastDFS 默认文件分组
+     */
     String DEFAULT_GROUP = "group1";
+
+    /**
+     * 文件数量为1时
+     */
+    int UNIQUE = 1;
 }

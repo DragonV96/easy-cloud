@@ -57,6 +57,26 @@ public class FileUserServiceImpl extends ServiceImpl<FileStatusMapper, FileUser>
     }
 
     @Override
+    public boolean delete(Long id) {
+        return super.removeById(id);
+    }
+
+    @Override
+    public boolean deleteBatch(List<Long> ids) {
+        return super.removeByIds(ids);
+    }
+
+    @Override
+    public Long queryFileInfoIdsById(Long id) {
+        return super.getBaseMapper().queryFileInfoIdsById(id);
+    }
+
+    @Override
+    public List<Long> queryIdsByFileInfoId(Long fileInfoId) {
+        return super.getBaseMapper().queryIdsByFileInfoId(fileInfoId);
+    }
+
+    @Override
     public boolean deleteByFileInfoId(Long id) {
         QueryWrapper<FileUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("file_info_id", id);

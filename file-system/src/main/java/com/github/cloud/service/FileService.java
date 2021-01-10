@@ -47,18 +47,16 @@ public interface FileService {
     FileInfoResponse detail(Long id);
 
     /**
-     * 根据主键 id 删除文件
+     * 根据文件用户主键 id 删除文件
      * @param id
-     * @return
      */
-    boolean delete(Long id);
+    void delete(Long id);
 
     /**
-     * 根据主键 id 列表批量删除文件
+     * 根据文件用户主键 id 列表批量删除文件 TODO 文件较多时，放入 MQ 中异步删除
      * @param ids
-     * @return
      */
-    boolean deleteBatch(List<Long> ids);
+    void deleteBatch(List<Long> ids);
 
     /**
      * 一次性上传

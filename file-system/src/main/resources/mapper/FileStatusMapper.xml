@@ -19,10 +19,30 @@
 
     <delete id="deleteBatchByFileInfoId" parameterType="java.util.List">
         DELETE FROM
-        file_status t
+        file_user t
         WHERE t.file_info_id IN
         <foreach collection="ids" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
+
+    <select id="queryFileInfoIdsById" resultType="java.lang.Long">
+        SELECT t.file_info_id
+        FROM file_user t
+        <where>
+            <if test="id != null and id != ''">
+                t.file_user_id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryIdsByFileInfoId" resultType="java.lang.Long">
+        SELECT t.file_user_id
+        FROM file_user t
+        <where>
+            <if test="id != null and id != ''">
+                t.file_info_id = #{id}
+            </if>
+        </where>
+    </select>
 </mapper>

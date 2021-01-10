@@ -82,30 +82,28 @@ public class FileServiceImpl implements FileService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean delete(Long id) {
-        // TODO 删除文件
+    public void delete(Long id) {
+        // 先执行文件删除再删除文件用户表，否则找不到记录
+        this.deleteFile(id);
 
-        boolean delete = fileInfoService.delete(id);
-        delete = delete && fileUserService.deleteByFileInfoId(id);
-
+        boolean delete = fileUserService.delete(id);
         if (!delete) {
-            throw new GlobalException(FileErrorCode.DELETE_FILE__RECORD_FAILED);
+            throw new GlobalException(FileErrorCode.DELETE_FILE_RECORD_FAILED);
         }
-        return delete;
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteBatch(List<Long> ids) {
-        // TODO 删除文件
+    public void deleteBatch(List<Long> ids) {
+        // 先执行文件删除再删除文件用户表，否则找不到记录
+        for (Long id : ids) {
+            this.deleteFile(id);
+        }
 
         boolean delete = fileInfoService.deleteBatch(ids);
-        delete = delete && fileUserService.deleteBatchByFileInfoId(ids);
-
         if (!delete) {
-            throw new GlobalException(FileErrorCode.DELETE_FILE__RECORD_FAILED);
+            throw new GlobalException(FileErrorCode.DELETE_FILE_RECORD_FAILED);
         }
-        return delete;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -224,5 +222,29 @@ public class FileServiceImpl implements FileService {
         }
 
         fileInfoService.updateById(update);
+    }
+
+    /**
+     * 根据文件用户表主键 id 删除文件
+     * @param id
+     */
+    private void deleteFile(Long id) {
+        // 如果只存在唯一一个 id 与文件 id 关联，则删除文件与对应的文件记录
+        Long fileInfoId = fileUserService.queryFileInfoIdsById(id);
+        List<Long> idList = fileUserService.queryIdsByFileInfoId(fileInfoId);
+        if (null != idList && idList.size() == FileConstant.UNIQUE) {
+            FileInfo fileInfo = fileInfoService.getById(fileInfoId);
+            if (null == fileInfo) {
+                throw new GlobalException(FileErrorCode.DELETE_FILE_NOT_EXIST);
+            }
+            // 删除文件
+            fastDFSClient.deleteFile(new StorePath(fileInfo.getDfsGroup(), fileInfo.getDfsPath()));
+
+            // 删除记录
+            boolean delete = fileInfoService.delete(fileInfoId);
+            if (!delete) {
+                throw new GlobalException(FileErrorCode.DELETE_FILE_INFO_RECORD_FAILED);
+            }
+        }
     }
 }
