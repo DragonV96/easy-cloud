@@ -1,5 +1,6 @@
 package com.github.cloud.controller;
 
+import com.github.cloud.AbstractHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import java.io.FileInputStream;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-public class FileControllerTest {
+public class FileControllerTest extends AbstractHelper {
 
     private MockMvc mockMvc;
 
@@ -47,13 +48,12 @@ public class FileControllerTest {
     @Test
     public void uploadCheck() throws Exception {
         // 存在相同文件
-        mockMvc.perform(MockMvcRequestBuilders.get("/file/upload/check")
-                .param("fileHash", "698d51a19d8a121ce581499d7b701668")
-        );
+        super.printResult(mockMvc.perform(MockMvcRequestBuilders.get("/file/upload/check")
+                .param("fileHash", "698d51a19d8a121ce581499d7b701668")));
+
         // 不存在相同文件
-        mockMvc.perform(MockMvcRequestBuilders.get("/file/upload/check")
-                .param("fileHash", "698d51a19d8a121ce581499d7b701670")
-        );
+        super.printResult(mockMvc.perform(MockMvcRequestBuilders.get("/file/upload/check")
+                .param("fileHash", "698d51a19d8a121ce581499d7b701670")));
     }
 
     /**
@@ -65,7 +65,7 @@ public class FileControllerTest {
     public void uploadOnce() throws Exception {
         File file = new File("D:\\tmp\\1.txt");
         MockMultipartFile uploadFile = new MockMultipartFile("file", "1.txt", MediaType.TEXT_PLAIN_VALUE, new FileInputStream(file));
-        mockMvc.perform(MockMvcRequestBuilders.multipart("/file/upload")
+        super.printResult(mockMvc.perform(MockMvcRequestBuilders.multipart("/file/upload")
                 .file(uploadFile)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
@@ -77,8 +77,7 @@ public class FileControllerTest {
                         "  \"fileSize\": 24,\n" +
                         "  \"uploadType\": 1,\n" +
                         "  \"uploaderId\": 666\n" +
-                        "}")
-        );
+                        "}")));
     }
 
     /**
@@ -88,7 +87,7 @@ public class FileControllerTest {
      */
     @Test
     public void uploadExist() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.multipart("/file/upload")
+        super.printResult(mockMvc.perform(MockMvcRequestBuilders.multipart("/file/upload")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\n" +
                         "  \"chunkFileSize\": 24,\n" +
@@ -99,8 +98,16 @@ public class FileControllerTest {
                         "  \"fileSize\": 24,\n" +
                         "  \"uploadType\": 3,\n" +
                         "  \"uploaderId\": 666\n" +
-                        "}")
-        );
+                        "}")));
     }
 
+    /**
+     * 删除文件信息
+     * @throws Exception
+     */
+    @Test
+    public void delete() throws Exception {
+        super.printResult(mockMvc.perform(MockMvcRequestBuilders
+                .delete("/file/delete/{id}", 6)));
+    }
 }
