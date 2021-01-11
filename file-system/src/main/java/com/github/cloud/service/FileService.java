@@ -2,7 +2,7 @@ package com.github.cloud.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.cloud.dto.request.AddFileRequest;
-import com.github.cloud.dto.request.PageFileInfoRequest;
+import com.github.cloud.dto.request.PageFileRequest;
 import com.github.cloud.dto.request.QueryFileRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
@@ -37,7 +37,7 @@ public interface FileService {
      * @param request
      * @return
      */
-    IPage<FileInfo> page(PageFileInfoRequest request);
+    IPage<FileInfo> page(PageFileRequest request);
 
     /**
      * 根据主键 id 查询文件信息详情

@@ -2,12 +2,12 @@ package com.github.cloud.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.cloud.dto.request.AddFileRequest;
-import com.github.cloud.dto.request.PageFileInfoRequest;
+import com.github.cloud.dto.request.PageFileRequest;
 import com.github.cloud.dto.request.QueryFileRequest;
 import com.github.cloud.dto.request.UpdateFileRequest;
 import com.github.cloud.dto.response.ApiResponse;
 import com.github.cloud.dto.response.FileInfoResponse;
-import com.github.cloud.entity.FileInfo;
+import com.github.cloud.dto.response.PageFileResponse;
 import com.github.cloud.service.FileInfoService;
 import com.github.cloud.service.FileService;
 import com.github.cloud.service.FileUserService;
@@ -39,10 +39,10 @@ public class FileController {
     @Autowired
     private FileUserService fileUserService;
 
-    @ApiOperation(value = "分页查询文件信息" , tags = "分页查询")
+    @ApiOperation(value = "分页查询文件记录" , tags = "分页查询")
     @GetMapping("/page")
-    public ApiResponse<IPage<FileInfo>> page(PageFileInfoRequest request) {
-    IPage<FileInfo> response = fileInfoService.page(request);
+    public ApiResponse<IPage<PageFileResponse>> page(PageFileRequest request) {
+    IPage<PageFileResponse> response = fileInfoService.page(request);
         return ApiResponse.success(response);
     }
 

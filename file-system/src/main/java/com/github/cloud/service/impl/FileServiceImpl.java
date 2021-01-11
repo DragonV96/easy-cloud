@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.github.cloud.config.FastDFSClient;
 import com.github.cloud.constatnt.FileConstant;
 import com.github.cloud.dto.request.AddFileRequest;
-import com.github.cloud.dto.request.PageFileInfoRequest;
+import com.github.cloud.dto.request.PageFileRequest;
 import com.github.cloud.dto.request.QueryFileRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
 import com.github.cloud.entity.FileInfo;
@@ -71,7 +71,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public IPage<FileInfo> page(PageFileInfoRequest request) {
+    public IPage<FileInfo> page(PageFileRequest request) {
         return null;
     }
 

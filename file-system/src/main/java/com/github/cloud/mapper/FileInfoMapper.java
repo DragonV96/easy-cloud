@@ -1,6 +1,9 @@
 package com.github.cloud.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.cloud.dto.request.PageFileRequest;
+import com.github.cloud.dto.response.PageFileResponse;
 import com.github.cloud.entity.FileInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +20,12 @@ public interface FileInfoMapper extends BaseMapper<FileInfo> {
      * @return
      */
     Long queryIdByHash(@Param("fileHash") String fileHash);
+
+    /**
+     * 分页查询文件记录
+     * @param page
+     * @param request
+     * @return
+     */
+    IPage<PageFileResponse> page(IPage<PageFileResponse> page, @Param("request") PageFileRequest request);
 }

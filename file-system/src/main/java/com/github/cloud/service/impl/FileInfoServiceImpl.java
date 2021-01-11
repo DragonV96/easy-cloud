@@ -1,12 +1,12 @@
 package com.github.cloud.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.cloud.dto.request.AddFileRequest;
-import com.github.cloud.dto.request.PageFileInfoRequest;
+import com.github.cloud.dto.request.PageFileRequest;
 import com.github.cloud.dto.response.FileInfoResponse;
+import com.github.cloud.dto.response.PageFileResponse;
 import com.github.cloud.entity.FileInfo;
 import com.github.cloud.mapper.FileInfoMapper;
 import com.github.cloud.service.FileInfoService;
@@ -25,11 +25,9 @@ import java.util.List;
 public class FileInfoServiceImpl extends ServiceImpl<FileInfoMapper, FileInfo> implements FileInfoService {
 
     @Override
-    public IPage<FileInfo> page(PageFileInfoRequest request) {
-        IPage<FileInfo> page = new Page<>(request.getCurrent(), request.getSize());
-        FileInfo entity = new FileInfo();
-        BeanUtils.copyProperties(request, entity);
-        return super.page(page, new QueryWrapper<>(entity));
+    public IPage<PageFileResponse> page(PageFileRequest request) {
+        IPage<PageFileResponse> page = new Page<>(request.getCurrent(), request.getSize());
+        return super.getBaseMapper().page(page, request);
     }
 
     @Override
