@@ -18,6 +18,8 @@ public class BaseEntityHandler implements MetaObjectHandler {
     private final static String CREATE_TIME = "createTime";
     private final static String UPDATE_BY = "updateBy";
     private final static String UPDATE_TIME = "updateTime";
+    private final static String HAS_UPDATE_BY = "et.updateBy";
+    private final static String HAS_UPDATE_TIME = "et.updateTime";
 
     @Override
     public void insertFill(MetaObject metaObject) {
@@ -41,10 +43,10 @@ public class BaseEntityHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         Long userId = this.getUser();
         Date now = new Date();
-        if(metaObject.hasGetter(UPDATE_BY)) {
+        if(metaObject.hasGetter(HAS_UPDATE_BY)) {
             this.setFieldValByName(UPDATE_BY, userId, metaObject);
         }
-        if(metaObject.hasGetter(UPDATE_TIME)) {
+        if(metaObject.hasGetter(HAS_UPDATE_TIME)) {
             this.setFieldValByName(UPDATE_TIME, now, metaObject);
         }
     }
