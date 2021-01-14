@@ -15,16 +15,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @author : glw
- * @date : 2020/11/24
- * @time : 22:52
- * @Description : 文件服务 Swagger API 文档配置类
+ * @datetime : 2021/1/14 23:20
+ * @Description : Oauth2 授权服务 Swagger API 文档配置类
  */
 @Configuration
 @EnableSwagger2WebMvc
 @Import(BeanValidatorPluginsConfiguration.class)
 public class Swagger2Config {
 
-    @Bean(value = "fileApi")
+    @Bean(value = "oauth2ServerApi")
     @Order(value = 1)
     public Docket groupRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -37,8 +36,8 @@ public class Swagger2Config {
 
     private ApiInfo groupApiInfo(){
         return new ApiInfoBuilder()
-                .title("cloud 文件服务接口 API文档")
-                .description("<div style='font-size:14px;color:red;'>file-system RESTful APIs</div>")
+                .title("cloud Oauth2授权服务接口 API文档")
+                .description("<div style='font-size:14px;color:red;'>oauth2-server RESTful APIs</div>")
                 .termsOfServiceUrl("https://www.github.com/DragonV96/easy-cloud")
                 .contact("xxx@yy.com")
                 .version("0.0.1")
