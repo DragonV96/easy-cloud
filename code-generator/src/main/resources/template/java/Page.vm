@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModelProperty;
 #end
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 #if(${hasDate})
 import org.springframework.format.annotation.DateTimeFormat;
 #end
@@ -26,9 +25,8 @@ import java.util.Date;
 * @datetime : ${datetime}
 * @description : ${tableComment}分页查询请求对象
 */
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Data
-@ToString
 #if($enableSwagger)
 @ApiModel(value = "${tableComment}分页查询请求对象")
 #end

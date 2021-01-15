@@ -5,8 +5,6 @@ import com.github.cloud.enums.ErrorType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -16,8 +14,6 @@ import java.io.Serializable;
  * @time : 13:39
  * @Description : 通用实体返回对象
  */
-@EqualsAndHashCode
-@ToString
 @Data
 @ApiModel(value = "通用实体返回对象", description = "通用实体返回对象")
 public class ApiResponse<T> implements Serializable {

@@ -3,8 +3,6 @@ package com.github.cloud.dto.response;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,9 +13,7 @@ import java.util.Date;
 * @datetime : 2021-01-12 00:09:18
 * @description : 文件分页响应对象
 */
-@EqualsAndHashCode
 @Data
-@ToString
 @ApiModel(value = "文件分页响应对象")
 public class PageFileResponse implements Serializable {
 

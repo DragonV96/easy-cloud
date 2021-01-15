@@ -3,8 +3,6 @@ package com.github.cloud.dto.request;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -15,9 +13,7 @@ import java.io.Serializable;
  * @date : 2021/1/9 16:25
  * @Description : 文件查重查询请求对象
  */
-@EqualsAndHashCode
 @Data
-@ToString
 @ApiModel(value = "文件查重查询请求对象")
 public class QueryFileRequest implements Serializable {
 

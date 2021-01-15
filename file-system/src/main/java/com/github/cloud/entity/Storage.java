@@ -2,17 +2,13 @@ package com.github.cloud.entity;
 
 import com.github.tobato.fastdfs.domain.StorePath;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * @author : glw
  * @datetime : 2021/1/6 22:34
  * @description : 二次封装 StorePath
  */
-@EqualsAndHashCode
 @Data
-@ToString
 public class Storage {
 
     /**

@@ -3,8 +3,6 @@ package com.github.cloud.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,8 +13,6 @@ import java.util.Date;
  * @time : 23:59
  * @Description : 操作记录基类对象
  */
-@EqualsAndHashCode
-@ToString
 @Data
 public class BaseEntity implements Serializable {
 

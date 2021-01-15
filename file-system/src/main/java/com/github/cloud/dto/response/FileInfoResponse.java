@@ -3,8 +3,7 @@ package com.github.cloud.dto.response;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,9 +14,7 @@ import java.util.Date;
 * @datetime : 2021-01-05 21:09:18
 * @description : 文件信息响应对象
 */
-@EqualsAndHashCode
 @Data
-@ToString
 @ApiModel(value = "文件信息响应对象")
 public class FileInfoResponse implements Serializable {
 
@@ -57,9 +54,11 @@ public class FileInfoResponse implements Serializable {
     private Integer currentChunk;
 
     @ApiModelProperty(value = "上传开始时间", name = "uploadStartTime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date uploadStartTime;
 
     @ApiModelProperty(value = "上传结束时间", name = "uploadEndTime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date uploadEndTime;
 
 }

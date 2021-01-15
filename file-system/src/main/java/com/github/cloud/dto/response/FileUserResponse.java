@@ -3,8 +3,7 @@ package com.github.cloud.dto.response;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,9 +14,7 @@ import java.util.Date;
  * @datetime : 2021-01-05 21:09:18
  * @description : 用户文件响应对象
  */
-@EqualsAndHashCode
 @Data
-@ToString
 @ApiModel(value = "用户文件响应对象")
 public class FileUserResponse implements Serializable {
 
@@ -48,6 +45,7 @@ public class FileUserResponse implements Serializable {
     private Long updateBy;
 
     @ApiModelProperty(value = "更新时间", name = "updateTime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
 }

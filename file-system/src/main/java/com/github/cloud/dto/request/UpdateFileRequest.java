@@ -3,8 +3,6 @@ package com.github.cloud.dto.request;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,9 +15,7 @@ import java.io.Serializable;
 * @datetime : 2021-01-05 21:09:18
 * @description : 用户文件新增请求对象
 */
-@EqualsAndHashCode
 @Data
-@ToString
 @ApiModel(value = "用户文件新增请求对象")
 public class UpdateFileRequest implements Serializable {
 

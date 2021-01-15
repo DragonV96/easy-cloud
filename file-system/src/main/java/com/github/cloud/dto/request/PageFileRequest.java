@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -16,9 +15,8 @@ import java.util.Date;
 * @datetime : 2021-01-05 21:09:18
 * @description : 文件信息分页查询请求对象
 */
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @Data
-@ToString
 @ApiModel(value = "文件信息新增请求对象")
 public class PageFileRequest extends PageRequest implements Serializable {
 

@@ -1,8 +1,6 @@
 package com.github.cloud.entity;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -12,8 +10,6 @@ import java.io.Serializable;
  * @time : 23:37
  * @Description : 表字段生成对象
  */
-@EqualsAndHashCode
-@ToString
 @Data
 public class TableColumn implements Serializable {
 

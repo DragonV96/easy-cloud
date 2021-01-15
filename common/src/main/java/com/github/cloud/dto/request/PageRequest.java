@@ -3,8 +3,6 @@ package com.github.cloud.dto.request;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * @author : glw
@@ -12,8 +10,6 @@ import lombok.ToString;
  * @time : 12:35
  * @Description : 通用分页实体请求对象
  */
-@EqualsAndHashCode
-@ToString
 @Data
 @ApiModel(value = "通用分页实体请求对象", description = "通用分页实体请求对象")
 public class PageRequest {

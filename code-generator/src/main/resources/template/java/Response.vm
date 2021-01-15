@@ -5,8 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 #end
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 import java.io.Serializable;
 #if(${hasDate})
@@ -22,9 +20,7 @@ import java.util.Date;
 * @datetime : ${datetime}
 * @description : ${tableComment}响应对象
 */
-@EqualsAndHashCode
 @Data
-@ToString
 #if($enableSwagger)
 @ApiModel(value = "${tableComment}响应对象")
 #end
