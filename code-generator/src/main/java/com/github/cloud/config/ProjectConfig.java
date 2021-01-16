@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class ProjectConfig {
 
     /**
-     * 项目名称 TODO 未完
+     * 项目名称
      */
     private String projectName;
 

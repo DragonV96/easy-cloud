@@ -18,3 +18,9 @@ mybatis-plus:
   typeAliasesPackage: com.github.cloud.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# jwk 证书配置
+jwt:
+  file: certificate.jks
+  key: 123456
+  alias: certificate
