@@ -12,14 +12,14 @@ spring:
     username: root
     password: root
 
-# 配置slq打印日志
+# 配置sql打印日志
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: com.github.cloud.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# jwk 证书配置
+# jwt 证书配置
 jwt:
   file: certificate.jks
   key: 123456

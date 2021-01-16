@@ -19,7 +19,7 @@ spring:
     username: root
     password: root
 
-# 配置slq打印日志
+# 配置sql打印日志
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: com.github.cloud.entity
