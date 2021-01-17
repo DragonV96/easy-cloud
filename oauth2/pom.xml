@@ -10,10 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <packaging>pom</packaging>
+    <artifactId>oauth2</artifactId>
+
     <modules>
         <module>oauth2-server</module>
     </modules>
-
-    <artifactId>oauth2</artifactId>
 
 </project>

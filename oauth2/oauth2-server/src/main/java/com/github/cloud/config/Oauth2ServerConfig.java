@@ -79,11 +79,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 Arrays.asList(this.tokenEnhancer(), this.jwtTokenEnhancer())
         );
 
-        endpoints.authenticationManager(authenticationManager)
+        endpoints.approvalStore(this.approvalStore())
                 .authorizationCodeServices(this.authorizationCodeServices())
-                .approvalStore(this.approvalStore())
                 .tokenStore(this.tokenStore())
-                .tokenEnhancer(tokenEnhancerChain);
+                .tokenEnhancer(tokenEnhancerChain)
+                .authenticationManager(authenticationManager);
     }
 
     /**
