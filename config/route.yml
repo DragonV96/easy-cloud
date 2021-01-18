@@ -10,3 +10,10 @@ spring:
           uri: lb://file-system
           predicates:
             - Path=/file/**
+          filters:
+            #            - SwaggerHeaderFilter
+            - StripPrefix=1
+        - id: oauth2-server
+          uri: lb://oauth2-server
+          predicates:
+            - Path=/oauth/**
