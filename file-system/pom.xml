@@ -25,6 +25,12 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
+        <!-- oauth2 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
         <!-- springboot 监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

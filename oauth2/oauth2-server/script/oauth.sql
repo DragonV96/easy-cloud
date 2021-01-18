@@ -79,7 +79,6 @@ INSERT INTO `users` VALUES ('writer', '$2a$04$M9t2oVs3/VIreBMocOujqOaB/oziWL0Snl
 INSERT INTO `authorities` VALUES ('reader', 'READ');
 INSERT INTO `authorities` VALUES ('writer', 'READ,WRITE');
 
-INSERT INTO `authorities` VALUES ('writer', 'READ,WRITE');
 INSERT INTO `oauth_client_details` VALUES ('file-system1', 'file-system', '1234', 'FOO', 'password,refresh_token', '', 'READ,WRITE', 7200, NULL, NULL, 'true');
 INSERT INTO `oauth_client_details` VALUES ('file-system2', 'file-system', '1234', 'FOO', 'client_credentials,refresh_token', '', 'READ,WRITE', 7200, NULL, NULL, 'true');
 INSERT INTO `oauth_client_details` VALUES ('file-system3', 'file-system', '1234', 'FOO', 'authorization_code,refresh_token', 'https://baidu.com,http://localhost:8082/ui/login,http://localhost:8083/ui/login,http://localhost:8082/ui/remoteCall', 'READ,WRITE', 7200, NULL, NULL, 'false');
