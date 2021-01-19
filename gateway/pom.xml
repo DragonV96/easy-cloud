@@ -36,12 +36,6 @@
             <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
 
-        <!-- 熔断降级 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-
         <!-- 日志追踪 -->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.cloud</groupId>-->
