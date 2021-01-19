@@ -1,6 +1,5 @@
 package com.github.cloud.exception;
 
-
 import com.github.cloud.enums.ErrorCode;
 import com.github.cloud.enums.ErrorType;
 import lombok.Getter;
