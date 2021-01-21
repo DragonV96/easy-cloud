@@ -1,6 +1,6 @@
 host:
   public: 0.0.0.0
-  private: 192.168.1.14
+  private: 192.168.1.8
   local: 127.0.0.1
 
 # 配置相关数据源 使用 druid 数据源
