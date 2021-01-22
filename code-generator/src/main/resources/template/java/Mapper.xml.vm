@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${rootPackageName}.${mapperPackageName}.${entityClassName}${mapperSuffix}">
+    <resultMap id="${entityLowerName}Map" type="${rootPackageName}.${entityPackageName}.${entityClassName}${entitySuffix}">
+#foreach(${column} in ${columns})
+        <result property="${column.javaField}" column="${column.columnName}"></result>
+#end
+    </resultMap>
+
+    <sql id="sqlList">
+        #foreach(${column} in ${columns})${column.javaField}#if($foreach.hasNext), #end#end
+    </sql>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.cloud.mapper.FileInfoMapper">
+    <resultMap id="fileInfoMap" type="com.github.cloud.entity.FileInfo">
+        <result property="fileInfoId" column="file_info_id"></result>
+        <result property="fileType" column="file_type"></result>
+        <result property="dfsGroup" column="dfs_group"></result>
+        <result property="dfsPath" column="dfs_path"></result>
+        <result property="fileHash" column="file_hash"></result>
+        <result property="uploadedFileSize" column="uploaded_file_size"></result>
+        <result property="fileSize" column="file_size"></result>
+        <result property="duration" column="duration"></result>
+        <result property="fileStatus" column="file_status"></result>
+        <result property="chunks" column="chunks"></result>
+        <result property="currentChunk" column="current_chunk"></result>
+        <result property="uploadStartTime" column="upload_start_time"></result>
+        <result property="uploadEndTime" column="upload_end_time"></result>
+    </resultMap>
+
+    <sql id="sqlList">
+        fileInfoId, fileType, dfsGroup, dfsPath, fileHash, uploadedFileSize, fileSize, duration, fileStatus, chunks, currentChunk, uploadStartTime, uploadEndTime
+    </sql>
+
+    <select id="queryIdByHash" resultType="java.lang.Long">
+        SELECT t.file_info_id
+        FROM file_info t
+        <where>
+            <if test="fileHash != null and fileHash != ''">
+                AND t.file_hash = #{fileHash}
+            </if>
+        </where>
+    </select>
+
+    <select id="page" parameterType="com.github.cloud.dto.request.PageFileRequest"
+            resultType="com.github.cloud.dto.response.PageFileResponse">
+        SELECT t.file_info_id AS fileInfoId,
+        t.file_type AS fileType,
+        t.dfs_group AS dfsGroup,
+        t.dfs_path AS dfsPath,
+        t.file_hash AS fileHash,
+        t.uploaded_file_size AS uploadedFileSize,
+        t.file_size AS fileSize,
+        t.duration AS duration, 
+        t.file_status AS fileStatus,
+        t.chunks AS chunks, 
+        t.current_chunk AS currentChunk,
+        t.upload_start_time AS uploadStartTime,
+        t.upload_end_time AS uploadEndTime,
+        u.file_user_id AS fileUserId, u.file_name AS fileName
+        FROM file_user u
+        LEFT JOIN file_info t ON t.file_info_id = u.file_info_id
+        <where>
+            <if test="request.fileType != null and request.fileType != ''">
+                AND t.file_type = #{request.fileType}
+            </if>
+            <if test="request.fileSize != null and request.fileSize != ''">
+                AND t.file_size = #{request.fileSize}
+            </if>
+            <if test="request.duration != null and request.duration != ''">
+                AND t.duration = #{request.duration}
+            </if>
+            <if test="request.fileStatus != null and request.fileStatus != ''">
+                AND t.file_status = #{request.fileStatus}
+            </if>
+            <if test="request.uploadStartTime != null">
+                AND t.upload_start_time = #{request.uploadStartTime}
+            </if>
+            <if test="request.uploadEndTime != null and request.uploadEndTime != ''">
+                AND t.upload_end_time = #{request.uploadEndTime}
+            </if>
+        </where>
+    </select>
+</mapper>

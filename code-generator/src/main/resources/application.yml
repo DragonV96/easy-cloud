@@ -1,0 +1,108 @@
+server:
+  port: 8888
+
+host:
+  public: 0.0.0.0
+  private: 192.168.1.14
+  local: 127.0.0.1
+
+# 配置相关数据源 使用 druid 数据源
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${host.private}:3306/information_schema?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+
+# 生成器配置
+generator:
+  # 项目信息配置
+  project:
+    # 项目名称
+    project-name: file-system
+    # 作者
+    author: glw
+    # 作者邮箱
+    email:
+    # 生成路径
+    path: D:\tmp
+    # 版本号
+    version: 0.0.1-SNAPSHOT
+    # 数据库名
+    database-name: file_system
+  # 项目开关配置
+  switch:
+    # 是否开启类注释的邮箱
+    enable-email: false
+    # 是否开启 swagger
+    enable-swagger: true
+    # 是否开启 shiro
+    enable-shiro: false
+    # 是否开启 log
+    enable-log: false
+    # 是否开启生成枚举
+    enable-enum: false
+  # 项目包结构及名称配置
+  package:
+    # 项目根路径
+    root-package-name: com.github.cloud
+    # controller 包路径
+    controller-package-name: controller
+    # service 接口包路径
+    service-package-name: service
+    # service 接口实现类包路径
+    service-impl-package-name: impl
+    # mapper 包路径
+    mapper-package-name: mapper
+    # 数据库实体类包路径
+    entity-package-name: entity
+    # dto 包路径
+    dto-package-name: dto
+    # request 包路径
+    request-package-name: request
+    # response 包路径
+    response-package-name: response
+  # 项目类后缀配置（为空则默认无后缀）
+  suffix:
+    # entity 实体类后缀
+    entity-suffix:
+    # request 后缀
+    request-suffix: Request
+    # response 后缀
+    response-suffix: Response
+    # controller 后缀
+    controller-suffix: Controller
+    # service 接口后缀
+    service-suffix: Service
+    # service 实现类后缀
+    service-impl-suffix: ServiceImpl
+    # mapper 接口后缀
+    mapper-suffix: Mapper
+  # 数据库表配置
+  table:
+    # 表名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
+    table-name-style: 1
+    # 字段名命名风格（1-全小写下划线转首字母驼峰；2-全大写下划线转首字母驼峰；3-原本就是首字母驼峰不转换）
+    column-name-style: 1
+    # 表信息生成配置列表
+    allow-tables:
+        # 表名（示例1）
+      - table-name: file_info
+        # 表前缀移除
+        remove-prefix:
+        # 主键名
+        primary-key-name: file_info_id
+        # 主键类型，对应 mybatis 5种主键类型
+        primary-key-type: INPUT
+        # 表名（示例2）
+      - table-name: file_status
+        # 表前缀移除
+        remove-prefix:
+        # 主键名
+        primary-key-name: file_status_id
+        # 主键类型，对应 mybatis 5种主键类型
+        primary-key-type: AUTO
+
+
+

@@ -1,0 +1,26 @@
+host:
+  public: 0.0.0.0
+  private: 192.168.1.14
+  local: 127.0.0.1
+
+# 配置相关数据源 使用 druid 数据源
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${host.private}:3306/oauth?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+
+# 配置sql打印日志
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.github.cloud.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# jwt 证书配置
+jwt:
+  file: certificate.jks
+  key: 123456
+  alias: certificate

@@ -1,0 +1,70 @@
+package ${rootPackageName}.${servicePackageName}.${serviceImplPackageName};
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
+import ${rootPackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
+import ${rootPackageName}.${mapperPackageName}.${entityClassName}${mapperSuffix};
+import ${rootPackageName}.${servicePackageName}.${entityClassName}${serviceSuffix};
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+
+/**
+* @author : ${author}
+#if(${enableEmail})
+* @email : ${email}
+#end
+* @datetime : ${datetime}
+* @description : ${tableComment}业务层实现
+*/
+@Service
+public class ${entityClassName}${serviceImplSuffix} extends ServiceImpl<${entityClassName}${mapperSuffix}, ${entityClassName}${entitySuffix}> implements ${entityClassName}${serviceSuffix} {
+
+    @Override
+    public IPage<${entityClassName}${entitySuffix}> page(Page${entityClassName}${requestSuffix} request) {
+        IPage<${entityClassName}${entitySuffix}> page = new Page<>(request.getCurrent(), request.getSize());
+        ${entityClassName}${entitySuffix} entity = new ${entityClassName}${entitySuffix}();
+        BeanUtils.copyProperties(request, entity);
+        return super.page(page, new QueryWrapper<>(entity));
+    }
+
+    @Override
+    public ${entityClassName}${responseSuffix} detail(${idDataType} id) {
+        ${entityClassName}${entitySuffix} entity = super.getById(id);
+        ${entityClassName}${responseSuffix} response = new ${entityClassName}${responseSuffix}();
+        BeanUtils.copyProperties(response, entity);
+        return response;
+    }
+
+    @Override
+    public boolean save(Add${entityClassName}${requestSuffix} request) {
+        ${entityClassName}${entitySuffix} entity = new ${entityClassName}${entitySuffix}();
+        BeanUtils.copyProperties(request, entity);
+        return super.save(entity);
+    }
+
+    @Override
+    public boolean update(Update${entityClassName}${requestSuffix} request) {
+        ${entityClassName}${entitySuffix} entity = new ${entityClassName}${entitySuffix}();
+        BeanUtils.copyProperties(request, entity);
+        return super.updateById(entity);
+    }
+
+    @Override
+    public boolean delete(${idDataType} id) {
+        return super.removeById(id);
+    }
+
+    @Override
+    public boolean deleteBatch(List<${idDataType}> ids) {
+        return super.removeByIds(ids);
+    }
+}

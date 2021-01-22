@@ -1,0 +1,68 @@
+package ${rootPackageName}.${dtoPackageName}.${requestPackageName};
+
+#if($enableSwagger)
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+#end
+import lombok.Data;
+#if(${hasDate})
+import org.springframework.format.annotation.DateTimeFormat;
+#end
+
+#if(${hasNotBlank})
+import javax.validation.constraints.NotBlank;
+#end
+#if(${hasNotNull})
+import javax.validation.constraints.NotNull;
+#end
+#if(${hasNotBlank})
+import javax.validation.constraints.Size;
+#end
+import java.io.Serializable;
+#if(${hasDate})
+import java.util.Date;
+#end
+
+
+/**
+* @author : ${author}
+#if(${enableEmail})
+* @email : ${email}
+#end
+* @datetime : ${datetime}
+* @description : ${tableComment}更新请求对象
+*/
+@Data
+#if($enableSwagger)
+@ApiModel(value = "${tableComment}更新请求对象")
+#end
+public class Update${entityClassName}${requestSuffix} implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+#foreach(${column} in ${columns})
+    @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}"#if(${column.isNullable.equals("NO")}), required = true#end)
+#if(${column.isNullable.equals("NO")})
+#if(${column.javaType.equals("String")})
+#if(${column.columnComment.indexOf("（")} > 0)
+    @NotBlank(message = "${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+    @Size(max = ${column.characterMaximum}, message = "${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}超过长度限制，最大长度为${column.characterMaximum}个字节")
+#else
+    @NotBlank(message = "${column.columnComment}不能为空")
+    @Size(max = ${column.characterMaximum}, message = "${column.columnComment}超过长度限制，最大长度为${column.characterMaximum}个字节")
+#end
+#elseif(${column.javaType.equals("Long")} || ${column.javaType.equals("Integer")} || ${column.javaType.equals("Byte")})
+#if(${column.columnComment.indexOf("（")} > 0)
+    @NotNull(message = "${column.columnComment.substring(0, ${column.columnComment.indexOf("（")})}不能为空")
+#else
+    @NotNull(message = "${column.columnComment}不能为空")
+#end
+#elseif(${column.javaType.equals("Date")})
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @NotNull(message = "${column.columnComment}不能为空")
+#end
+#end
+    private ${column.javaType} ${column.javaField};
+
+#end
+}

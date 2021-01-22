@@ -1,0 +1,39 @@
+host:
+  public: 0.0.0.0
+  private: 192.168.1.14
+  local: 127.0.0.1
+
+# 配置相关数据源 使用 druid 数据源
+spring:
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size:  10MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${host.private}:3306/file_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+
+# 配置sql打印日志
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.github.cloud.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# ===================================================================
+# 分布式文件系统FastDFS配置
+# ===================================================================
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image:             #缩略图生成参数
+    width: 80
+    height: 80
+  tracker-list:            #TrackerList参数,支持多个
+    - ${host.private}:22122

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.cloud.mapper.GeneratorMapper">
+
+    <select id="queryTable" resultType="com.github.cloud.entity.Table">
+        SELECT
+        t.table_name AS tableName,
+        t.table_comment AS tableComment
+        FROM tables t
+        <where>
+            <if test="databaseName != null and databaseName != ''">
+                AND t.table_schema = #{databaseName}
+            </if>
+            <if test="tableName != null and tableName != ''">
+                AND t.table_name = #{tableName}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryTableColumn" resultType="com.github.cloud.entity.TableColumn">
+        SELECT
+        t.table_name AS tableName,
+        t.column_name AS columnName,
+        t.column_default AS columnDefault,
+        t.is_nullable AS isNullable,
+        t.data_type AS dataType,
+        t.character_maximum_length AS characterMaximum,
+        t.column_key AS columnKey,
+        t.column_comment AS columnComment
+        FROM columns t
+        <where>
+            <if test="databaseName != null and databaseName != ''">
+                AND t.table_schema = #{databaseName}
+            </if>
+            <if test="tableName != null and tableName != ''">
+                AND t.table_name = #{tableName}
+            </if>
+        </where>
+    </select>
+</mapper>

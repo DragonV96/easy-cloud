@@ -1,0 +1,45 @@
+package ${rootPackageName}.${dtoPackageName}.${requestPackageName};
+
+import com.github.cloud.dto.request.PageRequest;
+#if($enableSwagger)
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+#end
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+#if(${hasDate})
+import org.springframework.format.annotation.DateTimeFormat;
+#end
+
+import java.io.Serializable;
+#if(${hasDate})
+import java.util.Date;
+#end
+
+
+/**
+* @author : ${author}
+#if(${enableEmail})
+* @email : ${email}
+#end
+* @datetime : ${datetime}
+* @description : ${tableComment}分页查询请求对象
+*/
+@EqualsAndHashCode(callSuper = true)
+@Data
+#if($enableSwagger)
+@ApiModel(value = "${tableComment}分页查询请求对象")
+#end
+public class Page${entityClassName}${requestSuffix} extends PageRequest implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+#foreach(${column} in ${columns})
+    @ApiModelProperty(value = "${column.columnComment}", name = "${column.javaField}")
+#if(${column.javaType.equals("Date")})
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+#end
+    private ${column.javaType} ${column.javaField};
+
+#end
+}

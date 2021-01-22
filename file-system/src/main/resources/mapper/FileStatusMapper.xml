@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.cloud.mapper.FileStatusMapper">
+    <resultMap id="fileUserMap" type="com.github.cloud.entity.FileUser">
+        <result property="fileUserId" column="file_user_id"></result>
+        <result property="fileInfoId" column="file_info_id"></result>
+        <result property="fileName" column="file_name"></result>
+        <result property="uploaderId" column="uploader_id"></result>
+        <result property="downloadCount" column="download_count"></result>
+        <result property="createBy" column="create_by"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateBy" column="update_by"></result>
+        <result property="updateTime" column="update_time"></result>
+    </resultMap>
+
+    <sql id="sqlList">
+        fileUserId, fileInfoId, fileName, uploaderId, downloadCount, createBy, createTime, updateBy, updateTime
+    </sql>
+
+    <delete id="deleteBatchByFileInfoId" parameterType="java.util.List">
+        DELETE FROM
+        file_user t
+        WHERE t.file_info_id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="queryFileInfoIdsById" resultType="java.lang.Long">
+        SELECT t.file_info_id
+        FROM file_user t
+        <where>
+            <if test="id != null and id != ''">
+                t.file_user_id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryIdsByFileInfoId" resultType="java.lang.Long">
+        SELECT t.file_user_id
+        FROM file_user t
+        <where>
+            <if test="id != null and id != ''">
+                t.file_info_id = #{id}
+            </if>
+        </where>
+    </select>
+</mapper>

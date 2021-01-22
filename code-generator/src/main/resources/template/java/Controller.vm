@@ -1,0 +1,112 @@
+package ${rootPackageName}.${controllerPackageName};
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Add${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Page${entityClassName}${requestSuffix};
+import ${rootPackageName}.${dtoPackageName}.${requestPackageName}.Update${entityClassName}${requestSuffix};
+import com.github.cloud.dto.response.ApiResponse;
+import ${rootPackageName}.${dtoPackageName}.${responsePackageName}.${entityClassName}${responseSuffix};
+import ${rootPackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
+import ${rootPackageName}.${servicePackageName}.${entityClassName}${serviceSuffix};
+#if($enableSwagger)
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+#end#if($enableShiro)
+import org.apache.shiro.authz.annotations.RequirePermission;
+#end
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+/**
+* @author : ${author}
+#if(${enableEmail})
+* @email : ${email}
+#end
+* @datetime : ${datetime}
+* @description : ${tableComment}控制层
+*/
+#if($enableSwagger)
+@Api(value = "${tableComment}" , tags = {"${tableComment}"})
+#end
+@RestController
+@RequestMapping("/${entityLowerName}")
+public class ${entityClassName}${controllerSuffix} {
+
+    @Autowired
+    private ${entityClassName}${serviceSuffix} ${entityLowerName}Service;
+
+#if($enableSwagger)
+    @ApiOperation(value = "分页查询${tableComment}" , tags = "分页查询")
+#end
+#if($enableShiro)
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:page")
+#end
+    @GetMapping("/page")
+    public ApiResponse<IPage<${entityClassName}${entitySuffix}>> page(Page${entityClassName}${requestSuffix} request) {
+    IPage<${entityClassName}${entitySuffix}> response = ${entityLowerName}Service.page(request);
+        return ApiResponse.success(response);
+    }
+
+#if($enableSwagger)
+    @ApiOperation(value = "查询${tableComment}详情" , tags = "查询详情")
+#end
+#if($enableShiro)
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:detail")
+#end
+    @GetMapping("/detail/{id}")
+    public ApiResponse<${entityClassName}${responseSuffix}> detail(@PathVariable("id") ${idDataType} id) {
+        ${entityClassName}${responseSuffix} response = ${entityLowerName}Service.detail(id);
+        return ApiResponse.success(response);
+    }
+
+#if($enableSwagger)
+    @ApiOperation(value = "新增${tableComment}" , tags = "新增")
+#end
+#if($enableShiro)
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:save")
+#end
+    @PostMapping("/save")
+    public ApiResponse<Boolean> save(@RequestBody @Valid Add${entityClassName}${requestSuffix} request) {
+        boolean save = ${entityLowerName}Service.save(request);
+        return ApiResponse.success(save);
+    }
+
+#if($enableSwagger)
+    @ApiOperation(value = "更新${tableComment}" , tags = "更新")
+#end
+#if($enableShiro)
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:update")
+#end
+    @PutMapping("/update")
+    public ApiResponse<Boolean> update(@RequestBody @Valid Update${entityClassName}${requestSuffix} request) {
+        boolean update = ${entityLowerName}Service.update(request);
+        return ApiResponse.success(update);
+    }
+
+#if($enableSwagger)
+    @ApiOperation(value = "删除${tableComment}" , tags = "删除")
+#end
+#if($enableShiro)
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")
+#end
+    @DeleteMapping("/delete/{id}")
+    public ApiResponse<Boolean> delete(@PathVariable("id") ${idDataType} id) {
+        boolean delete = ${entityLowerName}Service.delete(id);
+        return ApiResponse.success(delete);
+    }
+
+#if($enableSwagger)
+    @ApiOperation(value = "批量删除${tableComment}" , tags = "批量删除")
+#end
+#if($enableShiro)
+    @RequirePermission(value = "${modulePackageName}:${entityLowerName}:delete")
+#end
+    @DeleteMapping("/delete/batch/{ids}")
+    public ApiResponse<Boolean> deleteBatch(@PathVariable("ids") List<${idDataType}> ids) {
+        boolean delete = ${entityLowerName}Service.deleteBatch(ids);
+        return ApiResponse.success(delete);
+    }
+}
