@@ -21,6 +21,7 @@ public enum  ErrorCode implements ErrorType{
     PARAM_EMPTY(1000201, "请求参数为空，请确认参数后重试！"),
     PARAM_INVALID(1000202, "请求参数校验不通过，请确认参数正常后重试！"),
     PARAM_ERROR(1000203, "请求参数错误，请确认参数无误后重试！"),
+    PARAM_ILLEGAL(1000204, "非法请求参数，请确认参数无误后重试！"),
 
     DATABASE_DUPLICATE_KEY(1000301, "数据库主键冲突，请联系管理员！"),
 
