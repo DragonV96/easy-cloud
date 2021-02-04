@@ -22,8 +22,11 @@ public enum  ErrorCode implements ErrorType{
     PARAM_INVALID(1000202, "请求参数校验不通过，请确认参数正常后重试！"),
     PARAM_ERROR(1000203, "请求参数错误，请确认参数无误后重试！"),
     PARAM_ILLEGAL(1000204, "非法请求参数，请确认参数无误后重试！"),
+    PARAM_NOT_MATCH(1000205, "请求参数类型不匹配，无法进行反序列化，请联系管理员！"),
 
     DATABASE_DUPLICATE_KEY(1000301, "数据库主键冲突，请联系管理员！"),
+    VIOLATE_FIELD_CONSTRAINTS(1000302, "违反数据库字段约束，请联系管理员！"),
+    DATABASE_PERSISTENCE_ERROR(1000303, "数据库持久化错误，请联系管理员！"),
 
     FILE_LIMIT(1000401, "上传文件超过限制大小，请重新上传！"),
     ;
