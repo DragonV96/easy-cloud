@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
         ErrorType errorType = ex.getErrorType();
         log.error("Request path: {}, error code description: {}, error code: {},  exception description: {}, exception cause: {}",
                 request.getRequestURI(), errorType.getMsg(), errorType.getCode(), ex.getMessage(), ex.getCause());
-        return ApiResponse.error(errorType);
+        return ApiResponse.error(errorType, ex.getMessage());
     }
 
     @ExceptionHandler(value = {MissingServletRequestParameterException.class})

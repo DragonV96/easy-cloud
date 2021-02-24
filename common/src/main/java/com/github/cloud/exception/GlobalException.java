@@ -30,12 +30,12 @@ public class GlobalException extends RuntimeException implements Serializable {
     }
 
     public GlobalException(ErrorType errorType, String message) {
-        super(errorType.getMsg());
+        super(message);
         this.errorType = errorType;
     }
 
     public GlobalException(ErrorType errorType, String message, Throwable throwable) {
-        super(errorType.getMsg(), throwable);
+        super(message, throwable);
         this.errorType = errorType;
     }
 
