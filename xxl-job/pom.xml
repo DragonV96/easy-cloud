@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>elastic-job</artifactId>
+    <artifactId>xxl-job</artifactId>
 
 
 </project>

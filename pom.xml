@@ -19,13 +19,13 @@
         <module>util</module>
         <module>oauth2</module>
         <module>elasticsearch</module>
-        <module>elastic-job</module>
         <module>gateway</module>
         <module>file-system</module>
         <module>sharding-jdbc</module>
         <module>nacos</module>
         <module>rocketmq</module>
         <module>code-generator</module>
+        <module>xxl-job</module>
     </modules>
 
     <properties>
