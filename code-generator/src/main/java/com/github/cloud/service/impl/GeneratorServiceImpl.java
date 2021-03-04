@@ -86,6 +86,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         this.fillTableColumn(velocityContext, tableColumns, allowTable, table);
         velocityContext.put("columns", tableColumns);
         velocityContext.put("hasDate", table.getHasDate());
+        System.out.println(" 666>>>>>> " + table.getHasDate());
         velocityContext.put("hasNotNull", table.getHasNotNull());
         velocityContext.put("hasNotBlank", table.getHasNotBlank());
     }
@@ -150,6 +151,11 @@ public class GeneratorServiceImpl implements GeneratorService {
      * @param table
      */
     private void fillValidate(TableColumn column, Table table) {
+        if (DataTypeEnum.TIMESTAMP.getDataType().equals(column.getDataType())
+                || DataTypeEnum.DATETIME.getDataType().equals(column.getDataType())) {
+            table.setHasDate(true);
+        }
+
         if (Constant.NULL.equals(column.getIsNullable())) {
             return;
         }
@@ -162,9 +168,6 @@ public class GeneratorServiceImpl implements GeneratorService {
                 || DataTypeEnum.BIT.getDataType().equals(column.getDataType())
                 || DataTypeEnum.TINYINT.getDataType().equals(column.getDataType())) {
             table.setHasNotNull(true);
-        } else if (DataTypeEnum.TIMESTAMP.getDataType().equals(column.getDataType())
-                || DataTypeEnum.DATETIME.getDataType().equals(column.getDataType())) {
-            table.setHasDate(true);
         } else {
             throw new GlobalException("没有此数据库表字段类型！");
         }
