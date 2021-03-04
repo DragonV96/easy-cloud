@@ -102,7 +102,7 @@ public class VelocityUtil {
      */
     public static String getFileName(ProjectConfig projectConfig, PackageConfig packageConfig, SuffixConfig suffixConfig, TableConfig.AllowTable allowTable, String template) {
         StringBuilder filePath = new StringBuilder();
-        String className = getClassName(allowTable.getTableName());
+        String className = getClassName(allowTable.getTableName(), allowTable.getRemovePrefix());
 
         // 公共包路径
         filePath.append(projectConfig.getPath())
@@ -214,7 +214,8 @@ public class VelocityUtil {
      * @param name
      * @return
      */
-    public static String getClassName(String name) {
-        return StringUtils.capitalizeFirstLetter(StrUtil.toCamelCase(name));
+    public static String getClassName(String name, String removePrefix) {
+        String replace = name.replace(removePrefix, "");
+        return StringUtils.capitalizeFirstLetter(StrUtil.toCamelCase(replace));
     }
 }

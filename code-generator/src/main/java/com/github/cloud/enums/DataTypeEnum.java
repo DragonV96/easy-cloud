@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 public enum DataTypeEnum {
     VARCHAR("varchar", "String"),
+    TEXT("text", "String"),
     INT("int", "Integer"),
     BIGINT("bigint", "Long"),
     TIMESTAMP("timestamp", "Date"),

@@ -77,8 +77,9 @@ public class GeneratorServiceImpl implements GeneratorService {
         log.info("tableColumns = {}", tableColumns);
 
         // 表属性
-        velocityContext.put("entityClassName", VelocityUtil.getClassName(table.getTableName()));
-        velocityContext.put("entityLowerName", StrUtil.toCamelCase(table.getTableName()));
+        String className = VelocityUtil.getClassName(table.getTableName(), allowTable.getRemovePrefix());
+        velocityContext.put("entityClassName", className);
+        velocityContext.put("entityLowerName", StrUtil.toCamelCase(className));
         velocityContext.put("tableComment", table.getTableComment().replace(Constant.EXCLUDE, ""));
 
         // 字段属性
@@ -121,6 +122,8 @@ public class GeneratorServiceImpl implements GeneratorService {
     private void fillJavaType(TableColumn column, Table table) {
         if (DataTypeEnum.VARCHAR.getDataType().equals(column.getDataType())) {
             column.setJavaType(DataTypeEnum.VARCHAR.getJavaType());
+        } else if (DataTypeEnum.TEXT.getDataType().equals(column.getDataType())) {
+            column.setJavaType(DataTypeEnum.TEXT.getJavaType());
         } else if (DataTypeEnum.INT.getDataType().equals(column.getDataType())) {
             column.setJavaType(DataTypeEnum.INT.getJavaType());
         } else if (DataTypeEnum.BIGINT.getDataType().equals(column.getDataType())) {
