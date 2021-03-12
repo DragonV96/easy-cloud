@@ -215,7 +215,29 @@ public class VelocityUtil {
      * @return
      */
     public static String getClassName(String name, String removePrefix) {
-        String replace = name.replace(removePrefix, "");
-        return StringUtils.capitalizeFirstLetter(StrUtil.toCamelCase(replace));
+        String result = removePrefix(name, removePrefix);
+        return StringUtils.capitalizeFirstLetter(StrUtil.toCamelCase(result));
+    }
+
+    /**
+     * 根据下划线名字获取首字母小写驼峰名
+     * @param name
+     * @return
+     */
+    public static String getLowerClassName(String name, String removePrefix) {
+        String result = removePrefix(name, removePrefix);
+        return StrUtil.toCamelCase(StrUtil.toCamelCase(result));
+    }
+
+    /**
+     * 根据下划线名字获取首字母大写驼峰名
+     * @param name
+     * @return
+     */
+    public static String removePrefix(String name, String removePrefix) {
+        if (StrUtil.isNotBlank(removePrefix)) {
+            return name.replace(removePrefix, "");
+        }
+        return name;
     }
 }

@@ -77,9 +77,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         log.info("tableColumns = {}", tableColumns);
 
         // 表属性
-        String className = VelocityUtil.getClassName(table.getTableName(), allowTable.getRemovePrefix());
-        velocityContext.put("entityClassName", className);
-        velocityContext.put("entityLowerName", StrUtil.toCamelCase(className));
+        velocityContext.put("entityClassName", VelocityUtil.getClassName(table.getTableName(), allowTable.getRemovePrefix()));
+        velocityContext.put("entityLowerName",  VelocityUtil.getLowerClassName(table.getTableName(), allowTable.getRemovePrefix()));
         velocityContext.put("tableComment", table.getTableComment().replace(Constant.EXCLUDE, ""));
 
         // 字段属性
