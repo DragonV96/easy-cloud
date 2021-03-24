@@ -9,16 +9,18 @@ host:
 # 数据生成器配置
 data:
   # 数据库配置
-  database: test_db
+  database: data_optimize
   # 数据量（默认1000w）
   volume: 10000000
+  # 插入数据时的合并数据量（默认2w，较优）
+  merge: 20000
 
 # 配置相关数据源 使用 druid 数据源
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${host.private}:3306/${generator.database}?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://${host.private}:3306/${data.database}?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: root
 

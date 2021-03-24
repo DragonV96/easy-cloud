@@ -19,4 +19,9 @@ public class ProjectConfig {
      * 数据量（默认1000w）
      */
     private Integer volume;
+
+    /**
+     * 插入数据时的合并数据量（默认2w，较优）
+     */
+    private Integer merge;
 }

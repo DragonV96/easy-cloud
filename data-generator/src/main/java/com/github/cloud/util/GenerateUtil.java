@@ -142,12 +142,14 @@ public class GenerateUtil {
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            System.out.println(randomName()
+            String s = randomName()
                     + ", " + randomGender()
                     + ", " + randomAge()
                     + ", " + randomUserAccount()
                     + ", " + randomEmail()
-                    + ", " + randomTime());
+                    + ", " + randomTime();
+            System.out.println(s);
+            System.out.println(s.length());
         }
     }
 

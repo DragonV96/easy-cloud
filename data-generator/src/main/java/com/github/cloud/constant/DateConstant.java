@@ -23,4 +23,9 @@ public interface DateConstant {
      * 距离起始时间最大偏移量（s），即 2020-01-01 00:00:00
      */
     int MAX = 94694399;
+
+    /**
+     * 距离创建时间最大偏移量（s），即 100天
+     */
+    int OFFSET = 8640000;
 }
