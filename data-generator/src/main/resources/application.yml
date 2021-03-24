@@ -7,7 +7,7 @@ host:
   local: 127.0.0.1
 
 # 数据生成器配置
-generator:
+data:
   # 数据库配置
   database: test_db
   # 数据量（默认1000w）

@@ -1,10 +1,13 @@
 package com.github.cloud.util;
 
+import cn.hutool.core.date.DateField;
 import cn.hutool.core.util.RandomUtil;
 import com.github.cloud.constant.AccountConstant;
 import com.github.cloud.constant.ChineseConstant;
+import com.github.cloud.constant.DateConstant;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -79,6 +82,14 @@ public class GenerateUtil {
         return emailStr.toString();
     }
 
+    /**
+     * 随机时间
+     * @return
+     */
+    public static Date randomTime() {
+        return RandomUtil.randomDate(DateConstant.START_DATE, DateField.SECOND, DateConstant.MIN, DateConstant.MAX);
+    }
+
     // -------------------- 拆分方法 --------------------
 
     /**
@@ -131,7 +142,12 @@ public class GenerateUtil {
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            System.out.println(randomName() + ", " + randomGender() + ", " + randomUserAccount() + ", " + randomEmail());
+            System.out.println(randomName()
+                    + ", " + randomGender()
+                    + ", " + randomAge()
+                    + ", " + randomUserAccount()
+                    + ", " + randomEmail()
+                    + ", " + randomTime());
         }
     }
 
