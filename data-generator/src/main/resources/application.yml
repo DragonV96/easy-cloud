@@ -1,0 +1,27 @@
+server:
+  port: 8889
+
+host:
+  public: 0.0.0.0
+  private: 192.168.10.222
+  local: 127.0.0.1
+
+# 数据生成器配置
+generator:
+  # 数据库配置
+  database: test_db
+  # 数据量（默认1000w）
+  volume: 10000000
+
+# 配置相关数据源 使用 druid 数据源
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${host.private}:3306/${generator.database}?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+
+
+
+

@@ -26,6 +26,7 @@
         <module>rocketmq</module>
         <module>code-generator</module>
         <module>xxl-job</module>
+        <module>data-generator</module>
     </modules>
 
     <properties>
