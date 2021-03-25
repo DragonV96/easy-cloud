@@ -34,13 +34,13 @@ public class InsertServiceImpl implements InsertService {
 
     @Override
     public boolean insertUser() {
-
         // 外层循环次数
         int parentCount = projectConfig.getVolume() / projectConfig.getMerge();
         int mergeCount = projectConfig.getMerge();
-        int mergeLast = projectConfig.getMerge() - 1;
+        int mergeLast = mergeCount - 1;
+        int totalCount = mergeCount;
         for (int i = 0; i < parentCount; i++) {
-            StringBuilder sql = new StringBuilder((TableConstant.DATA_LENGTH + 2) * projectConfig.getMerge());
+            StringBuilder sql = new StringBuilder((TableConstant.DATA_LENGTH + 2) * mergeCount);
 
             // 插入语句前面部分
             sql.append(InsertConstant.INSERT_INTO)
@@ -91,12 +91,22 @@ public class InsertServiceImpl implements InsertService {
                     sql.append(InsertConstant.COMMA);
                 }
             }
-
             // 插入语句结尾部分
             sql.append(InsertConstant.SEMICOLON);
-            log.info(" >>>> 第 {} 次执行，已插入 {} 条数据...", i + 1, (i + 1) * mergeCount);
+
+            long start = System.currentTimeMillis();
             insertMapper.insertData(sql.toString());
+            long end = System.currentTimeMillis();
+            long time = end - start;
+            log.info(" >>>> 第 {} 次执行，当前插入 {} 条数据，耗时：{}ms，QPS：{}条/ms，总共已插入 {} 条数据...", i + 1, mergeCount, time, mergeCount / time, totalCount);
+
+            if (mergeCount < projectConfig.getMaxMerge()) {
+                mergeCount += projectConfig.getMerge();
+                mergeLast = mergeCount - 1;
+            }
+            totalCount += mergeCount;
         }
+
         return true;
     }
 }

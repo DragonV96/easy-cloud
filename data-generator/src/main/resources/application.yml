@@ -11,9 +11,11 @@ data:
   # 数据库配置
   database: data_optimize
   # 数据量（默认1000w）
-  volume: 10000000
+  volume: 15000000
   # 插入数据时的合并数据量（默认2w，较优）
-  merge: 20000
+  merge: 40000
+  # 插入数据时的最大合并数据量（最大4w）
+  max-merge: 40000
 
 # 配置相关数据源 使用 druid 数据源
 spring:

@@ -41,7 +41,7 @@ EXPLAIN SELECT * FROM users WHERE id >= '9800000' LIMIT 20
 
 -- --------------- 优化 sql ---------------
 -- 为用户姓名建索引
-ALTER TABLE users ADD INDEX users_real_name(real_name)
+ALTER TABLE users ADD INDEX users_real_name(real_name);
 
 -- 为用户姓名建前缀索引
-ALTER TABLE users ADD INDEX users_email(email(12))
+ALTER TABLE users ADD INDEX users_email(email(12));

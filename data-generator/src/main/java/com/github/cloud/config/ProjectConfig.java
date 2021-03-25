@@ -24,4 +24,9 @@ public class ProjectConfig {
      * 插入数据时的合并数据量（默认2w，较优）
      */
     private Integer merge;
+
+    /**
+     * 插入数据时的最大合并数据量（最大4w）
+     */
+    private Integer maxMerge;
 }
