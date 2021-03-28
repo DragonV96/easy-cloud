@@ -99,6 +99,12 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+        <!-- xxl-job 客户端 -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+        </dependency>
+
         <!-- 解决 swagger guava 冲突问题 -->
 <!--        <dependency>-->
 <!--            <groupId>com.google.guava</groupId>-->

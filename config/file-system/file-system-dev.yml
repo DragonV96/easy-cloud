@@ -37,3 +37,18 @@ fdfs:
     height: 80
   tracker-list:            #TrackerList参数,支持多个
     - ${host.private}:22122
+
+# ===================================================================
+# 分布式任务调度配置
+# ===================================================================
+xxl:
+  job:
+    admin:
+      addresses: http://192.168.10.1:8666/xxl-job-admin
+    executor:
+      app-name: ${spring.application.name}
+      ip:
+      port: 9999
+      log-path: /xxl-log
+      log-retention-days: -1
+    access-token:

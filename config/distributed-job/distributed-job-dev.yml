@@ -5,7 +5,7 @@ host:
 
 server:
   servlet:
-    context-path: /xxl-job
+    context-path: /xxl-job-admin
 
 # 数据源配置
 spring:
