@@ -25,8 +25,8 @@
         <module>nacos</module>
         <module>rocketmq</module>
         <module>code-generator</module>
-        <module>xxl-job</module>
         <module>data-generator</module>
+        <module>distributed-job</module>
     </modules>
 
     <properties>
@@ -43,10 +43,12 @@
         <guava.version>28.0-jre</guava.version>
         <fastdfs.version>1.26.4</fastdfs.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <mybatis.version>2.1.2</mybatis.version>
         <druid.version>1.1.14</druid.version>
         <mysql.version>5.1.41</mysql.version>
         <hutool.version>5.3.9</hutool.version>
         <velocity.version>1.7</velocity.version>
+        <xxl-job.version>2.2.0</xxl-job.version>
     </properties>
 
     <dependencyManagement>
@@ -119,6 +121,13 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- xxl-job 客户端 -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
             </dependency>
 
             <!--velocity代码生成使用模板 -->

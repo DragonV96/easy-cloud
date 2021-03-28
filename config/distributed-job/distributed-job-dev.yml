@@ -1,0 +1,82 @@
+host:
+  public: 0.0.0.0
+  private: 192.168.10.222
+  local: 127.0.0.1
+
+server:
+  servlet:
+    context-path: /xxl-job
+
+# 数据源配置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${host.private}:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 30
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 900000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1
+  # 邮箱配置
+  mail:
+    host: xxx.com
+    port: 994
+    username: xxx@aboatedu.com
+    password: xxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  # MVC配置
+  mvc:
+    servlet:
+      load-on-startup: 0
+    static-path-pattern: /static/**
+  resources:
+    static-locations: classpath:/static/
+  # freemarker配置
+  freemarker:
+    templateLoaderPath=classpath: /templates/
+    suffix: .ftl
+    charset: UTF-8
+    request-context-attribute: request
+    settings:
+      number_format: 0.##########
+# 通用配置，开放端点
+management:
+  server:
+    servlet:
+      context-path: /actuator
+  health:
+    mail:
+      enabled: false
+# mybatis配置
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+# XXL-job配置
+xxl:
+  job:
+    login:
+      username: admin
+      password: 123456
+    accessToken:
+    i18n: zh_CN
+    # 触发池
+    triggerpool:
+      fast:
+        max: 200
+      slow:
+        max: 100
+    logretentiondays: 30
