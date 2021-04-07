@@ -85,7 +85,6 @@ public class GeneratorServiceImpl implements GeneratorService {
         this.fillTableColumn(velocityContext, tableColumns, allowTable, table);
         velocityContext.put("columns", tableColumns);
         velocityContext.put("hasDate", table.getHasDate());
-        System.out.println(" 666>>>>>> " + table.getHasDate());
         velocityContext.put("hasNotNull", table.getHasNotNull());
         velocityContext.put("hasNotBlank", table.getHasNotBlank());
     }
