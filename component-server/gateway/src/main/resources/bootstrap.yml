@@ -19,7 +19,7 @@ spring:
         ext-config:
           - data-id: common-log.yml
             refresh: true
-          - data-id: route.yml
+          - data-id: gateway-dev.yml
             group: gateway
             refresh: true
 
