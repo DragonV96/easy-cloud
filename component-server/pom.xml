@@ -9,10 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
+    <artifactId>component-server</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>core</module>
+        <module>gateway</module>
+        <module>nacos</module>
+        <module>swagger</module>
+        <module>distributed-job</module>
     </modules>
+
 </project>

@@ -1,0 +1,27 @@
+server:
+  port: 8666
+
+spring:
+  application:
+    name: distributed-job
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: ca2bf4f6-e411-4b8d-a9ba-2e862a822af3
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        group: distributed-job
+        namespace: ca2bf4f6-e411-4b8d-a9ba-2e862a822af3
+        ext-config:
+          - data-id: common-log.yml
+            refresh: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
