@@ -3,16 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>easy-cloud</artifactId>
+        <artifactId>component-server</artifactId>
         <groupId>com.github.DragonV96</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>nacos</artifactId>
 
-    <modules>
-        <module>core</module>
-    </modules>
+
 </project>

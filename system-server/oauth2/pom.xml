@@ -3,16 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>easy-cloud</artifactId>
+        <artifactId>system-server</artifactId>
         <groupId>com.github.DragonV96</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
     <packaging>pom</packaging>
+    <artifactId>oauth2</artifactId>
 
     <modules>
-        <module>core</module>
+        <module>oauth2-server</module>
+        <module>oauth2-client</module>
     </modules>
+
 </project>

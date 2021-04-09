@@ -6,6 +6,6 @@ knife4j:
     routes:
       - name: 文件服务
         serviceName: file-system
-        namespaceId: ceaebcf5-685d-4d5a-93fc-bb67f22e2fb4
+        namespaceId: ca2bf4f6-e411-4b8d-a9ba-2e862a822af3
         location: /v2/api-docs?group=default
         servicePath: /file

@@ -13,20 +13,11 @@
     <description>Demo project for Spring Cloud</description>
 
     <modules>
-        <module>swagger</module>
-        <module>redis</module>
         <module>common</module>
-        <module>util</module>
-        <module>oauth2</module>
-        <module>elasticsearch</module>
-        <module>gateway</module>
-        <module>file-system</module>
-        <module>sharding-jdbc</module>
-        <module>nacos</module>
-        <module>rocketmq</module>
-        <module>code-generator</module>
-        <module>data-generator</module>
-        <module>distributed-job</module>
+        <module>component-server</module>
+        <module>tool-server</module>
+        <module>system-server</module>
+        <module>business-server</module>
     </modules>
 
     <properties>
