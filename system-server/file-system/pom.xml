@@ -93,18 +93,6 @@
             <artifactId>knife4j-micro-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- hutool 工具包 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-
-        <!-- xxl-job 客户端 -->
-        <dependency>
-            <groupId>com.xuxueli</groupId>
-            <artifactId>xxl-job-core</artifactId>
-        </dependency>
-
         <!-- 解决 swagger guava 冲突问题 -->
 <!--        <dependency>-->
 <!--            <groupId>com.google.guava</groupId>-->
@@ -113,4 +101,23 @@
 <!--        </dependency>-->
     </dependencies>
 
+    <!-- maven 打包 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.github.cloud.FileSystemApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
