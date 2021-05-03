@@ -45,10 +45,10 @@ xxl:
   job:
     admin:
       addresses: http://192.168.10.1:8666/xxl-job-admin
+      access-token: klah23q4huioh2bhagselas
     executor:
       app-name: ${spring.application.name}
       ip:
       port: 9999
       log-path: /xxl-log
       log-retention-days: -1
-    access-token:

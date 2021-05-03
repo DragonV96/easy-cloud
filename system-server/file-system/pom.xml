@@ -19,6 +19,13 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- job 公共模块 -->
+        <dependency>
+            <artifactId>job</artifactId>
+            <groupId>com.github.DragonV96</groupId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- oauth2 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

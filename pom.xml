@@ -28,18 +28,23 @@
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
         <spring-boot-alibaba.version>2.1.0.RELEASE</spring-boot-alibaba.version>
-        <lombok.version>1.18.10</lombok.version>
-        <swagger-model.version>1.5.21</swagger-model.version>
-        <knife4j.version>2.0.8</knife4j.version>
-        <guava.version>28.0-jre</guava.version>
-        <fastdfs.version>1.26.4</fastdfs.version>
+
+
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <mybatis.version>2.1.2</mybatis.version>
         <druid.version>1.1.14</druid.version>
         <mysql.version>5.1.41</mysql.version>
+
+        <swagger-model.version>1.5.21</swagger-model.version>
+        <knife4j.version>2.0.8</knife4j.version>
+        <xxl-job.version>2.2.0</xxl-job.version>
+        <fastdfs.version>1.26.4</fastdfs.version>
+
+        <lombok.version>1.18.10</lombok.version>
+        <guava.version>28.0-jre</guava.version>
         <hutool.version>5.3.9</hutool.version>
         <velocity.version>1.7</velocity.version>
-        <xxl-job.version>2.2.0</xxl-job.version>
+        <fastjson.version>1.2.46</fastjson.version>
     </properties>
 
     <dependencyManagement>
@@ -126,6 +131,12 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+            <!-- fastjson 序列化 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
