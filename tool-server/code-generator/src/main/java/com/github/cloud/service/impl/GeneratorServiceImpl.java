@@ -140,7 +140,6 @@ public class GeneratorServiceImpl implements GeneratorService {
         } else {
             throw new GlobalException("没有此数据库表字段类型！");
         }
-        log.info("column.getJavaType() = {}", column.getJavaType());
     }
 
     /**
@@ -152,6 +151,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         if (DataTypeEnum.TIMESTAMP.getDataType().equals(column.getDataType())
                 || DataTypeEnum.DATETIME.getDataType().equals(column.getDataType())) {
             table.setHasDate(true);
+            return;
         }
 
         if (Constant.NULL.equals(column.getIsNullable())) {
@@ -159,7 +159,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         }
 
         if (DataTypeEnum.VARCHAR.getDataType().equals(column.getDataType())
-                || DataTypeEnum.CHAR.getDataType().equals(column.getDataType())) {
+                || DataTypeEnum.CHAR.getDataType().equals(column.getDataType())
+                || DataTypeEnum.TEXT.getDataType().equals(column.getDataType())) {
             table.setHasNotBlank(true);
         } else if (DataTypeEnum.INT.getDataType().equals(column.getDataType())
                 || DataTypeEnum.BIGINT.getDataType().equals(column.getDataType())
@@ -167,6 +168,7 @@ public class GeneratorServiceImpl implements GeneratorService {
                 || DataTypeEnum.TINYINT.getDataType().equals(column.getDataType())) {
             table.setHasNotNull(true);
         } else {
+            log.error("错误字段类型为 [{}]", column.getDataType());
             throw new GlobalException("没有此数据库表字段类型！");
         }
     }
