@@ -65,6 +65,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>com.github.cloud.SwaggerApplication</mainClass>
+                    <fork>true</fork>
                 </configuration>
                 <executions>
                     <execution>

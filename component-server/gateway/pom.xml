@@ -64,6 +64,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>com.github.cloud.GateWayApplication</mainClass>
+                    <fork>true</fork>
                 </configuration>
                 <executions>
                     <execution>

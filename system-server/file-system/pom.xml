@@ -116,6 +116,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>com.github.cloud.FileSystemApplication</mainClass>
+                    <fork>true</fork>
                 </configuration>
                 <executions>
                     <execution>
