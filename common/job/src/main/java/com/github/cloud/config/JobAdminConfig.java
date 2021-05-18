@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class JobAdminConfig {
 
     /**
-     * 管理服务端地址
+     * xxl-job 管理服务端地址
      */
     private String addresses;
 

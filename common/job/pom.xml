@@ -36,10 +36,10 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-        <!-- 自动注入 -->
+        <!-- spring boot 配置 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
+            <artifactId>spring-boot-starter-integration</artifactId>
         </dependency>
     </dependencies>
 </project>
