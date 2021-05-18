@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author : glw
@@ -28,12 +29,23 @@ public class XxlJobCustomizeServiceImpl implements XxlJobCustomizeService {
     @Resource
     private XxlJobService xxlJobService;
 
+    @Resource
+    private XxlJobCustomizeService xxlJobCustomizeService;
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public ReturnT<String> addAndStart(XxlJobInfo jobInfo) {
         ReturnT<String> add = xxlJobService.add(jobInfo);
-        xxlJobService.start(jobInfo.getId());
-        return add;
+        return xxlJobService.start(Integer.parseInt(add.getContent()));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ReturnT<String> addAndStartBatch(List<XxlJobInfo> jobInfoList) {
+        for (XxlJobInfo xxlJob : jobInfoList) {
+            xxlJobCustomizeService.addAndStart(xxlJob);
+        }
+        return ReturnT.SUCCESS;
     }
 
     @Override

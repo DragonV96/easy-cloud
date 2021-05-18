@@ -3,6 +3,8 @@ package com.xxl.job.admin.service;
 import com.xxl.job.admin.core.model.XxlJobInfo;
 import com.xxl.job.core.biz.model.ReturnT;
 
+import java.util.List;
+
 /**
  * @author : glw
  * @datetime : 2021/4/26 22:56
@@ -44,4 +46,11 @@ public interface XxlJobCustomizeService {
      * @return
      */
     ReturnT<String> getGroupId(String appName);
+
+    /**
+     * 批量根据服务名获取执行器id
+     * @param jobInfoList
+     * @return
+     */
+    ReturnT<String> addAndStartBatch(List<XxlJobInfo> jobInfoList);
 }

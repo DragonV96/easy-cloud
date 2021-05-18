@@ -8,6 +8,7 @@ import com.xxl.job.core.biz.model.ReturnT;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author : glw
@@ -37,20 +38,26 @@ public class JobCustomizeController {
     }
 
     @PermissionLimit(limit = false)
-    @GetMapping("/remove")
-    public ReturnT<String> remove(int id) {
+    @GetMapping("/remove/{id}")
+    public ReturnT<String> remove(@PathVariable("id") Integer id) {
         return xxlJobService.remove(id);
     }
 
     @PermissionLimit(limit = false)
-    @GetMapping("/stop")
-    public ReturnT<String> pause(int id) {
+    @GetMapping("/removeByDesc")
+    public ReturnT<String> removeByDesc(String jobDesc) {
+        return xxlJobCustomizeService.removeByDesc(jobDesc);
+    }
+
+    @PermissionLimit(limit = false)
+    @GetMapping("/stop/{id}")
+    public ReturnT<String> stop(@PathVariable("id") Integer id) {
         return xxlJobService.stop(id);
     }
 
     @PermissionLimit(limit = false)
-    @GetMapping("/start")
-    public ReturnT<String> start(int id) {
+    @GetMapping("/start/{id}")
+    public ReturnT<String> start(@PathVariable("id") Integer id) {
         return xxlJobService.start(id);
     }
 
@@ -61,9 +68,9 @@ public class JobCustomizeController {
     }
 
     @PermissionLimit(limit = false)
-    @GetMapping("/removeByDesc")
-    public ReturnT<String> removeByDesc(String jobDesc) {
-        return xxlJobCustomizeService.removeByDesc(jobDesc);
+    @PostMapping("/batch/addAndStart")
+    public ReturnT<String> addAndStartBatch(@RequestBody List<XxlJobInfo> jobInfoList) {
+        return xxlJobCustomizeService.addAndStartBatch(jobInfoList);
     }
 
     @PermissionLimit(limit = false)
