@@ -110,6 +110,17 @@ public class GeneratorServiceImpl implements GeneratorService {
                 column.setIdType(allowTable.getPrimaryKeyType());
                 velocityContext.put("idDataType", column.getJavaType());
             }
+
+            // 创建时间填充
+            if (Constant.CREATE_TIME.equals(column.getColumnName())) {
+                column.setIsCreateTime(true);
+                velocityContext.put("hasCreateTime", true);
+            }
+            // 更新时间填充
+            if (Constant.UPDATE_TIME.equals(column.getColumnName())) {
+                column.setIsUpdateTime(true);
+                velocityContext.put("hasUpdateTime", true);
+            }
         }
     }
 

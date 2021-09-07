@@ -74,4 +74,14 @@ public class TableColumn implements Serializable {
      * 主键 id mybatis 类型
      */
     private String idType;
+
+    /**
+     * 是否创建时间
+     */
+    private Boolean isCreateTime;
+
+    /**
+     * 是否更新时间
+     */
+    private Boolean isUpdateTime;
 }

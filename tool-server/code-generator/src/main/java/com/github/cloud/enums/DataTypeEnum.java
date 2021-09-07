@@ -17,7 +17,7 @@ public enum DataTypeEnum {
     DATETIME("datetime", "Date"),
     CHAR("char", "String"),
     BIT("bit", "Boolean"),
-    TINYINT("tinyint", "Byte"),
+    TINYINT("tinyint", "Integer"),
     ;
 
     /**

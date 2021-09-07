@@ -77,4 +77,14 @@ public interface Constant {
      * 去掉表注释后缀 表
      */
     String EXCLUDE = "表";
+
+    /**
+     * 创建时间字段
+     */
+    String CREATE_TIME = "create_time";
+
+    /**
+     * 更新时间字段
+     */
+    String UPDATE_TIME = "update_time";
 }

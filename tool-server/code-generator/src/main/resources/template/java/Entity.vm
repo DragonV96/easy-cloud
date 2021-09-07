@@ -1,8 +1,17 @@
 package ${rootPackageName}.${entityPackageName};
 
+#if(${hasCreateTime} || ${hasUpdateTime})
+import com.baomidou.mybatisplus.annotation.FieldFill;
+#end
 import com.baomidou.mybatisplus.annotation.IdType;
+#if(${hasCreateTime} || ${hasUpdateTime})
+import com.baomidou.mybatisplus.annotation.TableField;
+#end
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
+#if(${hasBaseEntity})
+import lombok.EqualsAndHashCode;
+#end
 
 import java.io.Serializable;
 #if(${hasDate})
@@ -29,6 +38,12 @@ public class ${entityClassName}${entitySuffix} implements Serializable {
      */
 #if(${column.isKey})
     @TableId(type = IdType.${column.idType})
+#end
+#if(${column.isCreateTime})
+    @TableField(fill = FieldFill.INSERT)
+#end
+#if(${column.isUpdateTime})
+    @TableField(fill = FieldFill.INSERT_UPDATE)
 #end
     private ${column.javaType} ${column.javaField};
 
