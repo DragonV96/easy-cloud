@@ -11,8 +11,10 @@ import ${rootPackageName}.${dtoPackageName}.${responsePackageName}.${entityClass
 import ${rootPackageName}.${entityPackageName}.${entityClassName}${entitySuffix};
 import ${rootPackageName}.${mapperPackageName}.${entityClassName}${mapperSuffix};
 import ${rootPackageName}.${servicePackageName}.${entityClassName}${serviceSuffix};
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,11 +27,13 @@ import java.util.List;
 * @datetime : ${datetime}
 * @description : ${tableComment}业务层实现
 */
+@Slf4j
 @Service
 public class ${entityClassName}${serviceImplSuffix} extends ServiceImpl<${entityClassName}${mapperSuffix}, ${entityClassName}${entitySuffix}> implements ${entityClassName}${serviceSuffix} {
 
     @Override
     public IPage<${entityClassName}${entitySuffix}> page(Page${entityClassName}${requestSuffix} request) {
+        log.info("page, request = {}", request);
         IPage<${entityClassName}${entitySuffix}> page = new Page<>(request.getCurrent(), request.getSize());
         ${entityClassName}${entitySuffix} entity = new ${entityClassName}${entitySuffix}();
         BeanUtils.copyProperties(request, entity);
@@ -38,7 +42,11 @@ public class ${entityClassName}${serviceImplSuffix} extends ServiceImpl<${entity
 
     @Override
     public ${entityClassName}${responseSuffix} detail(${idDataType} id) {
+        log.info("detail, id = {}", id);
         ${entityClassName}${entitySuffix} entity = super.getById(id);
+        if (null == entity) {
+            return null;
+        }
         ${entityClassName}${responseSuffix} response = new ${entityClassName}${responseSuffix}();
         BeanUtils.copyProperties(response, entity);
         return response;
@@ -46,6 +54,7 @@ public class ${entityClassName}${serviceImplSuffix} extends ServiceImpl<${entity
 
     @Override
     public boolean save(Add${entityClassName}${requestSuffix} request) {
+        log.info("save, request = {}", request);
         ${entityClassName}${entitySuffix} entity = new ${entityClassName}${entitySuffix}();
         BeanUtils.copyProperties(request, entity);
         return super.save(entity);
@@ -53,6 +62,7 @@ public class ${entityClassName}${serviceImplSuffix} extends ServiceImpl<${entity
 
     @Override
     public boolean update(Update${entityClassName}${requestSuffix} request) {
+        log.info("update, request = {}", request);
         ${entityClassName}${entitySuffix} entity = new ${entityClassName}${entitySuffix}();
         BeanUtils.copyProperties(request, entity);
         return super.updateById(entity);
@@ -60,11 +70,14 @@ public class ${entityClassName}${serviceImplSuffix} extends ServiceImpl<${entity
 
     @Override
     public boolean delete(${idDataType} id) {
+        log.info("delete, id = {}", id);
         return super.removeById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean deleteBatch(List<${idDataType}> ids) {
+        log.info("deleteBatch, ids = {}", ids);
         return super.removeByIds(ids);
     }
 }
